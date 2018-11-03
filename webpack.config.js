@@ -18,6 +18,24 @@ module.exports = {
             presets: ["react"]
           }
         }
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader",
+        include: [path.resolve(__dirname, "node_modules/bootstrap/dist/css")]
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {}
+          }
+        ]
       }
     ]
   },

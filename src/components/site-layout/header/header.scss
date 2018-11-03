@@ -1,0 +1,79 @@
+.bg-light {
+  background-color: #ffffff !important;
+}
+
+.header--top {
+  display: flex;
+  height: 40px;
+}
+
+.header--menu-right {
+  align-self: flex-end;
+  float: right;
+}
+
+.header--top-logo {
+  text-transform: uppercase;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.header--top-slogan {
+  font-style: italic;
+  letter-spacing: 3px;
+  font-weight: bold;
+  padding-top: 12px;
+}
+
+.header--text {
+  margin-top: 20px;
+}
+
+.header--text-top {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  letter-spacing: 3px;
+}
+
+.header--text-middle {
+  text-align: center;
+  margin-bottom: 20px;
+
+  span {
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 50px;
+    border: 1px solid #c4c4c4;
+  }
+}
+
+.header--text-bottom {
+  text-align: center;
+  text-transform: uppercase;
+
+  & > span {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 3px 30px;
+    margin: 5px;
+  }
+}
+
+.header--social-media {
+  text-align: right;
+
+  img {
+    height: 30px;
+  }
+}
+
+.header--social-media-box {
+  &:first-of-type {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
