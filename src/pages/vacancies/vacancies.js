@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import Header from "./../header/header";
 // import VacancyService from "./../../services/api/vacancy-service";
 // import PageHeader from "../PageHeader/PageHeader";
-// import Skillset from "../skillset/skillset";
+import Skillset from "../../components/skillset/skillset";
 require("./vacancies.scss");
 // import logo1 from "../../img/logo-feyenoord.png";
 // import queryString from "query-string";
@@ -19,10 +19,10 @@ class Vacancies extends Component {
     //this.onSearchClick = this.onSearchClick.bind(this);
   }
 
-  //   state = {
-  //     results: [],
-  //     queryStringTalent: {}
-  //   };
+  state = {
+    results: [],
+    queryStringTalent: {}
+  };
 
   componentDidMount() {
     // const that = this;
@@ -64,10 +64,10 @@ class Vacancies extends Component {
         {/* <PageHeader /> */}
         <div className="row">
           <div className="col-md-3 results-skillset">
-            {/* <Skillset
+            <Skillset
               initialTalent={this.state.queryStringTalent}
               onSearchClick={this.onSearchClick}
-            /> */}
+            />
           </div>
           <div className="col-md-9 results-content">
             <div className="row">
