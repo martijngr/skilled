@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "../../components/site-layout/header/header";
+import Footer from "../../components/site-layout/footer/footer";
 import searchIcon from "../../assets/icons/icon-search.png";
 require("./home.scss");
 
@@ -7,7 +8,6 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <div className="row home--header-image">
           <div className="col-md-3" />
           <div className="col-md-6 ">
@@ -38,7 +38,7 @@ class Home extends Component {
           </div>
           <div className="col-md-3" />
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </React.Fragment>
     );
   }
