@@ -1,58 +1,32 @@
-.bg-light {
-  background-color: #ffffff !important;
+.page-header--image {
+  background-image: url("../../../assets/icons/home_bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.header--top {
-  display: flex;
-  height: 40px;
+.page-header--header {
+  text-align: center;
+  padding-top: 50px;
 }
 
-.header--menu-right {
-  align-self: flex-end;
-  float: right;
-}
-
-.header--top-logo {
+.page-header--header-title {
   text-transform: uppercase;
-  font-size: 30px;
+  font-weight: bold;
   letter-spacing: 5px;
-}
-
-.header--top-slogan {
-  font-style: italic;
-  letter-spacing: 3px;
-  font-weight: bold;
-  padding-top: 12px;
-}
-
-.header--text {
-  margin-top: 20px;
-}
-
-.header--text-top {
-  text-align: center;
-  font-weight: bold;
   font-size: 2em;
-  margin-bottom: 10px;
-  margin-top: 40px;
+}
+
+.page-header--header-subtitle {
+  font-style: italic;
+  font-weight: bold;
   letter-spacing: 3px;
+  margin-bottom: 25px;
 }
 
-.header--text-middle {
-  text-align: center;
-  margin-bottom: 20px;
-
-  span {
-    font-style: italic;
-    font-weight: bold;
-    padding: 3px 50px;
-    border: 1px solid #c4c4c4;
-  }
-}
-
-.header--text-bottom {
+.page-header--header-statement {
   text-align: center;
   text-transform: uppercase;
+  margin-bottom: 40px;
 
   & > span {
     display: inline-block;
@@ -60,20 +34,5 @@
     color: white;
     padding: 3px 30px;
     margin: 5px;
-  }
-}
-
-.header--social-media {
-  text-align: right;
-
-  img {
-    height: 30px;
-  }
-}
-
-.header--social-media-box {
-  &:first-of-type {
-    margin-top: 20px;
-    margin-bottom: 10px;
   }
 }

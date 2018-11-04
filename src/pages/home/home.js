@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../components/site-layout/header/header";
 import Footer from "../../components/site-layout/footer/footer";
 import searchIcon from "../../assets/icons/icon-search.png";
 require("./home.scss");

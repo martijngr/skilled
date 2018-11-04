@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Header from "./../header/header";
+import Header from "../../components/site-layout/header/header";
 // import VacancyService from "./../../services/api/vacancy-service";
 // import PageHeader from "../PageHeader/PageHeader";
 import Skillset from "../../components/skillset/skillset";
@@ -61,7 +61,7 @@ class Vacancies extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <PageHeader /> */}
+        <Header />
         <div className="row">
           <div className="col-md-3 results-skillset">
             <Skillset
