@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import Footer from "../../components/site-layout/footer/footer";
 import searchIcon from "../../assets/icons/icon-search.png";
+import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
+
 require("./home.scss");
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    // this.onSearch = this.onSearch.bind(this);
+    // this.onClose = this.onClose.bind(this);
+    // this.onEnterPress = this.onEnterPress.bind(this);
+    this.doSearch = this.doSearch.bind(this);
+
+    this.state = {
+      talent: {}
+    };
+  }
+
+  doSearch = function() {
+    this.props.history.push("/vacatures");
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -22,7 +41,8 @@ class Home extends Component {
                     onClose={this.onClose}
                     onEnterPress={this.onEnterPress}
                   /> */}
-                  <input type="text" />
+                  {/* <input type="text" /> */}
+                  <TalentTypeahead />
                 </div>
                 <div className="home--header-search-box--icon">
                   <img src={searchIcon} onClick={this.doSearch} />
