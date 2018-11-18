@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import Header from "../../components/site-layout/header/header";
-// import VacancyService from "./../../services/api/vacancy-service";
-// import PageHeader from "../PageHeader/PageHeader";
+import TalentService from "./../../services/api/TalentService";
+import VacancyService from "./../../services/api/VacancyService";
 import Skillset from "../../components/skillset/skillset";
 require("./vacancies.scss");
 // import logo1 from "../../img/logo-feyenoord.png";
-// import queryString from "query-string";
-// import TalentService from "./../../services/api/talent-service";
+import queryString from "query-string";
 // import Resultblock from "./resultblock/resultblock";
 
 class Vacancies extends Component {
   constructor(props) {
     super(props);
 
-    //this.vacancyService = new VacancyService();
-    //this.talentService = new TalentService();
+    this.vacancyService = new VacancyService();
+    this.talentService = new TalentService();
 
     //this.onSearchClick = this.onSearchClick.bind(this);
   }
@@ -25,17 +24,19 @@ class Vacancies extends Component {
   };
 
   componentDidMount() {
-    // const that = this;
-    // const queryParams = queryString.parse(this.props.location.search);
-    // console.log(" searching query talent...");
-    // this.talentService.search(queryParams.talent).then(function(resp) {
-    //   if (resp && resp.result && resp.result.length > 0) {
-    //     console.log("finished searching query talent", resp.result);
-    //     that.setState({
-    //       queryStringTalent: resp.result
-    //     });
-    //   }
-    // });
+    console.log(this.props.location);
+
+    const that = this;
+    const queryParams = queryString.parse(this.props.location.search);
+    console.log("searching query talent..." + queryParams.talent);
+    this.talentService.search(queryParams.talent).then(function(resp) {
+      if (resp && resp.result && resp.result.length > 0) {
+        console.log("finished searching query talent", resp.result);
+        that.setState({
+          queryStringTalent: resp.result
+        });
+      }
+    });
   }
 
   //   onSearchClick(searchPrefs) {

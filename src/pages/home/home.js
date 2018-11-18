@@ -9,18 +9,19 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    // this.onSearch = this.onSearch.bind(this);
-    // this.onClose = this.onClose.bind(this);
-    // this.onEnterPress = this.onEnterPress.bind(this);
-    this.doSearch = this.doSearch.bind(this);
+    this.toVacancies = this.toVacancies.bind(this);
 
     this.state = {
       talent: {}
     };
   }
 
-  doSearch = function() {
-    this.props.history.push("/vacatures");
+  toVacancies = function(talent) {
+    this.props.history.push("/vacatures?talent=" + talent.Name);
+    // this.props.history.push({
+    //   pathname: "/vacatures",
+    //   data: talent
+    // });
   };
 
   render() {
@@ -36,13 +37,7 @@ class Home extends Component {
               </div>
               <div className="home--header-search-box">
                 <div className="home--header-search-box--input">
-                  {/* <SkillFinder
-                    onSearch={this.onSearch}
-                    onClose={this.onClose}
-                    onEnterPress={this.onEnterPress}
-                  /> */}
-                  {/* <input type="text" /> */}
-                  <TalentTypeahead />
+                  <TalentTypeahead onTalentSelected={this.toVacancies} />
                 </div>
                 <div className="home--header-search-box--icon">
                   <img src={searchIcon} onClick={this.doSearch} />

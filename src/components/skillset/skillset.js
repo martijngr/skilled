@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 require("./skillset.scss");
 // import SkillFinder from "../skillFinder/SkillFinder";
-// import VacancyService from "./../../services/api/vacancy-service";
+import VacancyService from "./../../services/api/VacancyService";
 // import Modal from "react-modal";
 import hourIcon from "../../assets/icons/Icon_aantal_uren.png";
 import skillsetIcon from "../../assets/icons/Icon_skillset.png";
 import thinkIcon from "../../assets/icons/Icon_skills.png";
-//import TalentService from "./../../services/api/talent-service";
+import TalentService from "./../../services/api/TalentService";
+import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
+import TalentStore from "../talent-store/TalentStore";
 
 //Modal.setAppElement("#root");
 
@@ -14,7 +16,10 @@ class Skillset extends Component {
   constructor(props) {
     super(props);
 
-    //this.vacancyService = new VacancyService();
+    this.vacancyService = new VacancyService();
+    this.talentService = new TalentService();
+
+    this.updateTalents = this.updateTalents.bind(this);
 
     this.onTalentSelected = this.onTalentSelected.bind(this);
     this.onHoursPerWeekChange = this.onHoursPerWeekChange.bind(this);
@@ -29,17 +34,16 @@ class Skillset extends Component {
 
     // Modal function handlers
     this.openTalentModal = this.openTalentModal.bind(this);
-    this.afterOpenTalentModal = this.afterOpenTalentModal.bind(this);
-    this.closeTalentModal = this.closeTalentModal.bind(this);
-    this.setModalCheckboxes = this.setModalCheckboxes.bind(this);
-    this.createTalentChecbox = this.createTalentChecbox.bind(this);
+    // this.afterOpenTalentModal = this.afterOpenTalentModal.bind(this);
+    // this.closeTalentModal = this.closeTalentModal.bind(this);
+    // this.setModalCheckboxes = this.setModalCheckboxes.bind(this);
+    // this.createTalentChecbox = this.createTalentChecbox.bind(this);
     this.onTalentModalCheckboxChange = this.onTalentModalCheckboxChange.bind(
       this
     );
 
     this.state = {
       thinkLevels: [],
-      talentModalOpen: false,
       talents: [],
       hoursPerWeek: "",
       travelTime: "",
@@ -50,44 +54,42 @@ class Skillset extends Component {
   }
 
   openTalentModal() {
-    this.setState({ talentModalOpen: true });
+    this.refs.talentStoreModal.openTalentModal();
   }
 
-  afterOpenTalentModal() {
-    // references are now sync'd and can be accessed.
-    //this.subtitle.style.color = '#f00';
+  updateTalents(talents) {
+    this.setState({
+      talents: talents
+    });
   }
 
-  closeTalentModal() {
-    this.setState({ talentModalOpen: false });
+  afterOpenTalentModal() {}
+
+  componentDidMount() {
+    const that = this;
+    this.vacancyService.getThinkeLevels().then(function(resp) {
+      that.setState({
+        thinkLevels: resp
+      });
+    });
+
+    this.talentService.search().then(res => {
+      const talents = res.result.map(t => ({ ...t, checked: false }));
+      that.setState({ talents: talents });
+
+      // if (that.props && that.props.initialTalent.length > 0)
+      //   that.onTalentSelected(that.props.initialTalent[0]);
+    });
   }
 
-  //   componentDidMount() {
-  //     const that = this;
-  //     this.vacancyService.getThinkeLevels().then(function(resp) {
-  //       that.setState({
-  //         thinkLevels: resp
-  //       });
-  //     });
-
-  //     new TalentService().search().then(res => {
-  //       const talents = res.result.map(t => ({ ...t, checked: false }));
-  //       that.setState({ talents: talents });
-
-  //       if (that.props && that.props.initialTalent.length > 0)
-  //         that.onTalentSelected(that.props.initialTalent[0]);
-  //     });
-  //   }
-
-  //   componentDidUpdate(prevProps, prevState, snapshot) {
-  //     if (
-  //       this.props.initialTalent &&
-  //       this.props.initialTalent.length != prevProps.initialTalent.length
-  //     ) {
-  //       console.log("initialTalent.length differs");
-  //       this.onTalentSelected(this.props.initialTalent[0]);
-  //     }
-  //   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      this.props.initialTalent &&
+      this.props.initialTalent.length != prevProps.initialTalent.length
+    ) {
+      this.onTalentSelected(this.props.initialTalent[0]);
+    }
+  }
 
   onTalentSelected(talent) {
     if (this.maximumSelectedTalentsReached()) return;
@@ -210,7 +212,7 @@ class Skillset extends Component {
           )}
           {this.state.talents.filter(t => t.checked).length < 5 && (
             <div className="skillset-form">
-              {/* <SkillFinder onSearch={this.onTalentSelected} /> */}
+              <TalentTypeahead onTalentSelected={this.onTalentSelected} />
               <div className="skillset-form--search-subtitle">
                 <span onClick={this.openTalentModal}>
                   Of selecteer direct uit de talent store >
@@ -224,18 +226,20 @@ class Skillset extends Component {
               Jouw talenten:
             </div>
             <div className="skillset-selected-talents--overview">
-              {this.state.talents.filter(t => t.checked).map(t => (
-                <div key={t.Id} className="skillset-selected-talents--talent">
-                  <span
-                    onClick={this.onTalentModalCheckboxChange}
-                    data-talent={JSON.stringify(t)}
-                    className="skillset-selected-talents--talent--remove"
-                  >
-                    X&nbsp;
-                  </span>
-                  {t.Name}
-                </div>
-              ))}
+              {this.state.talents
+                .filter(t => t.checked)
+                .map(t => (
+                  <div key={t.Id} className="skillset-selected-talents--talent">
+                    <span
+                      onClick={this.onTalentModalCheckboxChange}
+                      data-talent={JSON.stringify(t)}
+                      className="skillset-selected-talents--talent--remove"
+                    >
+                      X&nbsp;
+                    </span>
+                    {t.Name}
+                  </div>
+                ))}
             </div>
           </div>
           <div className="skillset-seperator" />
@@ -309,6 +313,13 @@ class Skillset extends Component {
             </div>
           </div>
         </div>
+
+        <TalentStore
+          ref="talentStoreModal"
+          talents={this.state.talents}
+          isModelOpen={this.state.showTalentStore}
+          updateTalents={this.updateTalents}
+        />
 
         {/* <Modal
           isOpen={this.state.talentModalOpen}
