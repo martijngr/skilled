@@ -28,7 +28,9 @@ class TalentTypeahead extends Component {
   }
 
   onTalentSelected(talent) {
-    if (this.props.onTalentSelected) this.props.onTalentSelected(talent);
+    console.log("on talent selected... ", talent);
+    if (this.props.onTalentSelected && talent)
+      this.props.onTalentSelected(talent);
   }
 
   render() {

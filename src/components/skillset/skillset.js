@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 require("./skillset.scss");
-// import SkillFinder from "../skillFinder/SkillFinder";
 import VacancyService from "./../../services/api/VacancyService";
-// import Modal from "react-modal";
 import hourIcon from "../../assets/icons/Icon_aantal_uren.png";
 import skillsetIcon from "../../assets/icons/Icon_skillset.png";
 import thinkIcon from "../../assets/icons/Icon_skills.png";
 import TalentService from "./../../services/api/TalentService";
 import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
 import TalentStore from "../talent-store/TalentStore";
-
-//Modal.setAppElement("#root");
 
 class Skillset extends Component {
   constructor(props) {
@@ -22,10 +18,6 @@ class Skillset extends Component {
     this.updateTalents = this.updateTalents.bind(this);
 
     this.onTalentSelected = this.onTalentSelected.bind(this);
-    this.onHoursPerWeekChange = this.onHoursPerWeekChange.bind(this);
-    this.onThinkLevelChange = this.onThinkLevelChange.bind(this);
-    this.onTravelTimeChange = this.onTravelTimeChange.bind(this);
-    this.onZipcodeChange = this.onZipcodeChange.bind(this);
     this.onSearchClick = this.onSearchClick.bind(this);
     this.setSearchResultsTotal = this.setSearchResultsTotal.bind(this);
     this.maximumSelectedTalentsReached = this.maximumSelectedTalentsReached.bind(
@@ -34,10 +26,6 @@ class Skillset extends Component {
 
     // Modal function handlers
     this.openTalentModal = this.openTalentModal.bind(this);
-    // this.afterOpenTalentModal = this.afterOpenTalentModal.bind(this);
-    // this.closeTalentModal = this.closeTalentModal.bind(this);
-    // this.setModalCheckboxes = this.setModalCheckboxes.bind(this);
-    // this.createTalentChecbox = this.createTalentChecbox.bind(this);
     this.onTalentModalCheckboxChange = this.onTalentModalCheckboxChange.bind(
       this
     );
@@ -77,8 +65,8 @@ class Skillset extends Component {
       const talents = res.result.map(t => ({ ...t, checked: false }));
       that.setState({ talents: talents });
 
-      // if (that.props && that.props.initialTalent.length > 0)
-      //   that.onTalentSelected(that.props.initialTalent[0]);
+      if (that.props && that.props.initialTalent.length > 0)
+        that.onTalentSelected(that.props.initialTalent[0]);
     });
   }
 
@@ -99,42 +87,16 @@ class Skillset extends Component {
     let talents = [...this.state.talents];
     talents[talentIndex] = talent;
 
-    console.log("onTalentSelected", talents);
-
     this.setState({ talents }, this.setSearchResultsTotal);
-  }
-
-  onHoursPerWeekChange() {
-    this.setState({
-      hoursPerWeek: this.refs.hoursPerWeek.value
-    });
-  }
-
-  onThinkLevelChange() {
-    this.setState({
-      thinkLevel: this.refs.thinkLevel.value
-    });
-  }
-
-  onZipcodeChange() {
-    this.setState({
-      zipcode: this.refs.zipcode.value
-    });
-  }
-
-  onTravelTimeChange() {
-    this.setState({
-      travelTime: this.refs.travelTime.value
-    });
   }
 
   onSearchClick() {
     var searchPrefs = {
       talents: this.state.talents.filter(t => t.checked),
-      hoursPerWeek: this.state.hoursPerWeek,
-      travelTime: this.state.travelTime,
-      zipcode: this.state.zipcode,
-      thinkLevel: this.state.thinkLevel
+      hoursPerWeek: this.refs.hoursPerWeek.value,
+      travelTime: this.refs.travelTime.value,
+      zipcode: this.refs.zipcode.value,
+      thinkLevel: this.refs.thinkLevel.value
     };
 
     if (this.props.onSearchClick) this.props.onSearchClick(searchPrefs);
@@ -187,10 +149,10 @@ class Skillset extends Component {
     this.vacancyService
       .searchCount(
         talents,
-        this.state.hoursPerWeek,
-        this.state.thinkLevel,
-        this.state.zipcode,
-        this.state.travelTime
+        this.refs.hoursPerWeek.value,
+        this.refs.thinkLevel.value,
+        this.refs.zipcode.value,
+        this.refs.travelTime.value
       )
       .then(resp => {
         that.setState({
@@ -253,7 +215,6 @@ class Skillset extends Component {
                 <input
                   type="text"
                   ref="hoursPerWeek"
-                  onChange={this.onHoursPerWeekChange}
                   onBlur={this.setSearchResultsTotal}
                   placeholder="32"
                 />{" "}
@@ -267,7 +228,6 @@ class Skillset extends Component {
                 <input
                   type="text"
                   ref="travelTime"
-                  onChange={this.onTravelTimeChange}
                   onBlur={this.setSearchResultsTotal}
                   placeholder="30"
                 />{" "}
@@ -279,7 +239,6 @@ class Skillset extends Component {
                 <input
                   type="text"
                   ref="zipcode"
-                  onChange={this.onZipcodeChange}
                   onBlur={this.setSearchResultsTotal}
                   placeholder="1234AB"
                 />
@@ -289,11 +248,7 @@ class Skillset extends Component {
                   <img src={thinkIcon} />
                 </div>
                 mijn denkniveau is{" "}
-                <select
-                  ref="thinkLevel"
-                  onBlur={this.setSearchResultsTotal}
-                  onChange={this.onThinkLevelChange}
-                >
+                <select ref="thinkLevel" onBlur={this.setSearchResultsTotal}>
                   {this.state.thinkLevels.map(t => (
                     <option key={t.Id} value={t.Id}>
                       {t.Name}
@@ -320,26 +275,6 @@ class Skillset extends Component {
           isModelOpen={this.state.showTalentStore}
           updateTalents={this.updateTalents}
         />
-
-        {/* <Modal
-          isOpen={this.state.talentModalOpen}
-          onAfterOpen={this.afterOpenTalentModal}
-          onRequestClose={this.closeTalentModal}
-          contentLabel="Talent store"
-        >
-          <h2>Talent store</h2>
-          <button onClick={this.closeTalentModal}>close</button>
-          {!this.maximumSelectedTalentsReached() && (
-            <div>Kies uit de lijst maximaal vijf talenten</div>
-          )}
-          {this.maximumSelectedTalentsReached() && (
-            <div>
-              Je hebt 5 talenten gekozen, haal een talent weg om een ander
-              talent te kunnen kiezen
-            </div>
-          )}
-          <div>{this.setModalCheckboxes()}</div>
-        </Modal> */}
       </div>
     );
   }

@@ -6,6 +6,7 @@ import Skillset from "../../components/skillset/skillset";
 require("./vacancies.scss");
 // import logo1 from "../../img/logo-feyenoord.png";
 import queryString from "query-string";
+import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
 // import Resultblock from "./resultblock/resultblock";
 
 class Vacancies extends Component {
@@ -15,6 +16,7 @@ class Vacancies extends Component {
     this.vacancyService = new VacancyService();
     this.talentService = new TalentService();
 
+    this.performSearch = this.performSearch.bind(this);
     //this.onSearchClick = this.onSearchClick.bind(this);
   }
 
@@ -39,25 +41,21 @@ class Vacancies extends Component {
     });
   }
 
-  //   onSearchClick(searchPrefs) {
-  //     this.performSearch(searchPrefs);
-  //   }
-
-  //   performSearch(searchPrefs) {
-  //     this.vacancyService
-  //       .search(
-  //         searchPrefs.talents,
-  //         searchPrefs.hoursPerWeek,
-  //         searchPrefs.thinkLevel,
-  //         searchPrefs.zipcode,
-  //         searchPrefs.travelTime
-  //       )
-  //       .then(res => {
-  //         this.setState({
-  //           results: res.result
-  //         });
-  //       });
-  //   }
+  performSearch(searchPrefs) {
+    this.vacancyService
+      .search(
+        searchPrefs.talents,
+        searchPrefs.hoursPerWeek,
+        searchPrefs.thinkLevel,
+        searchPrefs.zipcode,
+        searchPrefs.travelTime
+      )
+      .then(res => {
+        this.setState({
+          results: res.result
+        });
+      });
+  }
 
   render() {
     return (
@@ -67,7 +65,7 @@ class Vacancies extends Component {
           <div className="col-md-3 results-skillset">
             <Skillset
               initialTalent={this.state.queryStringTalent}
-              onSearchClick={this.onSearchClick}
+              onSearchClick={this.performSearch}
             />
           </div>
           <div className="col-md-9 results-content">
@@ -88,9 +86,9 @@ class Vacancies extends Component {
               </div>
             </div>
             <div className="results-overview">
-              {/* {this.state.results.map(v => (
-                <Resultblock key={v.Id} vacancy={v} />
-              ))} */}
+              {this.state.results.map(v => (
+                <VacancyBlock key={v.Id} vacancy={v} />
+              ))}
             </div>
           </div>
         </div>
