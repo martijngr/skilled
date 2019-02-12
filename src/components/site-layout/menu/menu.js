@@ -10,7 +10,7 @@ class Menu extends Component {
             <a className="navbar-brand header--top-logo" href="#">
               SKILLED.
             </a>
-            <button
+            {/* <button
               className="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -20,10 +20,10 @@ class Menu extends Component {
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon" />
-            </button>
+            </button> */}
             <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
               <div className="header--top-slogan">100% happy money making</div>
-              <ul className="navbar-nav ml-auto">
+              {/* <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <a className="nav-link" href="#">
                     Registreren <span className="sr-only">(current)</span>
@@ -39,7 +39,7 @@ class Menu extends Component {
                     Ik ben werkgever
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </nav>
         </div>

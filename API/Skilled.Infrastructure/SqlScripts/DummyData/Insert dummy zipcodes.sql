@@ -1,0 +1,1 @@
+﻿insert into zipcode (value) values ('4205xp'), ('3362hb'), ('3363jd'), ('9121CB'), ('3365DB'), ('3362TV'), ('2984CD'), ('1066EP')
