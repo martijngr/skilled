@@ -5,7 +5,8 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "index_bundle.js"
+    filename: "index_bundle.js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -13,13 +14,37 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          query: {
-            presets: ["react"]
-          }
+          loader: "babel-loader"
         }
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
+        // include: [
+        //   path.resolve(
+        //     __dirname,
+        //     "node_modules/bootstrap/dist/css",
+        //     "node_modules/react-bootstrap-typeahead/css"
+        //   )
+        // ]
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {}
+          }
+        ]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({

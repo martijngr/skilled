@@ -1,0 +1,38 @@
+.page-header--image {
+  background-image: url("../../../assets/icons/home_bg.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.page-header--header {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.page-header--header-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 5px;
+  font-size: 2em;
+}
+
+.page-header--header-subtitle {
+  font-style: italic;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+}
+
+.page-header--header-statement {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+
+  & > span {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 3px 30px;
+    margin: 5px;
+  }
+}
