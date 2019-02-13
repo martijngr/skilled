@@ -1,10 +1,29 @@
 import React, { Component } from "react";
-import Header from "../../components/site-layout/header/header";
 import Footer from "../../components/site-layout/footer/footer";
 import searchIcon from "../../assets/icons/icon-search.png";
+import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
+
 require("./home.scss");
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toVacancies = this.toVacancies.bind(this);
+
+    this.state = {
+      talent: {}
+    };
+  }
+
+  toVacancies = function(talent) {
+    this.props.history.push("/vacatures?talent=" + talent.Name);
+    // this.props.history.push({
+    //   pathname: "/vacatures",
+    //   data: talent
+    // });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -18,12 +37,7 @@ class Home extends Component {
               </div>
               <div className="home--header-search-box">
                 <div className="home--header-search-box--input">
-                  {/* <SkillFinder
-                    onSearch={this.onSearch}
-                    onClose={this.onClose}
-                    onEnterPress={this.onEnterPress}
-                  /> */}
-                  <input type="text" />
+                  <TalentTypeahead onTalentSelected={this.toVacancies} />
                 </div>
                 <div className="home--header-search-box--icon">
                   <img src={searchIcon} onClick={this.doSearch} />

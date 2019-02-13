@@ -1,73 +1,72 @@
 import React, { Component } from "react";
-// import Header from "./../header/header";
-// import VacancyService from "./../../services/api/vacancy-service";
-// import PageHeader from "../PageHeader/PageHeader";
-// import Skillset from "../skillset/skillset";
+import Header from "../../components/site-layout/header/header";
+import TalentService from "./../../services/api/TalentService";
+import VacancyService from "./../../services/api/VacancyService";
+import Skillset from "../../components/skillset/skillset";
 require("./vacancies.scss");
 // import logo1 from "../../img/logo-feyenoord.png";
-// import queryString from "query-string";
-// import TalentService from "./../../services/api/talent-service";
+import queryString from "query-string";
+import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
 // import Resultblock from "./resultblock/resultblock";
 
 class Vacancies extends Component {
   constructor(props) {
     super(props);
 
-    //this.vacancyService = new VacancyService();
-    //this.talentService = new TalentService();
+    this.vacancyService = new VacancyService();
+    this.talentService = new TalentService();
 
+    this.performSearch = this.performSearch.bind(this);
     //this.onSearchClick = this.onSearchClick.bind(this);
   }
 
-  //   state = {
-  //     results: [],
-  //     queryStringTalent: {}
-  //   };
+  state = {
+    results: [],
+    queryStringTalent: {}
+  };
 
   componentDidMount() {
-    // const that = this;
-    // const queryParams = queryString.parse(this.props.location.search);
-    // console.log(" searching query talent...");
-    // this.talentService.search(queryParams.talent).then(function(resp) {
-    //   if (resp && resp.result && resp.result.length > 0) {
-    //     console.log("finished searching query talent", resp.result);
-    //     that.setState({
-    //       queryStringTalent: resp.result
-    //     });
-    //   }
-    // });
+    console.log(this.props.location);
+
+    const that = this;
+    const queryParams = queryString.parse(this.props.location.search);
+    console.log("searching query talent..." + queryParams.talent);
+    this.talentService.search(queryParams.talent).then(function(resp) {
+      if (resp && resp.result && resp.result.length > 0) {
+        console.log("finished searching query talent", resp.result);
+        that.setState({
+          queryStringTalent: resp.result
+        });
+      }
+    });
   }
 
-  //   onSearchClick(searchPrefs) {
-  //     this.performSearch(searchPrefs);
-  //   }
-
-  //   performSearch(searchPrefs) {
-  //     this.vacancyService
-  //       .search(
-  //         searchPrefs.talents,
-  //         searchPrefs.hoursPerWeek,
-  //         searchPrefs.thinkLevel,
-  //         searchPrefs.zipcode,
-  //         searchPrefs.travelTime
-  //       )
-  //       .then(res => {
-  //         this.setState({
-  //           results: res.result
-  //         });
-  //       });
-  //   }
+  performSearch(searchPrefs) {
+    this.vacancyService
+      .search(
+        searchPrefs.talents,
+        searchPrefs.hoursPerWeek,
+        searchPrefs.thinkLevel,
+        searchPrefs.zipcode,
+        searchPrefs.travelTime
+      )
+      .then(res => {
+        this.setState({
+          results: res.result
+        });
+      });
+  }
 
   render() {
     return (
       <React.Fragment>
-        {/* <PageHeader /> */}
+        <Header />
         <div className="row">
           <div className="col-md-3 results-skillset">
-            {/* <Skillset
+            <Skillset
               initialTalent={this.state.queryStringTalent}
-              onSearchClick={this.onSearchClick}
-            /> */}
+              onSearchClick={this.performSearch}
+            />
           </div>
           <div className="col-md-9 results-content">
             <div className="row">
@@ -87,9 +86,9 @@ class Vacancies extends Component {
               </div>
             </div>
             <div className="results-overview">
-              {/* {this.state.results.map(v => (
-                <Resultblock key={v.Id} vacancy={v} />
-              ))} */}
+              {this.state.results.map(v => (
+                <VacancyBlock key={v.Id} vacancy={v} />
+              ))}
             </div>
           </div>
         </div>

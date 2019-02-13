@@ -14,10 +14,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          query: {
-            presets: ["react"]
-          }
+          loader: "babel-loader"
         }
       },
       {
@@ -26,8 +23,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader",
-        include: [path.resolve(__dirname, "node_modules/bootstrap/dist/css")]
+        loader: "style-loader!css-loader"
+        // include: [
+        //   path.resolve(
+        //     __dirname,
+        //     "node_modules/bootstrap/dist/css",
+        //     "node_modules/react-bootstrap-typeahead/css"
+        //   )
+        // ]
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
