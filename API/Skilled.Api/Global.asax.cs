@@ -41,19 +41,10 @@ namespace Skilled.Api
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            builder.RegisterAssemblyTypes(assemblies)
-                    .As(type => type.GetInterfaces()
-                    .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(IQueryHandler<,>))));
-
-            builder.RegisterAssemblyTypes(assemblies)
-                    .As(type => type.GetInterfaces()
-                    .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<>))));
-            //.Select(interfaceType => new KeyedService("commandHandler", interfaceType)));
-
             builder.RegisterType<AppSettings>().As<IAppSettings>();
 
             // Set the dependency resolver to be Autofac.
-            Bootstrap.Bootstrapper.Bootstrap(builder);
+            Bootstrap.Bootstrapper.Bootstrap(builder, assemblies);
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
