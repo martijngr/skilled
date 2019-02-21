@@ -1,11 +1,92 @@
 import React, { Component } from "react";
+import Modal from "react-modal";
+import MailingListService from "../../services/api/MailingListService";
+import FormValidator from "../../components/form-validator/FormValidator";
 
 require("./coming-soon.scss");
+
 import instagramLogo from "../../../src/assets/icons/instagram_icon_black.png";
 import linkedinLogo from "../../../src/assets/icons/linkedin_icon_black.png";
 
 class ComingSoon extends Component {
+  mailingListService = new MailingListService();
+
+  constructor(props) {
+    super(props);
+
+    this.addComingSoonRecipient = this.addComingSoonRecipient.bind(this);
+    this.onComingSoonRecipientChange = this.onComingSoonRecipientChange.bind(
+      this
+    );
+    this.closeComingSoonModal = this.closeComingSoonModal.bind(this);
+    this.openComingSoonModal = this.openComingSoonModal.bind(this);
+
+    this.submitted = false;
+
+    this.validator = new FormValidator([
+      {
+        field: "comingSoonRecipient",
+        method: "isEmpty",
+        validWhen: false,
+        message: "Geen e-mailadres opgegeven :)"
+      },
+      {
+        field: "comingSoonRecipient",
+        method: "isEmail",
+        validWhen: true,
+        message: "Hmm dat lijkt niet op een e-mailadres..."
+      }
+    ]);
+
+    this.state = {
+      comingSoonRecipient: "",
+      comingSoonModelOpen: true,
+      validation: this.validator.valid(),
+      processing: false
+    };
+  }
+
+  onComingSoonRecipientChange = function(event) {
+    this.setState({
+      comingSoonRecipient: event.target.value,
+      validation: this.validator.valid()
+    });
+  };
+
+  addComingSoonRecipient = function() {
+    const validation = this.validator.validate(this.state);
+    this.setState({ validation });
+    this.submitted = true;
+
+    if (validation.isValid) {
+      var that = this;
+      this.mailingListService
+        .addComingSoonRecipient(this.state.comingSoonRecipient)
+        .then(function() {
+          that.openComingSoonModal();
+
+          that.setState({
+            comingSoonRecipient: ""
+          });
+
+          that.submitted = false;
+        });
+    }
+  };
+
+  closeComingSoonModal = function() {
+    this.setState({ comingSoonModelOpen: false });
+  };
+
+  openComingSoonModal = function() {
+    this.setState({ comingSoonModelOpen: true });
+  };
+
   render() {
+    let validation = this.submitted // if the form has been submitted at least once
+      ? this.validator.validate(this.state) // then check validity every time we render
+      : this.state.validation; // otherwise just use what's in state
+
     return (
       <React.Fragment>
         <div className="row cc--header-image">
@@ -43,20 +124,29 @@ class ComingSoon extends Component {
               <div className="block-highlight--mail">
                 <input
                   type="text"
-                  ref="email"
                   placeholder="vul je e-mailadres in!"
                   className="mail-textbox"
+                  value={this.state.comingSoonRecipient}
+                  onChange={this.onComingSoonRecipientChange}
                 />
                 <input
                   type="button"
                   value="keep me posted"
                   className="button-mail button-mail-me"
+                  onClick={this.addComingSoonRecipient}
+                  disabled={this.state.processing}
                 />
                 <input
                   type="button"
                   value="and tell a friend"
                   className="button-mail button-mail-friend"
+                  disabled={this.state.processing}
                 />
+              </div>
+              <div className="validation">
+                <span className=" validation-error">
+                  {validation.comingSoonRecipient.message}
+                </span>
               </div>
             </div>
           </div>
@@ -97,6 +187,25 @@ class ComingSoon extends Component {
             </div>
           </div>
         </div>
+
+        <Modal
+          size="sm"
+          isOpen={this.state.comingSoonModelOpen}
+          // style={customStyles}
+          contentLabel="Example Modal"
+          closeTimeoutMS={4000}
+        >
+          <div className="clearfix">
+            <h2 className="float-left">Done!</h2>
+            <div className="float-right">
+              <button onClick={this.closeComingSoonModal}>X</button>
+            </div>
+          </div>
+          <div>
+            Tof dat je je hebt aangemeld. We gaan je op de hoogte houden van de
+            ontwikkelingen van Skilled!
+          </div>
+        </Modal>
       </React.Fragment>
     );
   }

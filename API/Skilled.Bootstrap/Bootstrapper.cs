@@ -22,7 +22,7 @@ namespace Skilled.Bootstrap
             builder.RegisterAssemblyTypes(assemblies)
                     .As(type => type.GetInterfaces()
                     .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<>))));
-                    //.Select(interfaceType => new KeyedService("commandHandler", interfaceType)));
+            //.Select(interfaceType => new KeyedService("commandHandler", interfaceType)));
 
             //builder.RegisterGenericDecorator(typeof(LoggingCommandDecorator<>),
             //                                 typeof(ICommandHandler<>),
@@ -30,6 +30,10 @@ namespace Skilled.Bootstrap
             //builder.RegisterGenericDecorator(typeof(ProfilingCommandDecorator<>),
             //                                 typeof(ICommandHandler<>),
             //                                 "profilingHandler");
+
+            builder.RegisterAssemblyTypes(assemblies)
+                .Where(t => t.Name.EndsWith("Validator"))
+                .AsImplementedInterfaces();
 
             builder.RegisterType<QueryProcessor>().AsSelf();
             builder.RegisterType<CommandProcessor>().AsSelf();

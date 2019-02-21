@@ -76,6 +76,8 @@
   padding: 10px;
   border: none;
   font-style: italic;
+  cursor: pointer;
+  height: 48px;
 }
 
 .button-mail-me {
@@ -90,18 +92,18 @@
   height: 25px;
 }
 ::-webkit-input-placeholder {
-  padding: 10px;
+  padding: 10px 0;
 }
 :-moz-placeholder {
   /* older Firefox*/
-  padding: 10px;
+  padding: 10px 0;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  padding: 10px;
+  padding: 10px 0;
 }
 :-ms-input-placeholder {
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .content-text {
@@ -130,4 +132,33 @@
 
 .footer-phone {
   margin-right: 40px;
+}
+
+.ReactModalPortal > * {
+  // When the modal is closed, overlay div has no css class
+  // This selector should be overridden by the `&--after-open` class below
+  opacity: 0;
+}
+.ReactModal__Content {
+  left: 25% !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+.ReactModal__Overlay {
+  transition: opacity 200ms ease-in-out;
+  background: rgba(0, 0, 0, 0.15);
+  &--after-open {
+    opacity: 1;
+  }
+  &--before-close {
+    opacity: 0;
+  }
+}
+
+.validation {
+  margin-top: 5px;
+}
+.validation-error {
+  color: #ff4343;
+  font-size: 0.8em;
 }
