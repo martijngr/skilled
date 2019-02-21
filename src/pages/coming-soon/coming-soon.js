@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import MailingListService from "../../services/api/MailingListService";
 import FormValidator from "../../components/form-validator/FormValidator";
-
+import TellAFriendForm from "../../components/tell-a-friend-form/tell-a-friend-form";
 require("./coming-soon.scss");
 
 import instagramLogo from "../../../src/assets/icons/instagram_icon_black.png";
@@ -20,6 +20,8 @@ class ComingSoon extends Component {
     );
     this.closeComingSoonModal = this.closeComingSoonModal.bind(this);
     this.openComingSoonModal = this.openComingSoonModal.bind(this);
+    this.closeTellAFriendModal = this.closeTellAFriendModal.bind(this);
+    this.openTellAFriendModal = this.openTellAFriendModal.bind(this);
 
     this.submitted = false;
 
@@ -40,9 +42,16 @@ class ComingSoon extends Component {
 
     this.state = {
       comingSoonRecipient: "",
-      comingSoonModelOpen: true,
+      comingSoonModelOpen: false,
+      tellAFriendModelOpen: true,
       validation: this.validator.valid(),
-      processing: false
+      processing: false,
+      tellAFriend: {
+        from: "",
+        to: "",
+        message:
+          "Hoi!\r\n \r\nBekijk dit eens, superleuk! Een vacaturesite waarbij je kan zoeken op je talenten. Misschien ook iets voor jou? \r\n \r\n Groetjes!"
+      }
     };
   }
 
@@ -80,6 +89,14 @@ class ComingSoon extends Component {
 
   openComingSoonModal = function() {
     this.setState({ comingSoonModelOpen: true });
+  };
+
+  closeTellAFriendModal = function() {
+    this.setState({ tellAFriendModelOpen: false });
+  };
+
+  openTellAFriendModal = function() {
+    this.setState({ tellAFriendModelOpen: true });
   };
 
   render() {
@@ -140,6 +157,7 @@ class ComingSoon extends Component {
                   type="button"
                   value="and tell a friend"
                   className="button-mail button-mail-friend"
+                  onClick={this.openTellAFriendModal}
                   disabled={this.state.processing}
                 />
               </div>
@@ -189,21 +207,56 @@ class ComingSoon extends Component {
         </div>
 
         <Modal
-          size="sm"
           isOpen={this.state.comingSoonModelOpen}
           // style={customStyles}
           contentLabel="Example Modal"
           closeTimeoutMS={4000}
         >
+          <div
+            className="close-button close-button--circle close-button--top-right"
+            onClick={this.closeComingSoonModal}
+          >
+            <span>X</span>
+          </div>
           <div className="clearfix">
             <h2 className="float-left">Done!</h2>
-            <div className="float-right">
-              <button onClick={this.closeComingSoonModal}>X</button>
-            </div>
           </div>
+          <br />
           <div>
             Tof dat je je hebt aangemeld. We gaan je op de hoogte houden van de
             ontwikkelingen van Skilled!
+          </div>
+          <br />
+          <br />
+          <div>
+            <div
+              className="close-button close-button--rectangle"
+              onClick={this.closeComingSoonModal}
+            >
+              <span>Sluit popup</span>
+            </div>
+          </div>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.tellAFriendModelOpen}
+          contentLabel="Example Modal"
+          closeTimeoutMS={4000}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={this.closeTellAFriendModal}
+        >
+          <div
+            className="close-button close-button--circle close-button--top-right"
+            onClick={this.closeTellAFriendModal}
+          >
+            <span>X</span>
+          </div>
+          <div className="clearfix">
+            <h2 className="float-left">Tell a Friend!</h2>
+          </div>
+          <br />
+          <div>
+            <TellAFriendForm />
           </div>
         </Modal>
       </React.Fragment>

@@ -139,11 +139,12 @@
   // This selector should be overridden by the `&--after-open` class below
   opacity: 0;
 }
+
 .ReactModal__Content {
-  left: 25% !important;
-  right: auto !important;
-  bottom: auto !important;
+  left: 23% !important;
+  right: 23% !important;
 }
+
 .ReactModal__Overlay {
   transition: opacity 200ms ease-in-out;
   background: rgba(0, 0, 0, 0.15);
@@ -161,4 +162,28 @@
 .validation-error {
   color: #ff4343;
   font-size: 0.8em;
+}
+
+.close-button {
+  text-align: center;
+  color: white;
+  background-color: #4e5d51;
+  cursor: pointer;
+}
+
+.close-button--circle {
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.close-button--rectangle {
+  padding: 5px;
+}
+
+.close-button--top-right {
+  position: absolute;
+  right: 15px;
+  top: 25px;
 }
