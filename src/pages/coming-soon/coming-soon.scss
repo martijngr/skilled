@@ -141,10 +141,24 @@
 }
 
 .ReactModal__Content {
-  left: 23% !important;
-  right: 23% !important;
+  border-radius: 4px !important;
+  bottom: auto !important;
+  min-height: 10rem !important;
+  left: 50% !important;
+  padding: 2rem !important;
+  position: fixed !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  min-width: 20rem !important;
+  width: 80% !important;
+  max-width: 60rem !important;
 }
 
+.childDiv {
+  max-height: 90vh;
+  max-width: 90vw;
+}
 .ReactModal__Overlay {
   transition: opacity 200ms ease-in-out;
   background: rgba(0, 0, 0, 0.15);

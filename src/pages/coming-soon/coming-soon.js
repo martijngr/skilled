@@ -212,28 +212,30 @@ class ComingSoon extends Component {
           contentLabel="Example Modal"
           closeTimeoutMS={500}
         >
-          <div
-            className="close-button close-button--circle close-button--top-right"
-            onClick={this.closeComingSoonModal}
-          >
-            <span>X</span>
-          </div>
-          <div className="clearfix">
-            <h2 className="float-left">Done!</h2>
-          </div>
-          <br />
-          <div>
-            Tof dat je je hebt aangemeld. We gaan je op de hoogte houden van de
-            ontwikkelingen van Skilled!
-          </div>
-          <br />
-          <br />
-          <div>
+          <div className="childDiv">
             <div
-              className="close-button close-button--rectangle"
+              className="close-button close-button--circle close-button--top-right"
               onClick={this.closeComingSoonModal}
             >
-              <span>Sluit popup</span>
+              <span>X</span>
+            </div>
+            <div className="clearfix">
+              <h2 className="float-left">Done!</h2>
+            </div>
+            <br />
+            <div>
+              Tof dat je je hebt aangemeld. We gaan je op de hoogte houden van
+              de ontwikkelingen van Skilled!
+            </div>
+            <br />
+            <br />
+            <div>
+              <div
+                className="close-button close-button--rectangle"
+                onClick={this.closeComingSoonModal}
+              >
+                <span>Sluit popup</span>
+              </div>
             </div>
           </div>
         </Modal>
@@ -245,18 +247,20 @@ class ComingSoon extends Component {
           shouldCloseOnOverlayClick={true}
           onRequestClose={this.closeTellAFriendModal}
         >
-          <div
-            className="close-button close-button--circle close-button--top-right"
-            onClick={this.closeTellAFriendModal}
-          >
-            <span>X</span>
-          </div>
-          <div className="clearfix">
-            <h2 className="float-left">Tell a Friend!</h2>
-          </div>
-          <br />
-          <div>
-            <TellAFriendForm closeModal={this.closeTellAFriendModal} />
+          <div className="childDiv">
+            <div
+              className="close-button close-button--circle close-button--top-right"
+              onClick={this.closeTellAFriendModal}
+            >
+              <span>X</span>
+            </div>
+            <div className="clearfix">
+              <h2 className="float-left">Tell a Friend!</h2>
+            </div>
+            <br />
+            <div>
+              <TellAFriendForm closeModal={this.closeTellAFriendModal} />
+            </div>
           </div>
         </Modal>
       </React.Fragment>
