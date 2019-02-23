@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
-import MailingListService from "../../services/api/MailingListService";
+import MailingService from "../../services/api/MailingService";
 import FormValidator from "../../components/form-validator/FormValidator";
 import TellAFriendForm from "../../components/tell-a-friend-form/tell-a-friend-form";
 require("./coming-soon.scss");
@@ -9,7 +9,7 @@ import instagramLogo from "../../../src/assets/icons/instagram_icon_black.png";
 import linkedinLogo from "../../../src/assets/icons/linkedin_icon_black.png";
 
 class ComingSoon extends Component {
-  mailingListService = new MailingListService();
+  mailingListService = new MailingService();
 
   constructor(props) {
     super(props);
@@ -210,7 +210,7 @@ class ComingSoon extends Component {
           isOpen={this.state.comingSoonModelOpen}
           // style={customStyles}
           contentLabel="Example Modal"
-          closeTimeoutMS={4000}
+          closeTimeoutMS={500}
         >
           <div
             className="close-button close-button--circle close-button--top-right"
@@ -241,7 +241,7 @@ class ComingSoon extends Component {
         <Modal
           isOpen={this.state.tellAFriendModelOpen}
           contentLabel="Example Modal"
-          closeTimeoutMS={4000}
+          closeTimeoutMS={500}
           shouldCloseOnOverlayClick={true}
           onRequestClose={this.closeTellAFriendModal}
         >
@@ -256,7 +256,7 @@ class ComingSoon extends Component {
           </div>
           <br />
           <div>
-            <TellAFriendForm />
+            <TellAFriendForm closeModal={this.closeTellAFriendModal} />
           </div>
         </Modal>
       </React.Fragment>

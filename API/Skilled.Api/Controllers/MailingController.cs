@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Skilled.CQRS;
 using Skilled.Domain.Mailing.ComingSoon;
-using System.Linq;
+using Skilled.Domain.Mailing.TellAFriend;
 using System.Web.Http;
 
 namespace Skilled.Api.Controllers
@@ -21,6 +21,21 @@ namespace Skilled.Api.Controllers
             try
             {
                 _commandProcessor.Handle(command ?? AddMailRecipientCommand.Empty());
+
+                return Ok();
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Errors.ConvertToString());
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult SendTellAFriendMail(SendTellAFriendMailCommand command)
+        {
+            try
+            {
+                _commandProcessor.Handle(command ?? SendTellAFriendMailCommand.Empty());
 
                 return Ok();
             }

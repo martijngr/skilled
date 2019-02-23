@@ -3,6 +3,7 @@ using Skilled.CQRS;
 using Skilled.Domain;
 using Skilled.Domain.DistanceCalculators;
 using Skilled.Domain.DistanceCalculators.Google;
+using Skilled.Domain.Mailing.Clients;
 using Skilled.Domain.PathHandling;
 using Skilled.Domain.Vacancies.Searching;
 using Skilled.Infrastructure;
@@ -41,6 +42,7 @@ namespace Skilled.Bootstrap
             builder.RegisterType<AutofacTypeResolver>().As<ITypeResolver>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             builder.RegisterType<SkilledContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<SmtpMailClient>().As<ISmtpClient>();
 
             builder.RegisterType<GoogleDistanceCalculator>().Named<IDistanceCalculator>("google");
             builder.RegisterDecorator<IDistanceCalculator>((c, inner) => new DbDistanceCalculatorDecorator(inner, c.Resolve<IUnitOfWork>()), fromKey: "google");
