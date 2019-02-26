@@ -201,3 +201,13 @@
   right: 15px;
   top: 25px;
 }
+.social-share--container {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.social-share--button {
+  cursor: pointer;
+}

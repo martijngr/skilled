@@ -3,11 +3,21 @@ import Modal from "react-modal";
 import MailingService from "../../services/api/MailingService";
 import FormValidator from "../../components/form-validator/FormValidator";
 import TellAFriendForm from "../../components/tell-a-friend-form/tell-a-friend-form";
+import { Tooltip } from "react-tippy";
+import { WhatsappShareButton, WhatsappIcon, EmailIcon } from "react-share";
+
 require("./coming-soon.scss");
+import "react-tippy/dist/tippy.css";
 
 import instagramLogo from "../../../src/assets/icons/instagram_icon_black.png";
 import linkedinLogo from "../../../src/assets/icons/linkedin_icon_black.png";
 
+/* 
+RESOURCES
+
+Tippy: https://tvkhoa.github.io/testlib/
+social share: https://www.npmjs.com/package/react-share
+*/
 class ComingSoon extends Component {
   mailingListService = new MailingService();
 
@@ -22,6 +32,8 @@ class ComingSoon extends Component {
     this.openComingSoonModal = this.openComingSoonModal.bind(this);
     this.closeTellAFriendModal = this.closeTellAFriendModal.bind(this);
     this.openTellAFriendModal = this.openTellAFriendModal.bind(this);
+    this.showTellAFriendTippy = this.showTellAFriendTippy.bind(this);
+    this.closeTellAFriendTippy = this.closeTellAFriendTippy.bind(this);
 
     this.submitted = false;
 
@@ -43,7 +55,7 @@ class ComingSoon extends Component {
     this.state = {
       comingSoonRecipient: "",
       comingSoonModelOpen: false,
-      tellAFriendModelOpen: true,
+      tellAFriendModelOpen: false,
       validation: this.validator.valid(),
       processing: false,
       tellAFriend: {
@@ -51,7 +63,8 @@ class ComingSoon extends Component {
         to: "",
         message:
           "Hoi!\r\n \r\nBekijk dit eens, superleuk! Een vacaturesite waarbij je kan zoeken op je talenten. Misschien ook iets voor jou? \r\n \r\n Groetjes!"
-      }
+      },
+      showTellAFriendTippy: false
     };
   }
 
@@ -97,6 +110,18 @@ class ComingSoon extends Component {
 
   openTellAFriendModal = function() {
     this.setState({ tellAFriendModelOpen: true });
+  };
+
+  showTellAFriendTippy = function() {
+    this.setState({
+      showTellAFriendTippy: true
+    });
+  };
+
+  closeTellAFriendTippy = function() {
+    this.setState({
+      showTellAFriendTippy: false
+    });
   };
 
   render() {
@@ -153,13 +178,50 @@ class ComingSoon extends Component {
                   onClick={this.addComingSoonRecipient}
                   disabled={this.state.processing}
                 />
-                <input
+                {/* <input
                   type="button"
                   value="and tell a friend"
                   className="button-mail button-mail-friend"
                   onClick={this.openTellAFriendModal}
                   disabled={this.state.processing}
-                />
+                /> */}
+                <Tooltip
+                  // trigger="click"
+                  interactive
+                  arrow={true}
+                  theme="light"
+                  open={this.state.showTellAFriendTippy}
+                  onRequestClose={this.closeTellAFriendTippy}
+                  html={
+                    <div className="social-share--container">
+                      <div className="social-share--button">
+                        <WhatsappShareButton
+                          title="Share Skilled!"
+                          url="http://www.skilled.nu"
+                        >
+                          <WhatsappIcon size={32} round={true} />
+                        </WhatsappShareButton>
+                      </div>
+                      <div
+                        className="social-share--button"
+                        onClick={() => {
+                          this.openTellAFriendModal();
+                          this.closeTellAFriendTippy();
+                        }}
+                      >
+                        <EmailIcon size={32} round={true} />
+                      </div>
+                    </div>
+                  }
+                >
+                  <input
+                    type="button"
+                    value="and tell a friend"
+                    className="button-mail button-mail-friend"
+                    onClick={this.showTellAFriendTippy}
+                    disabled={this.state.processing}
+                  />
+                </Tooltip>
               </div>
               <div className="validation">
                 <span className=" validation-error">
