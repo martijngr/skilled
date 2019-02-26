@@ -61,9 +61,11 @@
 
 .block-highlight--mail {
   margin-top: 40px;
+  width: 100%;
 
   input {
     margin-right: 10px;
+    width: 100%;
   }
 
   .mail-textbox {
@@ -106,32 +108,36 @@
   padding: 10px 0;
 }
 
+.comingSoon {
+  margin-bottom: 50px;
+}
+
 .content-text {
   margin-top: 40px;
 }
 
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 55px;
   background-color: #747d76;
-  padding: 0;
+  text-align: center;
+  padding-top: inherit;
+  padding-bottom: inherit;
+  padding: 20px 0;
+}
+
+.footer-item {
+  padding: 5px 0;
 }
 
 .footer-contact {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: bold;
-  margin-right: 40px;
 }
 
 .footer-email {
-  margin-right: 40px;
 }
 
 .footer-phone {
-  margin-right: 40px;
 }
 
 .ReactModalPortal > * {

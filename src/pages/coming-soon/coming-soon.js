@@ -135,8 +135,8 @@ class ComingSoon extends Component {
           <div className="col-sm-12" />
         </div>
         <div className="row">
-          <div className="col-md-1" />
-          <div className="col-md-5">
+          {/* <div className="col-sm-1" /> */}
+          <div className="col-12 col-md-6">
             <div className="block-highlight">
               <div className="block-highlight--video">
                 <iframe
@@ -163,108 +163,116 @@ class ComingSoon extends Component {
                   <li>Absolute transparantie</li>
                 </ul>
               </div>
-              <div className="block-highlight--mail">
-                <input
-                  type="text"
-                  placeholder="vul je e-mailadres in!"
-                  className="mail-textbox"
-                  value={this.state.comingSoonRecipient}
-                  onChange={this.onComingSoonRecipientChange}
-                />
-                <input
-                  type="button"
-                  value="keep me posted"
-                  className="button-mail button-mail-me"
-                  onClick={this.addComingSoonRecipient}
-                  disabled={this.state.processing}
-                />
-                {/* <input
-                  type="button"
-                  value="and tell a friend"
-                  className="button-mail button-mail-friend"
-                  onClick={this.openTellAFriendModal}
-                  disabled={this.state.processing}
-                /> */}
-                <Tooltip
-                  // trigger="click"
-                  interactive
-                  arrow={true}
-                  theme="light"
-                  open={this.state.showTellAFriendTippy}
-                  onRequestClose={this.closeTellAFriendTippy}
-                  html={
-                    <div className="social-share--container">
-                      <div className="social-share--button">
-                        <WhatsappShareButton
-                          title="Share Skilled!"
-                          url="http://www.skilled.nu"
-                        >
-                          <WhatsappIcon size={32} round={true} />
-                        </WhatsappShareButton>
-                      </div>
-                      <div
-                        className="social-share--button"
-                        onClick={() => {
-                          this.openTellAFriendModal();
-                          this.closeTellAFriendTippy();
-                        }}
-                      >
-                        <EmailIcon size={32} round={true} />
-                      </div>
+              <div className="block-highlight--mail container">
+                <div className="row">
+                  <div className="col-12 col-lg-4">
+                    <input
+                      type="text"
+                      placeholder="vul je e-mailadres in!"
+                      className="mail-textbox"
+                      value={this.state.comingSoonRecipient}
+                      onChange={this.onComingSoonRecipientChange}
+                    />
+                    <div className="validation">
+                      <span className=" validation-error">
+                        {validation.comingSoonRecipient.message}
+                      </span>
                     </div>
-                  }
-                >
-                  <input
-                    type="button"
-                    value="and tell a friend"
-                    className="button-mail button-mail-friend"
-                    onClick={this.showTellAFriendTippy}
-                    disabled={this.state.processing}
-                  />
-                </Tooltip>
-              </div>
-              <div className="validation">
-                <span className=" validation-error">
-                  {validation.comingSoonRecipient.message}
-                </span>
+                  </div>
+                  <div className="col-12 col-lg-4">
+                    <input
+                      type="button"
+                      value="keep me posted"
+                      className="button-mail button-mail-me"
+                      onClick={this.addComingSoonRecipient}
+                      disabled={this.state.processing}
+                    />
+                  </div>
+                  <div className="d-lg-none">&nbsp;</div>
+                  <div className="col-12 col-lg-4">
+                    <Tooltip
+                      // trigger="click"
+                      interactive
+                      arrow={true}
+                      theme="light"
+                      open={this.state.showTellAFriendTippy}
+                      onRequestClose={this.closeTellAFriendTippy}
+                      html={
+                        <div className="social-share--container">
+                          <div className="social-share--button">
+                            <WhatsappShareButton
+                              title="Share Skilled!"
+                              url="http://www.skilled.nu"
+                            >
+                              <WhatsappIcon size={32} round={true} />
+                            </WhatsappShareButton>
+                          </div>
+                          <div
+                            className="social-share--button"
+                            onClick={() => {
+                              this.openTellAFriendModal();
+                              this.closeTellAFriendTippy();
+                            }}
+                          >
+                            <EmailIcon size={32} round={true} />
+                          </div>
+                        </div>
+                      }
+                    >
+                      <input
+                        type="button"
+                        value="and tell a friend"
+                        className="button-mail button-mail-friend"
+                        onClick={this.showTellAFriendTippy}
+                        disabled={this.state.processing}
+                      />
+                    </Tooltip>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-md-5">
-            <div className="block-title">Coming soon</div>
-            <div className="content-text">
-              <p>
-                Wij bouwen Skilled. Wij geloven dat talenten het uitgangspunt
-                moeten zijn van de zoektocht naar een baan die echt past. Want
-                talent kun je niet aanleren, vaardigheden wel. Wij geloven dat
-                als je werkt vanuit je talent het meer wordt dan een baan.{" "}
-                <br />
-                Stay tuned!
-              </p>
-            </div>
-            <div className="slogan">
-              See you soon, the Moonshot family{" "}
-              <a href="http://www.google.com" target="_blank">
-                <img className="img-25" src={instagramLogo} />
-              </a>
+          <div className="col-12 col-md-6">
+            <div className="comingSoon">
+              <div className="block-title">Coming soon</div>
+              <div className="content-text">
+                <p>
+                  Wij bouwen Skilled. Wij geloven dat talenten het uitgangspunt
+                  moeten zijn van de zoektocht naar een baan die echt past. Want
+                  talent kun je niet aanleren, vaardigheden wel. Wij geloven dat
+                  als je werkt vanuit je talent het meer wordt dan een baan.{" "}
+                  <br />
+                  Stay tuned!
+                </p>
+              </div>
+              <div className="slogan">
+                See you soon, the Moonshot family{" "}
+                <a href="http://www.google.com" target="_blank">
+                  <img className="img-25" src={instagramLogo} />
+                </a>
+              </div>
             </div>
           </div>
-          <div className="col-md-1" />
+          {/* <div className="col-sm-1" /> */}
         </div>
-        <div className="row">
-          <div className="col-sm-12 footer">
-            <div className="footer-contact">Contact</div>
-            <div className="footer-email">e-mail@skilled.nu</div>
-            <div className="footer-phone">06 - 28 494 618</div>
-            <div className="social">
-              <a href="http://www.google.com" target="_blank">
-                <img className="img-25" src={instagramLogo} />
-              </a>
-              &nbsp;
-              <a href="http://www.google.com" target="_blank">
-                <img className="img-25" src={linkedinLogo} />
-              </a>
-            </div>
+        <div className="row footer">
+          <div className="col-12 col-md-3 footer-item footer-contact">
+            Contact
+          </div>
+          <div className="col-12 col-md-3 footer-item footer-email">
+            e-mail@skilled.nu
+          </div>
+          <div className="col-12 col-md-3 footer-item footer-phone">
+            06 - 28 494 618
+          </div>
+          <div className="col-12 col-md-3 footer-item social">
+            <a href="http://www.google.com" target="_blank">
+              <img className="img-25" src={instagramLogo} />
+            </a>
+            &nbsp;
+            <a href="http://www.google.com" target="_blank">
+              <img className="img-25" src={linkedinLogo} />
+            </a>
           </div>
         </div>
 
