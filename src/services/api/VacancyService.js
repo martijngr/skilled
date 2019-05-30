@@ -1,12 +1,14 @@
 import axios from "axios";
 
 class VacancyService {
+  baseUrl = process.env.API_URL + '/Vacancies';
+
   search = function(talents, hoursPerWeek, thinkLevel, zipcode, travelTime) {
     var talentNames = talents.map(t => t.Name);
 
     return axios
       .get(
-        "http://localhost/Skilled/api/Vacancies/Search?talents=" +
+        baseUrl + "/Search?talents=" +
           talentNames +
           "&HoursPerWeek=" +
           hoursPerWeek +
@@ -33,7 +35,7 @@ class VacancyService {
 
     return axios
       .get(
-        "http://localhost/Skilled/api/Vacancies/SearchCount?talents=" +
+        baseUrl + "/SearchCount?talents=" +
           talentNames +
           "&HoursPerWeek=" +
           hoursPerWeek +
@@ -51,7 +53,7 @@ class VacancyService {
 
   getThinkeLevels = function() {
     return axios
-      .get("http://localhost/Skilled/api/Vacancies/GetThinkLevels")
+      .get(baseUrl + "/GetThinkLevels")
       .then(res => {
         return res.data;
       });

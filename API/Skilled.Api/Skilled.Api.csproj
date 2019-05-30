@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Production.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Skilled.Bootstrap\Skilled.Bootstrap.csproj">

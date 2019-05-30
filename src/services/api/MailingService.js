@@ -1,11 +1,13 @@
 import axios from "axios";
 
 class MailingService {
+   baseUrl = process.env.API_URL + '/Mailing';
+
   addComingSoonRecipient = function(email) {
     console.log(email);
 
     return axios
-      .post("http://localhost/Skilled/api/Mailing/ComingSoonMailing", {
+      .post(this.baseUrl + "/ComingSoonMailing", {
         Email: email
       })
       .then(res => {
@@ -17,7 +19,7 @@ class MailingService {
     console.log(message);
 
     return axios
-      .post("http://localhost/Skilled/api/Mailing/SendTellAFriendMail", message)
+      .post(this.baseUrl + "/SendTellAFriendMail", message)
       .then(res => {
         return res.data;
       });
