@@ -41,6 +41,7 @@ class TalentTypeahead extends Component {
         }}
         labelKey="Name"
         options={this.state.talents}
+        placeholder="Voer hier jouw talent in!"
       />
     );
   }

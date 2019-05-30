@@ -1,0 +1,22 @@
+.react-tabs__tab-list {
+    display: flex;
+}
+
+.react-tabs__tab {
+    border: 1px solid #212529;
+    border-right: none;
+    flex-grow: 1;
+    flex-basis: 0;
+    font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.react-tabs__tab:last-child{
+    border-right: 1px solid #212529;
+}
+
+.react-tabs__tab--selected {
+    background: #53988c;
+    border-radius: 0;
+    color: white;
+}

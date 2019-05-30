@@ -6,7 +6,7 @@ class TalentService {
   search = function(keyword) {
     keyword = keyword || "";
     return axios
-      .get(baseUrl + "/Search?keyword=" + keyword)
+      .get(this.baseUrl + "/Search?keyword=" + keyword)
       .then(res => {
         return res.data;
       });

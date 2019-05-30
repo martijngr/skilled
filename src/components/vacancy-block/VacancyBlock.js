@@ -7,13 +7,24 @@ import bucketIcon from "../../assets/icons/Icon_bucket.png";
 class VacancyBlock extends Component {
   state = {};
 
+  constructor(props){
+    super(props);
+
+    this.onVacancyClick = this.onVacancyClick.bind(this);
+  }
+
+  onVacancyClick(){
+    if(this.props.onVacancyClick)
+      this.props.onVacancyClick(this.props.vacancy.Id);
+  }
+
   render() {
     let progressbarStyle = {
       width: this.props.vacancy.MatchPercentage + "%"
     };
 
     return (
-      <div className="results-block">
+      <div className="results-block" onClick={this.onVacancyClick}>
         <div className="results-block--header-dots">
           <div>...</div>
         </div>

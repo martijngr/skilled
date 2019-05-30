@@ -3,11 +3,12 @@ import Header from "../../components/site-layout/header/header";
 import TalentService from "./../../services/api/TalentService";
 import VacancyService from "./../../services/api/VacancyService";
 import Skillset from "../../components/skillset/skillset";
-require("./vacancies.scss");
-// import logo1 from "../../img/logo-feyenoord.png";
 import queryString from "query-string";
 import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
-// import Resultblock from "./resultblock/resultblock";
+import Modal from "react-modal";
+import Vacancy from "../vacancy/vacancy";
+
+require("./vacancies.scss");
 
 class Vacancies extends Component {
   constructor(props) {
@@ -17,12 +18,15 @@ class Vacancies extends Component {
     this.talentService = new TalentService();
 
     this.performSearch = this.performSearch.bind(this);
-    //this.onSearchClick = this.onSearchClick.bind(this);
+    this.onVacancyClick = this.onVacancyClick.bind(this);
+    this.closeVacancyModal = this.closeVacancyModal.bind(this);
   }
 
   state = {
     results: [],
-    queryStringTalent: {}
+    queryStringTalent: {},
+    isVacancyModelOpen: false,
+    selectedVacancyId: ''
   };
 
   componentDidMount() {
@@ -57,6 +61,21 @@ class Vacancies extends Component {
       });
   }
 
+  onVacancyClick(vacancyId){
+    if(!vacancyId) return;
+
+    this.setState({
+      selectedVacancyId: vacancyId,
+      isVacancyModelOpen: true
+    });
+  }
+
+  closeVacancyModal(){
+    this.setState({
+      isVacancyModelOpen: false
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -87,11 +106,20 @@ class Vacancies extends Component {
             </div>
             <div className="results-overview">
               {this.state.results.map(v => (
-                <VacancyBlock key={v.Id} vacancy={v} />
+                <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
               ))}
             </div>
           </div>
         </div>
+
+        <Modal 
+          isOpen={this.state.isVacancyModelOpen}
+          onRequestClose={this.closeVacancyModal}>
+            <Vacancy 
+              vacancyId={this.state.selectedVacancyId} 
+              key={this.state.selectedVacancyId}>
+            </Vacancy>
+        </Modal>
       </React.Fragment>
     );
   }

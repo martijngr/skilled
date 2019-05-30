@@ -85,6 +85,7 @@
     <Compile Include="ThinkLevels\Queries\GetThinkLevelsQuery.cs" />
     <Compile Include="ThinkLevels\ThinkLevel.cs" />
     <Compile Include="ThinkLevels\Views\ThinkLevelView.cs" />
+    <Compile Include="Vacancies\Queries\GetVacancyByIdQuery.cs" />
     <Compile Include="Vacancies\Queries\GetVacancyLogoQuery.cs" />
     <Compile Include="Vacancies\Queries\GetVacancySearchCountQuery.cs" />
     <Compile Include="Vacancies\Queries\GetVacancySearchResultsQuery.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Vacancies\Vacancy.cs" />
     <Compile Include="Vacancies\Views\SearchVacancyResult.cs" />
     <Compile Include="Vacancies\Views\VacancySearchResult.cs" />
+    <Compile Include="Vacancies\Views\VacancyView.cs" />
     <Compile Include="Zipcodes\Zipcode.cs" />
     <Compile Include="Zipcodes\ZipcodeDistance.cs" />
   </ItemGroup>

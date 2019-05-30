@@ -71,25 +71,6 @@ class TalentStore extends Component {
     });
   }
 
-  //   createTalentCheckbox(talent) {
-  //     let attributes = {
-  //       type: "checkbox",
-  //       key: talent.Id,
-  //       value: talent.Id,
-  //       checked: talent.checked,
-  //       onChange: this.onTalentModalCheckboxChange,
-  //       "data-talent": JSON.stringify(talent)
-  //     };
-
-  //     return (
-  //       <div key={talent.Id}>
-  //         <label>
-  //           <input {...attributes} /> {talent.Name}
-  //         </label>
-  //       </div>
-  //     );
-  //   }
-
   onTalentModalCheckboxChange(e) {
     var talent = JSON.parse(e.target.dataset.talent);
     talent.checked = !talent.checked;
