@@ -1,10 +1,12 @@
 import axios from "axios";
 
 class TalentService {
+  baseUrl = process.env.API_URL + '/Talent';
+
   search = function(keyword) {
     keyword = keyword || "";
     return axios
-      .get("http://localhost/Skilled/api/Talent/Search?keyword=" + keyword)
+      .get(baseUrl + "/Search?keyword=" + keyword)
       .then(res => {
         return res.data;
       });

@@ -1,4 +1,5 @@
 ﻿using Skilled.Domain;
+using Skilled.Domain.Mailing.ComingSoon;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
 using Skilled.Domain.Vacancies;
@@ -19,6 +20,7 @@ namespace Skilled.Infrastructure
             ThinkLevels = new BaseRepository<ThinkLevel>(context);
             Zipcodes = new BaseRepository<Zipcode>(context);
             ZipcodeDistances = new BaseRepository<ZipcodeDistance>(context);
+            MailingRecipientsComingSoon = new BaseRepository<MailingRecipientComingSoon>(context);
         }
 
         public IRepository<Vacancy> Vacancies { get; }
@@ -30,6 +32,8 @@ namespace Skilled.Infrastructure
         public IRepository<Zipcode> Zipcodes { get; }
 
         public IRepository<ZipcodeDistance> ZipcodeDistances { get; }
+
+        public IRepository<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; }
 
         public int SaveChanges()
         {
