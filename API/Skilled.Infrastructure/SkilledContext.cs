@@ -1,4 +1,6 @@
-﻿using Skilled.Domain.Vacancies;
+﻿using Skilled.Domain.Mailing;
+using Skilled.Domain.Mailing.ComingSoon;
+using Skilled.Domain.Vacancies;
 using Skilled.Domain.Zipcodes;
 using System.Data.Entity;
 
@@ -14,6 +16,14 @@ namespace Skilled.Infrastructure
         public DbSet<Vacancy> Vacancies { get; set; }
 
         public DbSet<ZipcodeDistance> ZipcodeDistances { get; set; }
+
+        public DbSet<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MailingRecipientComingSoon>().ToTable("MailingListComingSoon");
+
+        }
 
         private void FixEfProviderServicesProblem()
         {

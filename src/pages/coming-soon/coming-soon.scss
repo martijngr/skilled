@@ -61,9 +61,11 @@
 
 .block-highlight--mail {
   margin-top: 40px;
+  width: 100%;
 
   input {
     margin-right: 10px;
+    width: 100%;
   }
 
   .mail-textbox {
@@ -76,6 +78,8 @@
   padding: 10px;
   border: none;
   font-style: italic;
+  cursor: pointer;
+  height: 48px;
 }
 
 .button-mail-me {
@@ -90,18 +94,22 @@
   height: 25px;
 }
 ::-webkit-input-placeholder {
-  padding: 10px;
+  padding: 10px 0;
 }
 :-moz-placeholder {
   /* older Firefox*/
-  padding: 10px;
+  padding: 10px 0;
 }
 ::-moz-placeholder {
   /* Firefox 19+ */
-  padding: 10px;
+  padding: 10px 0;
 }
 :-ms-input-placeholder {
-  padding: 10px;
+  padding: 10px 0;
+}
+
+.comingSoon {
+  margin-bottom: 50px;
 }
 
 .content-text {
@@ -109,25 +117,103 @@
 }
 
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 55px;
   background-color: #747d76;
-  padding: 0;
+  text-align: center;
+  padding-top: inherit;
+  padding-bottom: inherit;
+  padding: 20px 0;
+}
+
+.footer-item {
+  padding: 5px 0;
 }
 
 .footer-contact {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: bold;
-  margin-right: 40px;
 }
 
 .footer-email {
-  margin-right: 40px;
 }
 
 .footer-phone {
-  margin-right: 40px;
+}
+
+.ReactModalPortal > * {
+  // When the modal is closed, overlay div has no css class
+  // This selector should be overridden by the `&--after-open` class below
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  border-radius: 4px !important;
+  bottom: auto !important;
+  min-height: 10rem !important;
+  left: 50% !important;
+  padding: 2rem !important;
+  position: fixed !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  min-width: 20rem !important;
+  width: 80% !important;
+  max-width: 60rem !important;
+}
+
+.childDiv {
+  max-height: 90vh;
+  max-width: 90vw;
+}
+.ReactModal__Overlay {
+  transition: opacity 200ms ease-in-out;
+  background: rgba(0, 0, 0, 0.15);
+  &--after-open {
+    opacity: 1;
+  }
+  &--before-close {
+    opacity: 0;
+  }
+}
+
+.validation {
+  margin-top: 5px;
+}
+.validation-error {
+  color: #ff4343;
+  font-size: 0.8em;
+}
+
+.close-button {
+  text-align: center;
+  color: white;
+  background-color: #4e5d51;
+  cursor: pointer;
+}
+
+.close-button--circle {
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.close-button--rectangle {
+  padding: 5px;
+}
+
+.close-button--top-right {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+}
+.social-share--container {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.social-share--button {
+  cursor: pointer;
 }
