@@ -1,5 +1,38 @@
+.block-title{
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;  
+}
+
+.highlight__item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.highlight__item-icon{
+    margin-right: 20px;
+}
+
+.highlight__item-icon img{
+    width: 35px;
+}
+
+.highlight__item-description{
+    text-transform: uppercase;
+    letter-spacing: 1px;  
+}
+
 .react-tabs__tab-list {
     display: flex;
+}
+
+.divider{
+    height: 2px;
+    border: 1px solid grey;
+}
+.react-tabs__tab-panel{
+    margin-top: 20px;
 }
 
 .react-tabs__tab {
@@ -8,8 +41,9 @@
     flex-grow: 1;
     flex-basis: 0;
     font-size: 0.8em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px 12px;
 }
 .react-tabs__tab:last-child{
     border-right: 1px solid #212529;
@@ -19,4 +53,34 @@
     background: #53988c;
     border-radius: 0;
     color: white;
+}
+
+.tab__content-title{
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.talents-overview li:before{
+    content:"\2713\0020";
+    font-size:1.1em;
+}
+
+.talent-overview{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.talent-overview__item {
+    padding: 5px;
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.talent-overview__item-selected{
+    background: #1d9e1d;
 }

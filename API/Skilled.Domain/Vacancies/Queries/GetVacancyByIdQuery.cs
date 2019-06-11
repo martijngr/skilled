@@ -32,13 +32,28 @@ namespace Skilled.Domain.Vacancies.Queries
                 .Select(v => new VacancyView
                 {
                     City = v.City,
+                    CreatedOn = v.CreatedOn,
                     Description = v.Description,
                     HoursPerWeek = v.HoursPerWeek,
                     Id = v.Id,
+                    VacancyLogoFileName = v.LogoFileName,
                     SalaryFrom = v.SalaryFrom,
                     SalaryTill = v.SalaryTill,
                     Title = v.Title,
-                    Zipcode = v.Zipcode.Value
+                    Zipcode = v.Zipcode.Value,
+                    ContactPerson = new VacancyView.ContactPersonView
+                    {
+                        AvatarFileName = "",
+                        Email = v.ContactPerson.Email,
+                        Name = v.ContactPerson.Name
+                    },
+                    Skills = v.Skills.Select(s => s.Name),
+                    ThinkLevel = v.ThinkLevel.Name,
+                    Employer = new VacancyView.EmployerView
+                    {
+                        Description = v.Employer.Description,
+                        Name= v.Employer.Name
+                    }
                 })
                 .FirstOrDefault();
         }

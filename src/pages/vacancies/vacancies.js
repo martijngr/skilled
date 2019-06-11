@@ -56,7 +56,8 @@ class Vacancies extends Component {
       )
       .then(res => {
         this.setState({
-          results: res.result
+          results: res.result,
+          selectedTalents: searchPrefs.talents
         });
       });
   }
@@ -117,6 +118,7 @@ class Vacancies extends Component {
           onRequestClose={this.closeVacancyModal}>
             <Vacancy 
               vacancyId={this.state.selectedVacancyId} 
+              selectedTalents={this.state.selectedTalents}
               key={this.state.selectedVacancyId}>
             </Vacancy>
         </Modal>

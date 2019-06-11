@@ -58,6 +58,14 @@ class VacancyService {
         return res.data;
       });
   };
+
+  getById(vacancyId){
+    return axios
+      .get(this.baseUrl + "/GetVacancy?vacancyId=" + vacancyId)
+      .then(res => {
+        return res.data;
+      });
+  }
 }
 
 export default VacancyService;
