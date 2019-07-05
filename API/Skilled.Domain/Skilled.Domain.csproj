@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactPersons\ContactPerson.cs" />
+    <Compile Include="ContactPersons\Queries\GetProfilePicturePathByContactPersonId.cs" />
     <Compile Include="DistanceCalculators\DbDistanceCalculatorDecorator.cs" />
     <Compile Include="DistanceCalculators\Distance.cs" />
     <Compile Include="DistanceCalculators\Google\GoogleDistanceCalculator.cs" />

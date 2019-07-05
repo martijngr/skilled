@@ -89,22 +89,6 @@ class Vacancies extends Component {
             />
           </div>
           <div className="col-md-9 results-content">
-            <div className="row">
-              <div className="col-md-12 result-bucket-bar">
-                <div className="result-buckat-bar--filter-text">Filter op</div>
-                <div className="result-buckat-bar--dropdown">
-                  <select className="custom-select">
-                    <option># Kies je bucket</option>
-                    <option># Favorieten</option>
-                    <option># Saai</option>
-                    <option># Twijfelachtig</option>
-                  </select>
-                </div>
-                <div className="result-buckat-bar--button">
-                  <div>Naar mijn buckets ></div>
-                </div>
-              </div>
-            </div>
             <div className="results-overview">
               {this.state.results.map(v => (
                 <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>

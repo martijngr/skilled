@@ -138,6 +138,27 @@ class Vacancy extends Component{
 
                     <div className="contactperson">
                         <div className="block-title">Vragen of opmerkingen</div>
+                        <div className="contactperson__details">
+                            <div>
+                                <img className="contactperson-image"
+                                    src={
+                                        "http://localhost/Skilled/api/ContactPerson/ProfilePicture?contactPersonId=" +
+                                        this.state.vacancy.ContactPerson.Id
+                                    }
+                                    />
+                            </div>
+                            <div className="contactperson__contact-data">
+                                <div>
+                                {this.state.vacancy.ContactPerson.Name}
+                                </div>
+                                <div>
+                                    {this.state.vacancy.ContactPerson.Email}
+                                </div>
+                                <div>
+                                    {this.state.vacancy.ContactPerson.PhoneNumber}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

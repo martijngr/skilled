@@ -2,6 +2,7 @@
     font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 1px;  
+    margin-bottom: 5px;
 }
 
 .highlight__item{
@@ -30,6 +31,7 @@
 .divider{
     height: 2px;
     border: 1px solid grey;
+    margin: 30px 0;
 }
 .react-tabs__tab-panel{
     margin-top: 20px;
@@ -61,6 +63,10 @@
     font-weight: bold;
 }
 
+.talents{
+    margin-bottom: 20px;
+}
+
 .talents-overview li:before{
     content:"\2713\0020";
     font-size:1.1em;
@@ -83,4 +89,19 @@
 
 .talent-overview__item-selected{
     background: #1d9e1d;
+}
+
+.contactperson-image{
+    border-radius:50% 50% 50% 50%;  
+   width:100px;
+   height:100px;
+}
+
+.contactperson__details{
+    display: flex;
+    align-items: center;
+}
+
+.contactperson__contact-data{
+    padding-left: 30px
 }

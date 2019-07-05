@@ -12,9 +12,14 @@ namespace Skilled.Domain.PathHandling
             _settings = settings;
         }
 
-        public string GetVacancyRootPath(int employerId)
+        public string GetEmployerRootPath(int employerId)
         {
             return Path.Combine(GetRoot(), employerId.ToString());
+        }
+
+        public string GetContactPersonRootPath(int employerId)
+        {
+            return Path.Combine(GetRoot(), employerId.ToString(), "ContactPersons");
         }
 
         private string GetRoot()

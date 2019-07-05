@@ -1,5 +1,5 @@
-﻿insert into [dbo].[ContactPersons] (Name, Email, Employer_Id)
-values('Jan Splinter', 'jsplinter@bar.com', 1)
+﻿insert into [dbo].[ContactPersons] (Name, Email, Employer_Id, ProfilePictureName)
+values('Jan Splinter', 'jsplinter@bar.com', 1, 'JanSplinter.jpg')
 ,('Mieke van Oordrecht', 'mieke@foobar.com', 2)
 ,('Joost van der Gondel', 'jvg@bar.com', 3)
 ,('Thijs Visser', 'thijs@fb.com', 4)

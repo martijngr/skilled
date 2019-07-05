@@ -43,9 +43,10 @@ namespace Skilled.Domain.Vacancies.Queries
                     Zipcode = v.Zipcode.Value,
                     ContactPerson = new VacancyView.ContactPersonView
                     {
-                        AvatarFileName = "",
+                        Id = v.ContactPerson.Id,
                         Email = v.ContactPerson.Email,
-                        Name = v.ContactPerson.Name
+                        Name = v.ContactPerson.Name,
+                        PhoneNumber = v.ContactPerson.PhoneNumber
                     },
                     Skills = v.Skills.Select(s => s.Name),
                     ThinkLevel = v.ThinkLevel.Name,
