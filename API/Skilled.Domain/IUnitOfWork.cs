@@ -1,5 +1,7 @@
 ﻿using Skilled.Domain.ContactPersons;
+using Skilled.Domain.Employees;
 using Skilled.Domain.Mailing.ComingSoon;
+using Skilled.Domain.Security.Permissions;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
 using Skilled.Domain.Vacancies;
@@ -16,7 +18,9 @@ namespace Skilled.Domain
         IRepository<ZipcodeDistance> ZipcodeDistances { get; }
         IRepository<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; }
         IRepository<ContactPerson> ContactPersons { get; }
-
+        IRepository<Employee> Employees { get; }
+        IRepository<EmployeeGroup> EmployeeGroups { get; }
+        IRepository<Permission> Permissions { get; }
         int SaveChanges();
     }
 }

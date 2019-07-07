@@ -1,6 +1,8 @@
 ﻿using Skilled.Domain;
 using Skilled.Domain.ContactPersons;
+using Skilled.Domain.Employees;
 using Skilled.Domain.Mailing.ComingSoon;
+using Skilled.Domain.Security.Permissions;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
 using Skilled.Domain.Vacancies;
@@ -23,6 +25,9 @@ namespace Skilled.Infrastructure
             ZipcodeDistances = new BaseRepository<ZipcodeDistance>(context);
             MailingRecipientsComingSoon = new BaseRepository<MailingRecipientComingSoon>(context);
             ContactPersons = new BaseRepository<ContactPerson>(context);
+            Employees = new BaseRepository<Employee>(context);
+            EmployeeGroups = new BaseRepository<EmployeeGroup>(context);
+            Permissions = new BaseRepository<Permission>(context);
         }
 
         public IRepository<Vacancy> Vacancies { get; }
@@ -38,6 +43,12 @@ namespace Skilled.Infrastructure
         public IRepository<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; }
 
         public IRepository<ContactPerson> ContactPersons { get; }
+
+        public IRepository<Employee> Employees { get; }
+
+        public IRepository<EmployeeGroup> EmployeeGroups { get; }
+
+        public IRepository<Permission> Permissions { get; }
 
         public int SaveChanges()
         {

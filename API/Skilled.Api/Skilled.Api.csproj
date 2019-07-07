@@ -178,6 +178,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContactPersonController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\MailingController.cs" />
     <Compile Include="Controllers\TalentController.cs" />
     <Compile Include="Controllers\VacanciesController.cs" />

@@ -63,6 +63,8 @@
     <Compile Include="DistanceCalculators\Google\GoogleDistanceCalculator.cs" />
     <Compile Include="DistanceCalculators\Google\Response.cs" />
     <Compile Include="DistanceCalculators\IDistanceCalculator.cs" />
+    <Compile Include="Employees\Commands\LoginEmployeeCommand.cs" />
+    <Compile Include="Employees\Employee.cs" />
     <Compile Include="Employers\Employer.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\ValidationFailureExtensions.cs" />
@@ -79,6 +81,10 @@
     <Compile Include="PathHandling\IPathResolver.cs" />
     <Compile Include="PathHandling\PathResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Cryptography\PasswordEncryptor.cs" />
+    <Compile Include="Security\Password.cs" />
+    <Compile Include="Security\Permissions\EmployeeGroup.cs" />
+    <Compile Include="Security\Permissions\Permission.cs" />
     <Compile Include="Settings\IAppSettings.cs" />
     <Compile Include="Skills\Queries\GetTalentsQuery.cs" />
     <Compile Include="Skills\Skill.cs" />
@@ -108,6 +114,8 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Employees\Queries\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

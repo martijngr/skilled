@@ -1,5 +1,7 @@
-﻿using Skilled.Domain.Mailing;
+﻿using Skilled.Domain.Employees;
+using Skilled.Domain.Mailing;
 using Skilled.Domain.Mailing.ComingSoon;
+using Skilled.Domain.Security;
 using Skilled.Domain.Vacancies;
 using Skilled.Domain.Zipcodes;
 using System.Data.Entity;
@@ -19,10 +21,19 @@ namespace Skilled.Infrastructure
 
         public DbSet<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; set; }
 
+        public DbSet<Employee> Employees { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MailingRecipientComingSoon>().ToTable("MailingListComingSoon");
 
+            modelBuilder.ComplexType<Password>()
+                .Property(p => p.EncryptedPassword)
+                .HasColumnName("Password");
+
+            modelBuilder.ComplexType<Password>()
+                .Property(p => p.Salt)
+                .HasColumnName("Salt");
         }
 
         private void FixEfProviderServicesProblem()

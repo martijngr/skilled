@@ -1,0 +1,8 @@
+node_modules
+dist
+packages
+.vs
+bin
+obj
+.env
+.env.development
