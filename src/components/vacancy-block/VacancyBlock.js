@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 require("./vacancyBlock.scss");
-import favoriteIcon from "../../assets/icons/Icon_favoriet.png";
 import shareIcon from "../../assets/icons/Icon_delen.png";
-import bucketIcon from "../../assets/icons/Icon_bucket.png";
 
 class VacancyBlock extends Component {
   state = {};
+
+  constructor(props){
+    super(props);
+
+    this.onVacancyClick = this.onVacancyClick.bind(this);
+  }
+
+  onVacancyClick(){
+    if(this.props.onVacancyClick)
+      this.props.onVacancyClick(this.props.vacancy.Id);
+  }
 
   render() {
     let progressbarStyle = {
@@ -13,10 +22,7 @@ class VacancyBlock extends Component {
     };
 
     return (
-      <div className="results-block">
-        <div className="results-block--header-dots">
-          <div>...</div>
-        </div>
+      <div className="results-block" onClick={this.onVacancyClick}>
         <div className="results-block--header">
           <div className="results-block--header-logo">
             <img
@@ -60,12 +66,6 @@ class VacancyBlock extends Component {
           </div>
           <div className="result-block--footer">
             <div className="result-block--footer-icons">
-              <span>
-                <img src={favoriteIcon} />
-              </span>
-              <span>
-                <img src={bucketIcon} />
-              </span>
               <span>
                 <img src={shareIcon} />
               </span>

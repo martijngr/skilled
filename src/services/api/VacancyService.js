@@ -8,7 +8,7 @@ class VacancyService {
 
     return axios
       .get(
-        baseUrl + "/Search?talents=" +
+        this.baseUrl + "/Search?talents=" +
           talentNames +
           "&HoursPerWeek=" +
           hoursPerWeek +
@@ -35,7 +35,7 @@ class VacancyService {
 
     return axios
       .get(
-        baseUrl + "/SearchCount?talents=" +
+        this.baseUrl + "/SearchCount?talents=" +
           talentNames +
           "&HoursPerWeek=" +
           hoursPerWeek +
@@ -53,11 +53,19 @@ class VacancyService {
 
   getThinkeLevels = function() {
     return axios
-      .get(baseUrl + "/GetThinkLevels")
+      .get(this.baseUrl + "/GetThinkLevels")
       .then(res => {
         return res.data;
       });
   };
+
+  getById(vacancyId){
+    return axios
+      .get(this.baseUrl + "/GetVacancy?vacancyId=" + vacancyId)
+      .then(res => {
+        return res.data;
+      });
+  }
 }
 
 export default VacancyService;

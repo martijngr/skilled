@@ -30,7 +30,7 @@ namespace Skilled.Domain.Vacancies.Queries
                 .Select(v => new { v.LogoFileName, EmployerId = v.Employer.Id })
                 .FirstOrDefault();
 
-            return Path.Combine(_pathResolver.GetVacancyRootPath(logoData.EmployerId), logoData.LogoFileName);
+            return Path.Combine(_pathResolver.GetEmployerRootPath(logoData.EmployerId), logoData.LogoFileName);
         }
     }
 }
