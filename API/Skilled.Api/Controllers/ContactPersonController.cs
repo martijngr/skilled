@@ -1,12 +1,10 @@
 ﻿using Skilled.CQRS;
 using Skilled.Domain.ContactPersons.Queries;
-using System;
-using System.Collections.Generic;
+using Skilled.Domain.Employees.Commands;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web;
 using System.Web.Http;
 
 namespace Skilled.Api.Controllers
@@ -14,9 +12,12 @@ namespace Skilled.Api.Controllers
     public class ContactPersonController : ApiController
     {
         private readonly QueryProcessor _queryProcessor;
-        public ContactPersonController(QueryProcessor queryProcessor)
+        private readonly CommandProcessor _commandProcessor;
+
+        public ContactPersonController(QueryProcessor queryProcessor, CommandProcessor commandProcessor)
         {
             _queryProcessor = queryProcessor;
+            _commandProcessor = commandProcessor;
         }
 
         [HttpGet]
@@ -29,6 +30,17 @@ namespace Skilled.Api.Controllers
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/png");
 
             return response;
+        }
+
+        [HttpPost]
+        public HttpResponseMessage Login(LoginEmployeeCommand command)
+        {
+            var result = _commandProcessor.Handle(command);
+
+            if (result.Success)
+                return new HttpResponseMessage(HttpStatusCode.OK);
+
+            return new HttpResponseMessage(HttpStatusCode.Unauthorized);
         }
     }
 }

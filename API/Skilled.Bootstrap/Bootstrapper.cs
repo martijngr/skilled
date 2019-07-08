@@ -5,6 +5,7 @@ using Skilled.Domain.DistanceCalculators;
 using Skilled.Domain.DistanceCalculators.Google;
 using Skilled.Domain.Mailing.Clients;
 using Skilled.Domain.PathHandling;
+using Skilled.Domain.Security.Cryptography;
 using Skilled.Domain.Vacancies.Searching;
 using Skilled.Infrastructure;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace Skilled.Bootstrap
             builder.RegisterAssemblyTypes(assemblies)
                     .As(type => type.GetInterfaces()
                     .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<>))));
+            builder.RegisterAssemblyTypes(assemblies)
+                    .As(type => type.GetInterfaces()
+                    .Where(interfaceType => interfaceType.IsClosedTypeOf(typeof(ICommandHandler<,>))));
+
             //.Select(interfaceType => new KeyedService("commandHandler", interfaceType)));
 
             //builder.RegisterGenericDecorator(typeof(LoggingCommandDecorator<>),
@@ -49,6 +54,8 @@ namespace Skilled.Bootstrap
 
             builder.RegisterType<VancancySearcher>().AsSelf();
             builder.RegisterType<PathResolver>().As<IPathResolver>();
+
+            builder.RegisterType<PasswordEncryptor>();
         }
     }
 }

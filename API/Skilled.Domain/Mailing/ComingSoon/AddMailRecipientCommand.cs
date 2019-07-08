@@ -22,7 +22,7 @@ namespace Skilled.Domain.Mailing.ComingSoon
             _validator = validator;
         }
 
-        public void Handle(AddMailRecipientCommand command)
+        public CommandResult Handle(AddMailRecipientCommand command)
         {
             var mailingRecipient = CreateMailingRecipient(command);
 
@@ -31,6 +31,8 @@ namespace Skilled.Domain.Mailing.ComingSoon
             _unitOfWork.MailingRecipientsComingSoon.Add(mailingRecipient);
 
             _unitOfWork.SaveChanges();
+
+            return new CommandSuccessResult();
         }
 
         private MailingRecipientComingSoon CreateMailingRecipient(AddMailRecipientCommand command)

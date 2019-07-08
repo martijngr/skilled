@@ -22,6 +22,7 @@ namespace Skilled.Api.Controllers
             _queryProcessor = queryProcessor;
         }
 
+        [Authorize]
         [HttpGet]
         public IHttpActionResult Search([FromUri] GetVacancySearchResultsQuery query)
         {

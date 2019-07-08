@@ -23,10 +23,12 @@ namespace Skilled.Domain.Mailing.TellAFriend
             _mailClient = mailClient;
         }
 
-        public void Handle(SendTellAFriendMailCommand command)
+        public CommandResult Handle(SendTellAFriendMailCommand command)
         {
             var message = TellAFriendMailComposer.ComposeMail(command);
             _mailClient.SendMail(message);
+
+            return new CommandSuccessResult();
         }
     }
 }

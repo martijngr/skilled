@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Skilled.Domain.Employees.Commands
 {
-    public class LoginEmployeeCommand
+    public class LoginEmployeeCommand : ICommand<int>
     {
         public LoginEmployeeCommand(string email, string password)
         {
@@ -21,7 +21,7 @@ namespace Skilled.Domain.Employees.Commands
         public string Password { get; set; }
     }
 
-    public class LoginEmployeeCommandHandler : ICommandHandler<LoginEmployeeCommand>
+    public class LoginEmployeeCommandHandler : ICommandHandler<LoginEmployeeCommand, int>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PasswordEncryptor _passwordEncryptor;
@@ -32,17 +32,17 @@ namespace Skilled.Domain.Employees.Commands
             _passwordEncryptor = passwordEncryptor;
         }
 
-        public void Handle(LoginEmployeeCommand command)
+        public CommandResult<int> Handle(LoginEmployeeCommand command)
         {
             var employee = _unitOfWork.Employees.All.FirstOrDefault(e => e.Email == command.Email);
 
             if (employee == null)
-                throw new ArgumentException($"Invalid login attempt with email {command.Email}");
+                return new CommandFailedResult<int>($"Invalid login attempt with email {command.Email}");
 
             if (!_passwordEncryptor.ComparePasswords(command.Password, employee.Password))
-                throw new ArgumentException($"Invalid login attempt with email {command.Email}");
+                return new CommandFailedResult<int>($"Invalid login attempt with email {command.Email}");
 
-
+            return new CommandSuccessResult<int>(56);
         }
     }
 }
