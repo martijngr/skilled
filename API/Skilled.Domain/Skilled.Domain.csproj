@@ -64,6 +64,7 @@
     <Compile Include="DistanceCalculators\Google\Response.cs" />
     <Compile Include="DistanceCalculators\IDistanceCalculator.cs" />
     <Compile Include="Employees\Commands\LoginEmployeeCommand.cs" />
+    <Compile Include="Employees\Commands\LoginEmployeeResult.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Employers\Employer.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="Security\Password.cs" />
     <Compile Include="Security\Permissions\EmployeeGroup.cs" />
     <Compile Include="Security\Permissions\Permission.cs" />
+    <Compile Include="Security\Permissions\PermissionList.cs" />
+    <Compile Include="Security\Queries\HasEmployeeGroupPermissionQuery.cs" />
     <Compile Include="Settings\IAppSettings.cs" />
     <Compile Include="Skills\Queries\GetTalentsQuery.cs" />
     <Compile Include="Skills\Skill.cs" />

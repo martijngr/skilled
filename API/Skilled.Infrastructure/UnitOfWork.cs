@@ -7,6 +7,7 @@ using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
 using Skilled.Domain.Vacancies;
 using Skilled.Domain.Zipcodes;
+using System.Diagnostics;
 
 namespace Skilled.Infrastructure
 {
@@ -17,6 +18,7 @@ namespace Skilled.Infrastructure
         public UnitOfWork(SkilledContext context)
         {
             _context = context;
+            context.Database.Log = (s) => Debug.Write(s);
 
             Vacancies = new BaseRepository<Vacancy>(context);
             Skills = new BaseRepository<Skill>(context);

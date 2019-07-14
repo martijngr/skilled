@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Skilled.Domain.Employees.Commands
 {
-    public class LoginEmployeeCommand : ICommand<int>
+    public class LoginEmployeeCommand : ICommand<LoginEmployeeResult>
     {
         public LoginEmployeeCommand(string email, string password)
         {
@@ -21,7 +21,7 @@ namespace Skilled.Domain.Employees.Commands
         public string Password { get; set; }
     }
 
-    public class LoginEmployeeCommandHandler : ICommandHandler<LoginEmployeeCommand, int>
+    public class LoginEmployeeCommandHandler : ICommandHandler<LoginEmployeeCommand, LoginEmployeeResult>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PasswordEncryptor _passwordEncryptor;
@@ -32,17 +32,22 @@ namespace Skilled.Domain.Employees.Commands
             _passwordEncryptor = passwordEncryptor;
         }
 
-        public CommandResult<int> Handle(LoginEmployeeCommand command)
+        public CommandResult<LoginEmployeeResult> Handle(LoginEmployeeCommand command)
         {
             var employee = _unitOfWork.Employees.All.FirstOrDefault(e => e.Email == command.Email);
 
             if (employee == null)
-                return new CommandFailedResult<int>($"Invalid login attempt with email {command.Email}");
+                return new CommandFailedResult<LoginEmployeeResult>($"Invalid login attempt with email {command.Email}");
 
             if (!_passwordEncryptor.ComparePasswords(command.Password, employee.Password))
-                return new CommandFailedResult<int>($"Invalid login attempt with email {command.Email}");
+                return new CommandFailedResult<LoginEmployeeResult>($"Invalid login attempt with email {command.Email}");
 
-            return new CommandSuccessResult<int>(56);
+            return new CommandSuccessResult<LoginEmployeeResult>(new LoginEmployeeResult
+            {
+                Id = employee.ID, 
+                Name = employee.Name,
+                EmployeeGroupId = employee.EmployeeGroup.Id
+            });
         }
     }
 }

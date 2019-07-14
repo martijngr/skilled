@@ -13,18 +13,22 @@ namespace Skilled.CQRS
             Success = success;
         }
 
+        public CommandResult(bool success, T result)
+        {
+            Success = success;
+            Result = result;
+        }
+
         public bool Success { get; }
+
+        public T Result { get; }
     }
 
     public class CommandSuccessResult<T> : CommandResult<T>
     {
         public CommandSuccessResult(T result)
-            : base(true)
-        {
-            Result = result;
-        }
-
-        public T Result { get; }
+            : base(true, result)
+        { }
     }
 
     public class CommandFailedResult<T> : CommandResult<T>

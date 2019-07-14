@@ -15,20 +15,17 @@ namespace Skilled.Api
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //AreaRegistration.RegisterAllAreas();
+            //GlobalConfiguration.Configure(WebApiConfig.Register);
+            // FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            RegisterAutofac();
+            // RegisterAutofac();
         }
 
         private void RegisterAutofac()
         {
             var builder = new ContainerBuilder();
-
-            // Get your HttpConfiguration.
-            var config = GlobalConfiguration.Configuration;
 
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
@@ -47,7 +44,7 @@ namespace Skilled.Api
             Bootstrap.Bootstrapper.Bootstrap(builder, assemblies);
 
             var container = builder.Build();
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
     }
 }

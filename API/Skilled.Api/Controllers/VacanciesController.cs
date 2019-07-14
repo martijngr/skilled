@@ -1,5 +1,7 @@
-﻿using Skilled.CQRS;
+﻿using Skilled.Api.Security;
+using Skilled.CQRS;
 using Skilled.Domain.DistanceCalculators.Google;
+using Skilled.Domain.Security.Permissions;
 using Skilled.Domain.ThinkLevels.Queries;
 using Skilled.Domain.Vacancies.Queries;
 using System;
@@ -22,7 +24,7 @@ namespace Skilled.Api.Controllers
             _queryProcessor = queryProcessor;
         }
 
-        [Authorize]
+        [HasPermission("vacancy_read")]
         [HttpGet]
         public IHttpActionResult Search([FromUri] GetVacancySearchResultsQuery query)
         {

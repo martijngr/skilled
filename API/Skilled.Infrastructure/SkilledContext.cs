@@ -2,6 +2,7 @@
 using Skilled.Domain.Mailing;
 using Skilled.Domain.Mailing.ComingSoon;
 using Skilled.Domain.Security;
+using Skilled.Domain.Security.Permissions;
 using Skilled.Domain.Vacancies;
 using Skilled.Domain.Zipcodes;
 using System.Data.Entity;
@@ -34,6 +35,16 @@ namespace Skilled.Infrastructure
             modelBuilder.ComplexType<Password>()
                 .Property(p => p.Salt)
                 .HasColumnName("Salt");
+
+            modelBuilder.Entity<EmployeeGroup>()
+                .HasMany<Permission>(s => s.Permissions)
+                .WithMany(c => c.EmployeeGroups)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("EmployeeGroup_Id");
+                    cs.MapRightKey("Permission_Id");
+                    cs.ToTable("EmployeeGroupPermissions");
+                });
         }
 
         private void FixEfProviderServicesProblem()
