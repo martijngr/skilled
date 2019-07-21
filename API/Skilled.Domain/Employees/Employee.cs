@@ -1,6 +1,5 @@
 ﻿using Skilled.Domain.Employers;
-using Skilled.Domain.Security;
-using Skilled.Domain.Security.Permissions;
+using Skilled.Domain.Permissions;
 
 namespace Skilled.Domain.Employees
 {
