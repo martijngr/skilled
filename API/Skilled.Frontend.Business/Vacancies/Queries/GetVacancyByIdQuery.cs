@@ -1,4 +1,5 @@
-﻿using Skilled.Business.Frontend.Vacancies.Views;
+﻿using Skilled.Business.Core;
+using Skilled.Business.Frontend.Vacancies.Views;
 using Skilled.CQRS;
 using System.Linq;
 
@@ -16,9 +17,9 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
 
     public class GetVacancyByIdQueryHandler : IQueryHandler<GetVacancyByIdQuery, VacancyView>
     {
-        private readonly IFrontEndUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetVacancyByIdQueryHandler(IFrontEndUnitOfWork unitOfWork)
+        public GetVacancyByIdQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

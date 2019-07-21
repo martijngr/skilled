@@ -1,5 +1,5 @@
 ﻿using Skilled.Business.Core;
-using Skilled.Business.Frontend.Mailing.ComingSoon;
+using Skilled.Business.Core.Mailing;
 using Skilled.Domain.ContactPersons;
 using Skilled.Domain.Employees;
 using Skilled.Domain.Permissions;

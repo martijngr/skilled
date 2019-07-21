@@ -64,6 +64,14 @@
       <Project>{7ba27546-2c8d-4241-8517-e705d6d7a1e2}</Project>
       <Name>Skilled.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Skilled.Frontend.Business\Skilled.Frontend.Business.csproj">
+      <Project>{AF4283C2-1BC4-4764-BC06-418912DC308F}</Project>
+      <Name>Skilled.Frontend.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Skilled.Frontend.Infrastructure\Skilled.Infrastructure.csproj">
+      <Project>{9E2B8BAE-889C-47CA-9CBD-04B17ACAC7E8}</Project>
+      <Name>Skilled.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

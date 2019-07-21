@@ -1,4 +1,5 @@
-﻿using Skilled.CQRS;
+﻿using Skilled.Business.Core;
+using Skilled.CQRS;
 using Skilled.Domain.PathHandling;
 using System.IO;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
 
     public class GetVacancyLogoQueryHandler : IQueryHandler<GetVacancyLogoQuery, string>
     {
-        private readonly IFrontEndUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPathResolver _pathResolver;
 
-        public GetVacancyLogoQueryHandler(IFrontEndUnitOfWork unitOfWork, IPathResolver pathResolver)
+        public GetVacancyLogoQueryHandler(IUnitOfWork unitOfWork, IPathResolver pathResolver)
         {
             _unitOfWork = unitOfWork;
             _pathResolver = pathResolver;

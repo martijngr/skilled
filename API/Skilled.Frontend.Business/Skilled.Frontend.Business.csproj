@@ -58,9 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactPersons\Queries\GetProfilePicturePathByContactPersonId.cs" />
-    <Compile Include="IFrontEndUnitOfWork.cs" />
     <Compile Include="Mailing\ComingSoon\AddMailRecipientCommand.cs" />
-    <Compile Include="Mailing\ComingSoon\MailingRecipientComingSoon.cs" />
     <Compile Include="Mailing\TellAFriend\SendTellAFriendMailCommand.cs" />
     <Compile Include="Mailing\TellAFriend\TellAFriendMailComposer.cs" />
     <Compile Include="PathHandling\IPathResolver.cs" />

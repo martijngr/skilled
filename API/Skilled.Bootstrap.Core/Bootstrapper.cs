@@ -3,7 +3,10 @@ using Skilled.Business.Core;
 using Skilled.Business.Core.DistanceCalculators;
 using Skilled.Business.Core.DistanceCalculators.Google;
 using Skilled.Business.Core.Mailing.Clients;
+using Skilled.Business.Frontend.Vacancies.Searching;
 using Skilled.CQRS;
+using Skilled.Domain.PathHandling;
+using Skilled.Infrastructure;
 using System.Linq;
 using System.Reflection;
 
@@ -36,6 +39,8 @@ namespace Skilled.Bootstrap
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t => t.Name.EndsWith("Validator"))
                 .AsImplementedInterfaces();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<SkilledContext>().InstancePerRequest();
 
             builder.RegisterType<QueryProcessor>().AsSelf();
             builder.RegisterType<CommandProcessor>().AsSelf();
@@ -45,6 +50,8 @@ namespace Skilled.Bootstrap
 
             builder.RegisterType<GoogleDistanceCalculator>().Named<IDistanceCalculator>("google");
             builder.RegisterDecorator<IDistanceCalculator>((c, inner) => new DbDistanceCalculatorDecorator(inner, c.Resolve<IUnitOfWork>()), fromKey: "google");
+            builder.RegisterType<VancancySearcher>();
+            builder.RegisterType<PathResolver>().As<IPathResolver>();
         }
     }
 }

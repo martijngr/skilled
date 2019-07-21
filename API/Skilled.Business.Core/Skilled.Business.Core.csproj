@@ -63,6 +63,7 @@
     <Compile Include="Mailing\Clients\ISmtpClient.cs" />
     <Compile Include="Mailing\Clients\SmtpMailClient.cs" />
     <Compile Include="Mailing\MailingRecipient.cs" />
+    <Compile Include="Mailing\MailingRecipientComingSoon.cs" />
     <Compile Include="Mailing\MailingRecipientValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Cryptography\PasswordEncryptor.cs" />

@@ -1,4 +1,5 @@
-﻿using Skilled.CQRS;
+﻿using Skilled.Business.Core;
+using Skilled.CQRS;
 using Skilled.Domain.PathHandling;
 using System;
 using System.IO;
@@ -18,10 +19,10 @@ namespace Skilled.Business.Frontend.ContactPersons.Queries
 
     public class GetProfilePicturePathByContactPersonIdQueryHandler : IQueryHandler<GetProfilePicturePathByContactPersonId, string>
     {
-        private readonly IFrontEndUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPathResolver _pathResolver;
 
-        public GetProfilePicturePathByContactPersonIdQueryHandler(IFrontEndUnitOfWork unitOfWork, IPathResolver pathResolver)
+        public GetProfilePicturePathByContactPersonIdQueryHandler(IUnitOfWork unitOfWork, IPathResolver pathResolver)
         {
             _unitOfWork = unitOfWork;
             _pathResolver = pathResolver;

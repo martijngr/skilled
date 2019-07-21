@@ -1,4 +1,5 @@
-﻿using Skilled.Business.Core.DistanceCalculators;
+﻿using Skilled.Business.Core;
+using Skilled.Business.Core.DistanceCalculators;
 using Skilled.Business.Frontend.Vacancies.Views;
 using Skilled.Domain.Vacancies;
 using System;
@@ -9,12 +10,12 @@ namespace Skilled.Business.Frontend.Vacancies.Searching
 {
     public class VancancySearcher
     {
-        private readonly IFrontEndUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IDistanceCalculator _distanceCalculator;
 
         private IEnumerable<Distance> _distances;
 
-        public VancancySearcher(IFrontEndUnitOfWork unitOfWork, IDistanceCalculator distanceCalculator)
+        public VancancySearcher(IUnitOfWork unitOfWork, IDistanceCalculator distanceCalculator)
         {
             _unitOfWork = unitOfWork;
             _distanceCalculator = distanceCalculator;

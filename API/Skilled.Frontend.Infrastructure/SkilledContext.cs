@@ -1,4 +1,4 @@
-﻿using Skilled.Business.Frontend.Mailing.ComingSoon;
+﻿using Skilled.Business.Core.Mailing;
 using Skilled.Domain.Employees;
 using Skilled.Domain.Permissions;
 using Skilled.Domain.Vacancies;

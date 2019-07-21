@@ -33,7 +33,7 @@ namespace Skilled.Api
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("v1", "Skilled.Api");
+                        c.SingleApiVersion("v1", "Skilled.Frontend.Api");
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
