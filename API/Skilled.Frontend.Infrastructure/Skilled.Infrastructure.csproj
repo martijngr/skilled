@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="CMS\CmsUnitOfWork.cs" />
+    <Compile Include="CMS\Vacancies\EmployeeVacancyRepository.cs" />
+    <Compile Include="CMS\Vacancies\NotAuthorizedRepository.cs" />
+    <Compile Include="CMS\Vacancies\VacancyRepositoryFactory.cs" />
     <Compile Include="SkilledContext.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +75,10 @@
     <ProjectReference Include="..\Skilled.Business.Core\Skilled.Business.Core.csproj">
       <Project>{656dfb8b-6ecb-4884-89e1-65828cdc45e4}</Project>
       <Name>Skilled.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Skilled.CMS.Business\Skilled.CMS.Business.csproj">
+      <Project>{04E71100-C8AF-4DC3-8657-B5CA9BE0687F}</Project>
+      <Name>Skilled.CMS.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Skilled.Domain\Skilled.Domain.csproj">
       <Project>{7BA27546-2C8D-4241-8517-E705D6D7A1E2}</Project>

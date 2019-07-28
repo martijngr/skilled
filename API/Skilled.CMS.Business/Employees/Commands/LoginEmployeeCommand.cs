@@ -43,7 +43,8 @@ namespace Skilled.CMS.Business.Employees.Commands
             {
                 Id = employee.ID, 
                 Name = employee.Name,
-                EmployeeGroupId = employee.EmployeeGroup.Id
+                EmployeeGroupId = employee.EmployeeGroup.Id,
+                EmployerId = employee.Employer.Id
             });
         }
     }

@@ -3,6 +3,7 @@ using Autofac.Integration.WebApi;
 using Microsoft.Owin;
 using Owin;
 using Skilled.Api.Settings;
+using Skilled.Bootstrap;
 using Skilled.Domain.Settings;
 using System;
 using System.Reflection;
@@ -39,7 +40,7 @@ namespace Skilled.Api
             builder.RegisterType<AppSettings>().As<IAppSettings>();
 
             // Set the dependency resolver to be Autofac.
-            Bootstrap.Bootstrapper.Bootstrap(builder, assemblies);
+            FrontendBootstrapper.Bootstrap(builder, assemblies);
 
             var container = builder.Build();
             app.UseAutofacMiddleware(container);

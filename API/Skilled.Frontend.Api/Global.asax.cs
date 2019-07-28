@@ -39,7 +39,7 @@ namespace Skilled.Api
             builder.RegisterType<AppSettings>().As<IAppSettings>();
 
             // Set the dependency resolver to be Autofac.
-            Bootstrapper.Bootstrap(builder, assemblies);
+            FrontendBootstrapper.Bootstrap(builder, assemblies);
 
             var container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacTypeResolver.cs" />
-    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="CoreBootstrapper.cs" />
+    <Compile Include="FrontendBootstrapper.cs" />
+    <Compile Include="CmsBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +57,10 @@
     <ProjectReference Include="..\Skilled.Business.Core\Skilled.Business.Core.csproj">
       <Project>{656DFB8B-6ECB-4884-89E1-65828CDC45E4}</Project>
       <Name>Skilled.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Skilled.CMS.Business\Skilled.CMS.Business.csproj">
+      <Project>{04E71100-C8AF-4DC3-8657-B5CA9BE0687F}</Project>
+      <Name>Skilled.CMS.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Skilled.CQRS\Skilled.CQRS.csproj">
       <Project>{06D61233-B59E-45D8-A886-E94068AA73A2}</Project>

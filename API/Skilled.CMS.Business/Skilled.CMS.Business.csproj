@@ -51,8 +51,11 @@
     <Compile Include="EmployeeGroups\Queries\HasEmployeeGroupPermissionQuery.cs" />
     <Compile Include="Employees\Commands\LoginEmployeeCommand.cs" />
     <Compile Include="Employees\Commands\LoginEmployeeResult.cs" />
-    <Compile Include="ICmsUnitOfWork.cs" />
+    <Compile Include="Employees\ILoggedInEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vacancies\IVacancyRepository.cs" />
+    <Compile Include="Vacancies\Queries\GetAllVacanciesQuery.cs" />
+    <Compile Include="Vacancies\Queries\GetAllVacanciesView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Skilled.Business.Core\Skilled.Business.Core.csproj">

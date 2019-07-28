@@ -5,6 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Skilled.Bootstrap;
+using Skilled.CMS.Api;
+using Skilled.CMS.Business.Employees;
 using Skilled.CMS.Business.Employees.Commands;
 using Skilled.CQRS;
 using System;
@@ -43,8 +45,9 @@ namespace Skilled.Api
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             // builder.RegisterWebApiFilterProvider(config); // using this prevents authorize filter from executing
 
+            builder.RegisterType<LoggedInEmployee>().As<ILoggedInEmployee>();
             // Set the dependency resolver to be Autofac.
-            Bootstrapper.Bootstrap(builder, assemblies);
+            CmsBootstrapper.Bootstrap(builder, assemblies);
 
             var container = builder.Build();
             app.UseAutofacMiddleware(container);
@@ -89,6 +92,7 @@ namespace Skilled.Api
             {
                 identity.AddClaim(new Claim(ClaimTypes.Name, loginResult.Result.Name));
                 identity.AddClaim(new Claim(ClaimTypes.Role, loginResult.Result.EmployeeGroupId.ToString()));
+                identity.AddClaim(new Claim("EmployerId", loginResult.Result.EmployerId.ToString()));
 
                 context.Validated(identity);
             }

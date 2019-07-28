@@ -7,5 +7,7 @@
         public string Name { get; set; }
 
         public int EmployeeGroupId { get; set; }
+
+        public int EmployerId { get; set; }
     }
 }

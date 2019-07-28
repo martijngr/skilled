@@ -17,7 +17,6 @@ namespace Skilled.Api.Controllers
             _queryProcessor = queryProcessor;
         }
 
-        //[HasPermission("vacancy_read")]
         [HttpGet]
         public IHttpActionResult Search([FromUri] GetVacancySearchResultsQuery query)
         {
