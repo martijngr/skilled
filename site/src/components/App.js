@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../pages/home/home";
 import Vacancies from "./../pages/vacancies/vacancies";
 import Menu from "../components/site-layout/menu/menu";
+require("./app.scss");
 
 class App extends Component {
   render() {
