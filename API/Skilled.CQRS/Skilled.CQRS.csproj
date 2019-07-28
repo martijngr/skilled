@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandProcessor.cs" />
+    <Compile Include="CommandResult.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="ICommandHandlerTResult.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="IQueryHandler.cs" />

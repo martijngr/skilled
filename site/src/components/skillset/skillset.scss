@@ -1,0 +1,125 @@
+.skillset-container {
+  border: 2px solid #c4c4c4;
+  -webkit-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
+  -moz-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
+  box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
+}
+
+.skillset-content {
+  padding: 20px;
+}
+
+.skillset-header {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #5a695f;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 15px;
+  color: white;
+}
+
+.skillset-form {
+  margin-bottom: 20px;
+  input {
+    border: 1px solid #c4c4c4;
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+.skillset-form--search-subtitle {
+  margin-top: 10px;
+  font-size: 0.8em;
+}
+
+.skillset-seperator {
+  width: 100%;
+  border-bottom: 1px solid#c4c4c4;
+  height: 1px;
+}
+
+.skillset-selected-talents {
+  margin: 20px 0;
+}
+
+.skillset-selected-talents--header {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.skillset-selected-talents--overview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.skillset-selected-talents--talent {
+  padding: 5px;
+  background-color: black;
+  color: white;
+  margin-top: 20px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.skillset-selected-talents--talent--remove {
+  cursor: pointer;
+}
+
+.skillset-criteria {
+  margin: 20px 0;
+}
+
+.skillset-criteria--header {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.skillset-criteria--overview {
+  margin-top: 10px;
+  font-size: 0.8em;
+
+  input {
+    width: 50px;
+  }
+
+  select {
+    padding: 3px;
+  }
+
+  & > div {
+    margin-bottom: 5px;
+  }
+}
+
+.skillset-criteria--overview-icon {
+  img {
+    width: 25px;
+  }
+  width: 25px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.skillset-search {
+  margin-top: 20px;
+}
+
+.skillset-search--button {
+  cursor: pointer;
+  background-color: #53988c;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-style: italic;
+}
+
+.ReactModal__Overlay {
+  z-index: 3;
+}
