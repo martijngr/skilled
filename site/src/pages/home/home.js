@@ -27,8 +27,8 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row home--header-image">
-          <div className="col-md-3" />
+        <div className="row home--header-image h-100">
+          <div className="col-md-3 d-none d-sm-block"/>
           <div className="col-md-6 ">
             <div className="home--header">
               <div className="home--header-title">de vacaturesite</div>

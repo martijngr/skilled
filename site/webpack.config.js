@@ -66,7 +66,15 @@ module.exports = (env) => {
               options: {}
             }
           ]
-        }
+        },
+        {
+          test: /\.(woff2?)(\?.*)?$/,
+          loader: "url-loader",
+          query: {
+              limit: 10000,
+              mimetype: 'application/font-woff'
+          }
+        },
       ]
     },
     devServer: {

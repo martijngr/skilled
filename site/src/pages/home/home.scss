@@ -1,15 +1,19 @@
+html,body {
+  height: 100%;
+}
+
 .home--header-image {
-  background-image: url("../../assets/icons/home_bg.jpeg");
+  background-image: url("../../assets/img/homepage_bg.jpg");
   background-repeat: no-repeat;
   background-position: center 15px;
   background-size: cover;
-  height: calc(100vh - 40px);
-  min-height: 375px;
+  //height: calc(100vh - 111px);
+  //min-height: 500px;
 }
 
 .home--header {
   text-align: center;
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 .home--header-title {
@@ -17,6 +21,7 @@
   font-weight: bold;
   letter-spacing: 5px;
   font-size: 2em;
+  font-family: 'inconsolataregular';
 }
 
 .home--header-subtitle {
@@ -24,6 +29,8 @@
   font-weight: bold;
   letter-spacing: 3px;
   margin-bottom: 25px;
+  font-family: 'la_belle_auroreregular';
+  font-size: 23px;
 }
 
 .home--header-search-box {
@@ -85,6 +92,7 @@
 .home--header-statement {
   text-align: center;
   text-transform: uppercase;
+  font-family: 'inconsolataregular';
 
   & > span {
     display: inline-block;

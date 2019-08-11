@@ -16,6 +16,7 @@
   text-transform: uppercase;
   font-size: 30px;
   letter-spacing: 5px;
+  font-family: 'inconsolataregular';
 }
 
 .header--top-slogan {
@@ -23,6 +24,17 @@
   letter-spacing: 3px;
   font-weight: bold;
   padding-top: 12px;
+  font-family: 'la_belle_auroreregular';
+  font-size: 20px;
+}
+
+.top-right-menu{
+  font-family: 'inconsolataregular';
+  text-transform: uppercase;
+}
+
+.top-right-menu li:first-of-type{
+  margin-right: 20px;
 }
 
 .header--text {
