@@ -1,5 +1,16 @@
-.results-skillset {
-  margin-top: -50px;
+.results-selected-talents--overview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0 20px 0;
+}
+.results-selected-talent-block{
+  padding: 5px;
+  background-color: black;
+  color: white;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-top: 10px;
 }
 
 .results-content {

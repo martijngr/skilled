@@ -37,7 +37,7 @@ class Home extends Component {
               </div>
               <div className="home--header-search-box">
                 <div className="home--header-search-box--input">
-                  <TalentTypeahead onTalentSelected={this.toVacancies} />
+                  <TalentTypeahead onTalentSelected={this.toVacancies} placeholderText="Vertel ons jouw talent, probeers eens 'creatief'"/>
                 </div>
                 <div className="home--header-search-box--icon">
                   <img src={searchIcon} onClick={this.doSearch} />

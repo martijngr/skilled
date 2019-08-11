@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../components/site-layout/header/header";
 import TalentService from "./../../services/api/TalentService";
 import VacancyService from "./../../services/api/VacancyService";
 import Skillset from "../../components/skillset/skillset";
@@ -7,6 +6,8 @@ import queryString from "query-string";
 import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
 import Modal from "react-modal";
 import Vacancy from "../vacancy/vacancy";
+
+import headerImage from "../../assets/img/results_header.png";
 
 require("./vacancies.scss");
 
@@ -26,7 +27,8 @@ class Vacancies extends Component {
     results: [],
     queryStringTalent: {},
     isVacancyModelOpen: false,
-    selectedVacancyId: ''
+    selectedVacancyId: '',
+    selectedTalents: []
   };
 
   componentDidMount() {
@@ -80,7 +82,11 @@ class Vacancies extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <div className="row">
+          <div className="col-md-12">
+            <img src={headerImage} className="results-header--image img-fluid"/>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-3 results-skillset">
             <Skillset
@@ -89,12 +95,23 @@ class Vacancies extends Component {
             />
           </div>
           <div className="col-md-9 results-content">
-            <div className="results-overview">
-              {this.state.results.map(v => (
-                <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
-              ))}
+            <div className="row">
+              <div className="col-md-12 results-selected-talents--overview">
+                {this.state.selectedTalents.map(t => (
+                  <div className="results-selected-talent-block" key={t.Id}>X {t.Name}</div>
+                ))}
+              
             </div>
-          </div>
+            
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                {this.state.results.map(v => (
+                  <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
+                ))}
+                </div>
+            </div>
+            </div>
         </div>
 
         <Modal 

@@ -3,6 +3,8 @@
   -webkit-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
   -moz-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
   box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
+
+  background-color: #F8E0BE;
 }
 
 .skillset-content {
@@ -13,11 +15,9 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   text-align: center;
-  background-color: #5a695f;
   font-weight: bold;
   font-size: 1.3em;
-  padding: 15px;
-  color: white;
+  padding: 30px;
 }
 
 .skillset-form {
@@ -36,7 +36,7 @@
 
 .skillset-seperator {
   width: 100%;
-  border-bottom: 1px solid#c4c4c4;
+  border-bottom: 1px solid#DCD0AA;
   height: 1px;
 }
 

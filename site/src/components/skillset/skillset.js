@@ -164,7 +164,7 @@ class Skillset extends Component {
   render() {
     return (
       <div className="skillset-container">
-        <div className="skillset-header">skillset</div>
+        <div className="skillset-header">Zoekfilters</div>
         <div className="skillset-content">
           {this.maximumSelectedTalentsReached() && (
             <div>
@@ -174,10 +174,10 @@ class Skillset extends Component {
           )}
           {this.state.talents.filter(t => t.checked).length < 5 && (
             <div className="skillset-form">
-              <TalentTypeahead onTalentSelected={this.onTalentSelected} />
+              <TalentTypeahead placeholderText="voeg een talent toe" onTalentSelected={this.onTalentSelected} />
               <div className="skillset-form--search-subtitle">
                 <span onClick={this.openTalentModal}>
-                  Of selecteer direct uit de talent store >
+                  > Bekijk alle talenten
                 </span>
               </div>
             </div>
