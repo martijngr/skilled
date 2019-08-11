@@ -1,10 +1,14 @@
+html,body {
+  height: 100%;
+}
+
 .home--header-image {
   background-image: url("../../assets/img/homepage_bg.jpg");
   background-repeat: no-repeat;
   background-position: center 15px;
   background-size: cover;
-  height: calc(100vh - 40px);
-  min-height: 500px;
+  //height: calc(100vh - 111px);
+  //min-height: 500px;
 }
 
 .home--header {

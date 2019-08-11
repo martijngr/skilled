@@ -8,7 +8,7 @@ require("./app.scss");
 class App extends Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid h-100 d-flex flex-column">
         <Menu />
         <Switch>
           <Route path="/vacatures" component={Vacancies} />
