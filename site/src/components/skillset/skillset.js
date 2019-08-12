@@ -7,6 +7,7 @@ import thinkIcon from "../../assets/icons/Icon_skills.png";
 import TalentService from "./../../services/api/TalentService";
 import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
 import TalentStore from "../talent-store/TalentStore";
+import SelectedItem from "../selected-item/selected-item";
 
 class Skillset extends Component {
   constructor(props) {
@@ -130,7 +131,7 @@ class Skillset extends Component {
   }
 
   onTalentModalCheckboxChange(e) {
-    var talent = JSON.parse(e.target.dataset.talent);
+    var talent = JSON.parse(e.data);
     talent.checked = !talent.checked;
 
     if (this.maximumSelectedTalentsReached() && talent.checked) return;
@@ -191,16 +192,24 @@ class Skillset extends Component {
               {this.state.talents
                 .filter(t => t.checked)
                 .map(t => (
-                  <div key={t.Id} className="skillset-selected-talents--talent">
-                    <span
-                      onClick={this.onTalentModalCheckboxChange}
-                      data-talent={JSON.stringify(t)}
-                      className="skillset-selected-talents--talent--remove"
-                    >
-                      X&nbsp;
-                    </span>
-                    {t.Name}
-                  </div>
+                  <SelectedItem
+                      onItemRemoved={this.onTalentModalCheckboxChange}
+                      data={JSON.stringify(t)}
+                      caption={t.Name}
+                      key={t.Id}
+                      />
+
+                  // <div key={t.Id} className="skillset-selected-talents--talent">
+                    
+                  //   <span
+                  //     onClick={this.onTalentModalCheckboxChange}
+                  //     data-talent={JSON.stringify(t)}
+                  //     className="skillset-selected-talents--talent--remove"
+                  //   >
+                  //     X&nbsp;
+                  //   </span>
+                  //   {t.Name}
+                  // </div>
                 ))}
             </div>
           </div>

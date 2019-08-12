@@ -6,6 +6,7 @@ import queryString from "query-string";
 import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
 import Modal from "react-modal";
 import Vacancy from "../vacancy/vacancy";
+import SelectedItem from "../../components/selected-item/selected-item";
 
 import headerImage from "../../assets/img/results_header.png";
 
@@ -98,7 +99,7 @@ class Vacancies extends Component {
             <div className="row">
               <div className="col-md-12 results-selected-talents--overview">
                 {this.state.selectedTalents.map(t => (
-                  <div className="results-selected-talent-block" key={t.Id}>X {t.Name}</div>
+                  <SelectedItem key={t.Id} caption={t.Name} id={t.Id}/>
                 ))}
               
             </div>
