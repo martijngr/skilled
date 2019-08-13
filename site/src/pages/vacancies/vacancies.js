@@ -96,20 +96,25 @@ class Vacancies extends Component {
             />
           </div>
           <div className="col-md-9 results-content">
-            <div className="row">
+            {/* <div className="row">
               <div className="col-md-12 results-selected-talents--overview">
                 {this.state.selectedTalents.map(t => (
                   <SelectedItem key={t.Id} caption={t.Name} id={t.Id}/>
                 ))}
-              
-            </div>
-            
               </div>
-              <div className="row">
+            </div> */}
+
+            <div className="row">
                 <div className="col-md-12">
-                {this.state.results.map(v => (
-                  <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
-                ))}
+                  {this.state.results.map(v => (
+                    <React.Fragment key={v.Id+"v"}>
+                      <div className="row" key={v.Id+5000}>
+                        <div className="result-separator"></div>
+                      </div>
+
+                      <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
+                    </React.Fragment>
+                  ))}
                 </div>
             </div>
             </div>

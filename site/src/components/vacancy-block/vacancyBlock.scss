@@ -1,8 +1,22 @@
 .results-block {
-  border: 1px solid #c4c4c4;
-  padding: 10px;
-  margin-bottom: 40px;
-  width: 430px;
+  // max-width: 430px;
+}
+
+.results-block--matchperc{
+  border: 1px solid #F6D246;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.results-block--matchperc div:first-of-type{
+  font-size:1.5em;
+}
+
+.results-block--matchperc div:nth-child(2){
+  font-family: 'la_belle_auroreregular';
+  font-size: 2em;
 }
 
 .results-block--header {

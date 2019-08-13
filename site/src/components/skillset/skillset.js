@@ -165,7 +165,9 @@ class Skillset extends Component {
   render() {
     return (
       <div className="skillset-container">
-        <div className="skillset-header">Zoekfilters</div>
+        <div className="skillset-header">
+          <h4>Zoekfilters</h4>
+        </div>
         <div className="skillset-content">
           {this.maximumSelectedTalentsReached() && (
             <div>
