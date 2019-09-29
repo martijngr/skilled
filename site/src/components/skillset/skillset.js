@@ -8,6 +8,7 @@ import TalentService from "./../../services/api/TalentService";
 import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
 import TalentStore from "../talent-store/TalentStore";
 import SelectedItem from "../selected-item/selected-item";
+import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
 
 import conditionsImg from '../../assets/img/voorwaarden.png';
 import motivationsImg from '../../assets/img/drijfveren.png';
@@ -167,22 +168,30 @@ class Skillset extends Component {
   }
 
   setSearchResultsTotal() {
-    var that = this;
-    var talents = that.state.talents.filter(t => t.checked);
-
-    this.vacancyService
-      .searchCount(
-        talents,
-        this.refs.hoursPerWeek.value,
-        this.refs.thinkLevel.value,
-        this.refs.zipcode.value,
-        this.refs.travelTime.value
-      )
-      .then(resp => {
-        that.setState({
-          searchCount: resp.count
-        });
+    if(this.props.setSearchResultsTotal)
+      this.props.setSearchResultsTotal({
+        hoursPerWeek: this.refs.hoursPerWeek.value,
+        thinkLevel: this.refs.thinkLevel.value,
+        zipcode: this.refs.zipcode.value,
+        travelTime: this.refs.travelTime.value
       });
+
+    // var that = this;
+    // var talents = that.state.talents.filter(t => t.checked);
+
+    // this.vacancyService
+    //   .searchCount(
+    //     talents,
+    //     this.refs.hoursPerWeek.value,
+    //     this.refs.thinkLevel.value,
+    //     this.refs.zipcode.value,
+    //     this.refs.travelTime.value
+    //   )
+    //   .then(resp => {
+    //     that.setState({
+    //       searchCount: resp.count
+    //     });
+    //   });
   }
 
   render() {
@@ -303,12 +312,9 @@ class Skillset extends Component {
           </div>
           <div className="skillset-seperator" />
           <div className="skillset-search">
-            <span
-              className="skillset-search--button"
-              onClick={this.onSearchClick}
-            >
-              Zoek ({this.state.searchCount})
-            </span>
+          <VacancySearchButton 
+                  searchCount={this.props.searchCount}
+                  onSearchClick={this.props.onSearchClick}></VacancySearchButton>
           </div>
         </div>
         <div className="skillset-footer">

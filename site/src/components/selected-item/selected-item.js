@@ -19,7 +19,6 @@ class SelectedItem extends Component {
           title: this.props.caption,
           data: this.props.data
         };
-    console.log("on item removed... ", item);
     if (this.props.onItemRemoved && item)
       this.props.onItemRemoved(item);
   }

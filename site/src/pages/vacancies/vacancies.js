@@ -10,6 +10,7 @@ import SelectedItem from "../../components/selected-item/selected-item";
 import VacancyResults from "../../components/vacancy-results/VacancyResults";
 import MotivationsSelector from "../../components/motivations-selector/MotivationsSelector";
 import CultureSelector from "../../components/culture-selector/CultureSelector";
+import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
 
 import headerImage from "../../assets/img/results_header.png";
 
@@ -26,6 +27,7 @@ class Vacancies extends Component {
     this.onTalentSelected = this.onTalentSelected.bind(this);
     this.onVacancyClick = this.onVacancyClick.bind(this);
     this.closeVacancyModal = this.closeVacancyModal.bind(this);
+    this.setSearchResultsTotal = this.setSearchResultsTotal.bind(this);
 
     this.setContentAreaTo = this.setContentAreaTo.bind(this);
   }
@@ -48,18 +50,16 @@ class Vacancies extends Component {
       {id: 12, text: 'cul2'},
       {id: 13, text: 'cul3'},
       {id: 14, text: 'cul4'}
-    ]
+    ],
+    searchCount: 0,
+    searchCriteria: {}
   };
 
   componentDidMount() {
-    console.log(this.props.location);
-
     const that = this;
     const queryParams = queryString.parse(this.props.location.search);
-    console.log("searching query talent..." + queryParams.talent);
     this.talentService.search(queryParams.talent).then(function(resp) {
       if (resp && resp.result && resp.result.length > 0) {
-        console.log("finished searching query talent", resp.result);
         that.setState({
           queryStringTalent: resp.result
         });
@@ -72,25 +72,50 @@ class Vacancies extends Component {
   }
 
   onTalentSelected(talent){
-    console.log('onTalentSelected', talent);
     this.setState(prevState => ({
       selectedTalents: [...prevState.selectedTalents, talent]
-    }))
+    }), this.setSearchResultsTotal());
   }
 
-  performSearch(searchPrefs) {
+  setSearchResultsTotal(criteria) {
+    console.log('criteria', criteria);
+    if(!criteria)
+      criteria = this.state.searchCriteria;
+
+    var that = this;
+    var talents = that.state.selectedTalents; //.filter(t => t.checked);
+    this.setState({
+      searchCriteria: criteria
+    });
+
+    this.vacancyService
+      .searchCount(
+        talents,
+        criteria.hoursPerWeek,
+        criteria.thinkLevel,
+        criteria.zipcode,
+        criteria.travelTime
+      )
+      .then(resp => {
+        that.setState({
+          searchCount: resp.count
+        });
+      });
+  }
+
+  performSearch() {
     this.vacancyService
       .search(
-        searchPrefs.talents,
-        searchPrefs.hoursPerWeek,
-        searchPrefs.thinkLevel,
-        searchPrefs.zipcode,
-        searchPrefs.travelTime
+        this.state.selectedTalents,
+        this.state.searchCriteria.hoursPerWeek,
+        this.state.searchCriteria.thinkLevel,
+        this.state.searchCriteria.zipcode,
+        this.state.searchCriteria.travelTime
       )
       .then(res => {
         this.setState({
           results: res.result,
-          selectedTalents: searchPrefs.talents
+          area: ''
         });
       });
   }
@@ -154,8 +179,7 @@ class Vacancies extends Component {
           onItemRemoved={(item) => {
             var talent = item.data;
             var updatedTalents = this.state.selectedTalents.filter(m => m.Id != talent.Id);
-
-            this.setState({selectedTalents: updatedTalents});
+            this.setState({selectedTalents: updatedTalents}, this.setSearchResultsTotal);
           }}/>
       ))
     );
@@ -223,6 +247,9 @@ class Vacancies extends Component {
               onSearchClick={this.performSearch}
               onMotivationsClick={this.setContentAreaTo}
               onCultureClick={this.setContentAreaTo}
+              setSearchResultsTotal={this.setSearchResultsTotal}
+              searchCount={this.state.searchCount}
+              onSearchClick={this.performSearch}
             />
           </div>
           <div className="col-md-9 results-content">
@@ -231,6 +258,9 @@ class Vacancies extends Component {
                 {this.renderSelectedTalents()}
                 {this.renderSelectedMotivations()}
                 {this.renderSelectedCultures()}
+                <VacancySearchButton 
+                  searchCount={this.state.searchCount}
+                  onSearchClick={this.performSearch}></VacancySearchButton>
               </div>
             </div>
 
