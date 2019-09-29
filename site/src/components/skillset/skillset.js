@@ -9,6 +9,12 @@ import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
 import TalentStore from "../talent-store/TalentStore";
 import SelectedItem from "../selected-item/selected-item";
 
+import conditionsImg from '../../assets/img/voorwaarden.png';
+import motivationsImg from '../../assets/img/drijfveren.png';
+import cultureImg from '../../assets/img/cultuur.png';
+import linkedinImg from '../../assets/icons/linkedin_icon_black.png';
+import instagramImg from '../../assets/icons/instagram_icon_black.png';
+
 class Skillset extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +37,10 @@ class Skillset extends Component {
       this
     );
 
+    // filter button click handlers
+    this.motivationsClick = this.motivationsClick.bind(this);
+    this.cultureClick = this.cultureClick.bind(this);
+
     this.state = {
       thinkLevels: [],
       talents: [],
@@ -40,6 +50,16 @@ class Skillset extends Component {
       thinkLevel: "",
       searchCount: 0
     };
+  }
+
+  motivationsClick(){
+    if(this.props.onMotivationsClick)
+      this.props.onMotivationsClick('motivations');
+  }
+
+  cultureClick(){
+    if(this.props.onCultureClick)
+      this.props.onCultureClick('culture');
   }
 
   openTalentModal() {
@@ -87,6 +107,9 @@ class Skillset extends Component {
     const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
     let talents = [...this.state.talents];
     talents[talentIndex] = talent;
+
+    if(this.props.onTalentSelected)
+        this.props.onTalentSelected(talent);
 
     this.setState({ talents }, this.setSearchResultsTotal);
   }
@@ -177,7 +200,7 @@ class Skillset extends Component {
           )}
           {this.state.talents.filter(t => t.checked).length < 5 && (
             <div className="skillset-form">
-              <TalentTypeahead placeholderText="voeg een talent toe" onTalentSelected={this.onTalentSelected} />
+              <TalentTypeahead placeholderText="Voeg een talent toe" onTalentSelected={this.onTalentSelected} />
               <div className="skillset-form--search-subtitle">
                 <span onClick={this.openTalentModal}>
                   > Bekijk alle talenten
@@ -186,10 +209,8 @@ class Skillset extends Component {
             </div>
           )}
           <div className="skillset-seperator" />
-          <div className="skillset-selected-talents">
-            <div className="skillset-selected-talents--header">
-              Jouw talenten:
-            </div>
+          {/* <div className="skillset-selected-talents">
+            <h6>Jouw talenten:</h6>
             <div className="skillset-selected-talents--overview">
               {this.state.talents
                 .filter(t => t.checked)
@@ -200,24 +221,32 @@ class Skillset extends Component {
                       caption={t.Name}
                       key={t.Id}
                       />
-
-                  // <div key={t.Id} className="skillset-selected-talents--talent">
-                    
-                  //   <span
-                  //     onClick={this.onTalentModalCheckboxChange}
-                  //     data-talent={JSON.stringify(t)}
-                  //     className="skillset-selected-talents--talent--remove"
-                  //   >
-                  //     X&nbsp;
-                  //   </span>
-                  //   {t.Name}
-                  // </div>
                 ))}
             </div>
           </div>
+          <div className="skillset-seperator" /> */}
+          
+          <div className="skillset-filters">
+              <h6>Filter ook op</h6>
+              <div className="skillset-filters-icons">
+                <div className="skillset-filters-button" onClick={this.motivationsClick}>
+                  <img src={motivationsImg}/>
+                  <div>Drijfveren</div>
+                </div>
+                <div className="skillset-filters-button" onClick={this.cultureClick}>
+                  <img src={cultureImg}/>
+                  <div>Cultuur</div>
+                </div>
+                <div>
+                  <img src={conditionsImg}/>
+                  <div>Voorwaarden</div>
+                </div>
+              </div>
+          </div>
+          
           <div className="skillset-seperator" />
           <div className="skillset-criteria">
-            <div className="skillset-criteria--header">Jouw voorkeuren:</div>
+            <h6>Aanvullende criteria</h6>
             <div className="skillset-criteria--overview">
               <div>
                 <div className="skillset-criteria--overview-icon">
@@ -228,6 +257,7 @@ class Skillset extends Component {
                   ref="hoursPerWeek"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="32"
+                  className="number"
                 />{" "}
                 werkuren per week
               </div>
@@ -241,6 +271,7 @@ class Skillset extends Component {
                   ref="travelTime"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="30"
+                  className="number"
                 />{" "}
                 minuten reistijd
               </div>
@@ -252,6 +283,7 @@ class Skillset extends Component {
                   ref="zipcode"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="1234AB"
+                  className="zipcode"
                 />
               </div>
               <div>
@@ -271,15 +303,22 @@ class Skillset extends Component {
           </div>
           <div className="skillset-seperator" />
           <div className="skillset-search">
-            <div
+            <span
               className="skillset-search--button"
               onClick={this.onSearchClick}
             >
               Zoek ({this.state.searchCount})
-            </div>
+            </span>
           </div>
         </div>
-
+        <div className="skillset-footer">
+          <span className="skillset-footer-text">
+            Need some courage first?
+          </span>
+          <span className="skillset-footer-social">
+            <img src={linkedinImg}/> <img src={instagramImg}/>
+          </span>
+        </div>
         <TalentStore
           ref="talentStoreModal"
           talents={this.state.talents}

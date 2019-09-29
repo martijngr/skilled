@@ -14,6 +14,9 @@ class App extends Component {
           <Route path="/vacatures" component={Vacancies} />
           <Route path="/" component={Home} />
         </Switch>
+        <div>
+          &nbsp;
+        </div>
       </div>
     );
   }

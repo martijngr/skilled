@@ -7,6 +7,9 @@ import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
 import Modal from "react-modal";
 import Vacancy from "../vacancy/vacancy";
 import SelectedItem from "../../components/selected-item/selected-item";
+import VacancyResults from "../../components/vacancy-results/VacancyResults";
+import MotivationsSelector from "../../components/motivations-selector/MotivationsSelector";
+import CultureSelector from "../../components/culture-selector/CultureSelector";
 
 import headerImage from "../../assets/img/results_header.png";
 
@@ -20,8 +23,11 @@ class Vacancies extends Component {
     this.talentService = new TalentService();
 
     this.performSearch = this.performSearch.bind(this);
+    this.onTalentSelected = this.onTalentSelected.bind(this);
     this.onVacancyClick = this.onVacancyClick.bind(this);
     this.closeVacancyModal = this.closeVacancyModal.bind(this);
+
+    this.setContentAreaTo = this.setContentAreaTo.bind(this);
   }
 
   state = {
@@ -29,7 +35,20 @@ class Vacancies extends Component {
     queryStringTalent: {},
     isVacancyModelOpen: false,
     selectedVacancyId: '',
-    selectedTalents: []
+    selectedTalents: [],
+    area: '',
+    motivations: [
+      {id: 1, text: 'abc'},
+      {id: 2, text: 'def'},
+      {id: 3, text: 'ghi'},
+      {id: 4, text: 'jkl'}
+    ],
+    cultures: [
+      {id: 11, text: 'cul1'},
+      {id: 12, text: 'cul2'},
+      {id: 13, text: 'cul3'},
+      {id: 14, text: 'cul4'}
+    ]
   };
 
   componentDidMount() {
@@ -46,6 +65,17 @@ class Vacancies extends Component {
         });
       }
     });
+  }
+
+  setContentAreaTo(name){
+    this.setState({area: name});
+  }
+
+  onTalentSelected(talent){
+    console.log('onTalentSelected', talent);
+    this.setState(prevState => ({
+      selectedTalents: [...prevState.selectedTalents, talent]
+    }))
   }
 
   performSearch(searchPrefs) {
@@ -80,11 +110,108 @@ class Vacancies extends Component {
     });
   }
 
+  getMotivationSelector(){
+    return(
+      <MotivationsSelector
+        motivations = {this.state.motivations}
+        onMotivationClick={(motivation) => {
+          var index = this.state.motivations.findIndex(m => m.id == motivation.id);
+
+          var motivations = [...this.state.motivations];
+          motivations[index] = motivation;
+
+          this.setState({motivations: motivations});
+        }}
+      ></MotivationsSelector>
+    );
+  }
+
+  getCultureSelector(){
+    return(
+      <CultureSelector
+        cultures = {this.state.cultures}
+        onCultureClick={(culture) => {
+          var index = this.state.cultures.findIndex(m => m.id == culture.id);
+
+          var cultures = [...this.state.cultures];
+          cultures[index] = culture;
+
+          this.setState({cultures: cultures});
+        }}
+      ></CultureSelector>
+    );
+  }
+
+  renderSelectedTalents(){
+    return(
+      this.state.selectedTalents.map(t => (
+        t.checked && 
+        <SelectedItem 
+          key={t.Id} 
+          caption={t.Name} 
+          id={t.Id}
+          data={t}
+          onItemRemoved={(item) => {
+            var talent = item.data;
+            var updatedTalents = this.state.selectedTalents.filter(m => m.Id != talent.Id);
+
+            this.setState({selectedTalents: updatedTalents});
+          }}/>
+      ))
+    );
+  }
+
+  renderSelectedMotivations(){
+    return(
+      this.state.motivations.map(t => (
+        t.checked && 
+        <SelectedItem 
+          key={t.id} 
+          caption={t.text} 
+          id={t.id} 
+          data={t}
+          onItemRemoved={(item) => {
+            var motivation = item.data;
+            motivation.checked = false;
+            var index = this.state.motivations.findIndex(m => m.id == motivation.id);
+
+            var motivations = [...this.state.motivations];
+            motivations[index] = motivation;
+
+            this.setState({motivations: motivations});
+          }}/>
+      ))
+    );
+  }
+
+  renderSelectedCultures(){
+    return(
+      this.state.cultures.map(t => (
+        t.checked && 
+        <SelectedItem 
+          key={t.id} 
+          caption={t.text} 
+          id={t.id} 
+          data={t}
+          onItemRemoved={(item) => {
+            var culture = item.data;
+            culture.checked = false;
+            var index = this.state.cultures.findIndex(m => m.id == culture.id);
+
+            var cultures = [...this.state.cultures];
+            cultures[index] = culture;
+
+            this.setState({cultures: cultures});
+          }}/>
+      ))
+    );
+  }
+
   render() {
     return (
       <React.Fragment>
-        <div className="row">
-          <div className="col-md-12">
+        <div className="row results-header">
+          <div className="col-md-12 ">
             <img src={headerImage} className="results-header--image img-fluid"/>
           </div>
         </div>
@@ -92,29 +219,28 @@ class Vacancies extends Component {
           <div className="col-md-3 results-skillset">
             <Skillset
               initialTalent={this.state.queryStringTalent}
+              onTalentSelected= {this.onTalentSelected}
               onSearchClick={this.performSearch}
+              onMotivationsClick={this.setContentAreaTo}
+              onCultureClick={this.setContentAreaTo}
             />
           </div>
           <div className="col-md-9 results-content">
-            {/* <div className="row">
+            <div className="row">
               <div className="col-md-12 results-selected-talents--overview">
-                {this.state.selectedTalents.map(t => (
-                  <SelectedItem key={t.Id} caption={t.Name} id={t.Id}/>
-                ))}
+                {this.renderSelectedTalents()}
+                {this.renderSelectedMotivations()}
+                {this.renderSelectedCultures()}
               </div>
-            </div> */}
+            </div>
 
             <div className="row">
                 <div className="col-md-12">
-                  {this.state.results.map(v => (
-                    <React.Fragment key={v.Id+"v"}>
-                      <div className="row" key={v.Id+5000}>
-                        <div className="result-separator"></div>
-                      </div>
-
-                      <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
-                    </React.Fragment>
-                  ))}
+                  <div id="content-area">
+                    {this.state.area == '' && <VacancyResults results={this.state.results}></VacancyResults>}
+                    {this.state.area == 'motivations' && this.getMotivationSelector()}
+                    {this.state.area == 'culture' && this.getCultureSelector()}
+                  </div>
                 </div>
             </div>
             </div>

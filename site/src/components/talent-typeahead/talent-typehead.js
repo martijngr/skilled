@@ -28,7 +28,10 @@ class TalentTypeahead extends Component {
   }
 
   onTalentSelected(talent) {
-    console.log("on talent selected... ", talent);
+    const instance = this._typeahead.getInstance()
+    instance.clear()
+    instance.focus()
+    
     if (this.props.onTalentSelected && talent)
       this.props.onTalentSelected(talent);
   }
@@ -39,9 +42,11 @@ class TalentTypeahead extends Component {
         onChange={selected => {
           this.onTalentSelected(selected[0]);
         }}
+        ref={(ref) => this._typeahead = ref}
         labelKey="Name"
         options={this.state.talents}
         placeholder={this.props.placeholderText}
+        id="a1"
       />
     );
   }

@@ -13,10 +13,18 @@
 }
 
 .header--top-logo {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
   text-transform: uppercase;
   font-size: 30px;
   letter-spacing: 5px;
   font-family: 'inconsolataregular';
+}
+
+.header--top-logo img{
+  height: 35px;
+  margin-right: 10px;
 }
 
 .header--top-slogan {
@@ -29,8 +37,9 @@
 }
 
 .top-right-menu{
-  font-family: 'inconsolataregular';
+  // font-family: 'inconsolataregular';
   text-transform: uppercase;
+  font-size: 0.9em;
 }
 
 .top-right-menu li:first-of-type{
