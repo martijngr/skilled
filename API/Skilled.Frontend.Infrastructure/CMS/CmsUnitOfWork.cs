@@ -2,8 +2,10 @@
 using Skilled.Business.Core.Mailing;
 using Skilled.CMS.Business.Employees;
 using Skilled.CMS.Business.Vacancies;
+using Skilled.Domain.CompanyCultures;
 using Skilled.Domain.ContactPersons;
 using Skilled.Domain.Employees;
+using Skilled.Domain.Motivations;
 using Skilled.Domain.Permissions;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
@@ -55,6 +57,8 @@ namespace Skilled.Infrastructure
         public IRepository<EmployeeGroup> EmployeeGroups { get; }
 
         public IRepository<Permission> Permissions { get; }
+        public IRepository<CompanyCulture> CompanyCultures { get; }
+        public IRepository<Motivation> Motivations { get; }
 
         public int SaveChanges()
         {

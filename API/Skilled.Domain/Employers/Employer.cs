@@ -1,4 +1,5 @@
-﻿using Skilled.Domain.ContactPersons;
+﻿using Skilled.Domain.CompanyCultures;
+using Skilled.Domain.ContactPersons;
 using System.Collections.Generic;
 
 namespace Skilled.Domain.Employers
@@ -16,5 +17,7 @@ namespace Skilled.Domain.Employers
         public string Zipcode { get; set; }
 
         public virtual ICollection<ContactPerson> ContactPeople { get; set; }
+
+        public virtual ICollection<CompanyCulture> CompanyCultures { get; set; }
     }
 }

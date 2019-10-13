@@ -1,5 +1,7 @@
 ﻿using Skilled.Business.Core.Mailing;
+using Skilled.Domain.CompanyCultures;
 using Skilled.Domain.Employees;
+using Skilled.Domain.Motivations;
 using Skilled.Domain.Permissions;
 using Skilled.Domain.Vacancies;
 using Skilled.Domain.Zipcodes;
@@ -21,6 +23,10 @@ namespace Skilled.Infrastructure
         public DbSet<MailingRecipientComingSoon> MailingRecipientsComingSoon { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Motivation> Motivations { get; set; }
+
+        public DbSet<CompanyCulture> CompanyCultures { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

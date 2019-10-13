@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyCultures\CompanyCulture.cs" />
     <Compile Include="ContactPersons\ContactPerson.cs" />
     <Compile Include="Employees\Employee.cs" />
     <Compile Include="Employees\Password.cs" />
     <Compile Include="Employers\Employer.cs" />
+    <Compile Include="Motivations\Motivation.cs" />
     <Compile Include="Permissions\EmployeeGroup.cs" />
     <Compile Include="Permissions\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,5 +56,6 @@
     <Compile Include="Zipcodes\Zipcode.cs" />
     <Compile Include="Zipcodes\ZipcodeDistance.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Skilled.Domain.ContactPersons;
 using Skilled.Domain.Employers;
+using Skilled.Domain.Motivations;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
 using Skilled.Domain.Zipcodes;
@@ -37,6 +38,7 @@ namespace Skilled.Domain.Vacancies
         public virtual ThinkLevel ThinkLevel { get; set; }
 
         public virtual ICollection<Skill> Skills { get; set; }
+        public virtual ICollection<Motivation> Motivations { get; set; }
 
     }
 }
