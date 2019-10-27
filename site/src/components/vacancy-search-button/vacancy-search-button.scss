@@ -1,10 +1,4 @@
-// .skillset-search {
-//     margin-top: 20px;
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-  
-  .skillset-search--button {
+.skillset-search--button {
     cursor: pointer;
     background-color: #FACC43;
     color: black;
@@ -15,3 +9,10 @@
     -moz-box-shadow: 10px 10px 14px -8px #878787;
     box-shadow: 10px 10px 14px -8px #878787;
   }
+
+.sticky-to-corner{
+  position: fixed;
+  bottom: 50px;
+  right: 50px; 
+  z-index:10;
+}

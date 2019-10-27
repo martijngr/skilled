@@ -22,13 +22,11 @@ class MotivationCard extends Component{
 
         if(motivation.checked && this.props.onClick){
             motivation.checked = true;
-            console.log('motivation.checked && this.props.onClick', motivation);
             this.props.onClick(motivation);
         }
 
         if(!motivation.checked && this.props.onClick){
             motivation.checked = false;
-            console.log('!motivation.checked && this.props.onClick', motivation);
             this.props.onClick(motivation);
         }
     }
@@ -40,7 +38,7 @@ class MotivationCard extends Component{
                 <img src="https://i0.wp.com/www.oxbridgeacademy.edu.za/blog/wp-content/uploads/2015/09/Motivation-sign-with-a-beautiful-day.jpeg?fit=960%2C593&ssl=1" className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <p className="card-text">
-                        {this.props.motivation.text}
+                        {this.props.motivation.Name}
                     </p>
                 </div>
             </div>

@@ -6,8 +6,6 @@ import skillsetIcon from "../../assets/icons/Icon_skillset.png";
 import thinkIcon from "../../assets/icons/Icon_skills.png";
 import TalentService from "./../../services/api/TalentService";
 import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
-import TalentStore from "../talent-store/TalentStore";
-import SelectedItem from "../selected-item/selected-item";
 import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
 
 import conditionsImg from '../../assets/img/voorwaarden.png';
@@ -32,15 +30,10 @@ class Skillset extends Component {
       this
     );
 
-    // Modal function handlers
-    this.openTalentModal = this.openTalentModal.bind(this);
-    this.onTalentModalCheckboxChange = this.onTalentModalCheckboxChange.bind(
-      this
-    );
-
     // filter button click handlers
     this.motivationsClick = this.motivationsClick.bind(this);
     this.cultureClick = this.cultureClick.bind(this);
+    this.talentClick = this.talentClick.bind(this);
 
     this.state = {
       thinkLevels: [],
@@ -63,8 +56,9 @@ class Skillset extends Component {
       this.props.onCultureClick('culture');
   }
 
-  openTalentModal() {
-    this.refs.talentStoreModal.openTalentModal();
+  talentClick(){
+    if(this.props.onTalentClick)
+      this.props.onTalentClick('talent');
   }
 
   updateTalents(talents) {
@@ -72,8 +66,6 @@ class Skillset extends Component {
       talents: talents
     });
   }
-
-  afterOpenTalentModal() {}
 
   componentDidMount() {
     const that = this;
@@ -102,17 +94,18 @@ class Skillset extends Component {
   }
 
   onTalentSelected(talent) {
-    if (this.maximumSelectedTalentsReached()) return;
+    if (this.maximumSelectedTalentsReached()) 
+      return;
 
     talent.checked = true;
-    const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
-    let talents = [...this.state.talents];
-    talents[talentIndex] = talent;
+    // const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
+    // let talents = [...this.state.talents];
+    // talents[talentIndex] = talent;
 
     if(this.props.onTalentSelected)
         this.props.onTalentSelected(talent);
 
-    this.setState({ talents }, this.setSearchResultsTotal);
+    // this.setState({ talents }, this.setSearchResultsTotal);
   }
 
   onSearchClick() {
@@ -128,43 +121,7 @@ class Skillset extends Component {
   }
 
   maximumSelectedTalentsReached() {
-    return this.state.talents.filter(t => t.checked).length >= 5;
-  }
-
-  setModalCheckboxes() {
-    return this.state.talents.map(this.createTalentChecbox);
-  }
-
-  createTalentChecbox(talent) {
-    let attributes = {
-      type: "checkbox",
-      key: talent.Id,
-      value: talent.Id,
-      checked: talent.checked,
-      onChange: this.onTalentModalCheckboxChange,
-      "data-talent": JSON.stringify(talent)
-    };
-
-    return (
-      <div key={talent.Id}>
-        <label>
-          <input {...attributes} /> {talent.Name}
-        </label>
-      </div>
-    );
-  }
-
-  onTalentModalCheckboxChange(e) {
-    var talent = JSON.parse(e.data);
-    talent.checked = !talent.checked;
-
-    if (this.maximumSelectedTalentsReached() && talent.checked) return;
-
-    const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
-    let updatedTalents = [...this.state.talents];
-    updatedTalents[talentIndex] = talent;
-
-    this.setState({ talents: updatedTalents }, this.setSearchResultsTotal);
+    return this.props.talents.filter(t => t.checked).length >= 5;
   }
 
   setSearchResultsTotal() {
@@ -175,23 +132,6 @@ class Skillset extends Component {
         zipcode: this.refs.zipcode.value,
         travelTime: this.refs.travelTime.value
       });
-
-    // var that = this;
-    // var talents = that.state.talents.filter(t => t.checked);
-
-    // this.vacancyService
-    //   .searchCount(
-    //     talents,
-    //     this.refs.hoursPerWeek.value,
-    //     this.refs.thinkLevel.value,
-    //     this.refs.zipcode.value,
-    //     this.refs.travelTime.value
-    //   )
-    //   .then(resp => {
-    //     that.setState({
-    //       searchCount: resp.count
-    //     });
-    //   });
   }
 
   render() {
@@ -207,34 +147,20 @@ class Skillset extends Component {
               talent te kunnen kiezen
             </div>
           )}
-          {this.state.talents.filter(t => t.checked).length < 5 && (
+          {!this.maximumSelectedTalentsReached() && (
             <div className="skillset-form">
-              <TalentTypeahead placeholderText="Voeg een talent toe" onTalentSelected={this.onTalentSelected} />
+              <TalentTypeahead 
+                placeholderText="Voeg een talent toe" 
+                onTalentSelected={this.onTalentSelected} 
+                talents={this.props.talents}/>
               <div className="skillset-form--search-subtitle">
-                <span onClick={this.openTalentModal}>
+                <span onClick={this.talentClick}>
                   > Bekijk alle talenten
                 </span>
               </div>
             </div>
           )}
           <div className="skillset-seperator" />
-          {/* <div className="skillset-selected-talents">
-            <h6>Jouw talenten:</h6>
-            <div className="skillset-selected-talents--overview">
-              {this.state.talents
-                .filter(t => t.checked)
-                .map(t => (
-                  <SelectedItem
-                      onItemRemoved={this.onTalentModalCheckboxChange}
-                      data={JSON.stringify(t)}
-                      caption={t.Name}
-                      key={t.Id}
-                      />
-                ))}
-            </div>
-          </div>
-          <div className="skillset-seperator" /> */}
-          
           <div className="skillset-filters">
               <h6>Filter ook op</h6>
               <div className="skillset-filters-icons">
@@ -325,12 +251,6 @@ class Skillset extends Component {
             <img src={linkedinImg}/> <img src={instagramImg}/>
           </span>
         </div>
-        <TalentStore
-          ref="talentStoreModal"
-          talents={this.state.talents}
-          isModelOpen={this.state.showTalentStore}
-          updateTalents={this.updateTalents}
-        />
       </div>
     );
   }

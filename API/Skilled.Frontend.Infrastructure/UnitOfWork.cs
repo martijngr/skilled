@@ -22,7 +22,10 @@ namespace Skilled.Infrastructure
         public UnitOfWork(SkilledContext context)
         {
             _context = context;
-            context.Database.Log = (s) => Debug.Write(s);
+            context.Database.Log = (s) =>
+            {
+                Debug.Write(s);
+            };
 
             Vacancies = new BaseRepository<Vacancy>(context);
             Skills = new BaseRepository<Skill>(context);

@@ -1,6 +1,7 @@
 ﻿using Skilled.Business.Core.Mailing;
 using Skilled.Domain.CompanyCultures;
 using Skilled.Domain.Employees;
+using Skilled.Domain.Employers;
 using Skilled.Domain.Motivations;
 using Skilled.Domain.Permissions;
 using Skilled.Domain.Vacancies;
@@ -48,6 +49,26 @@ namespace Skilled.Infrastructure
                     cs.MapLeftKey("EmployeeGroup_Id");
                     cs.MapRightKey("Permission_Id");
                     cs.ToTable("EmployeeGroupPermissions");
+                });
+
+            modelBuilder.Entity<Vacancy>()
+                .HasMany<Motivation>(s => s.Motivations)
+                .WithMany(c => c.Vacancies)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Vacancy_Id");
+                    cs.MapRightKey("Motivation_Id");
+                    cs.ToTable("VacancyMotivations");
+                });
+
+            modelBuilder.Entity<Employer>()
+                .HasMany<CompanyCulture>(s => s.CompanyCultures)
+                .WithMany(c => c.Employers)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Employer_Id");
+                    cs.MapRightKey("CompanyCulture_Id");
+                    cs.ToTable("EmployerCompanyCultures");
                 });
         }
 

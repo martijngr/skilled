@@ -20,7 +20,7 @@ class CultureSelector extends Component{
             <div className="row">
                 <div className="col-md-12 cultures-container">
                 {this.props.cultures.map(m => (
-                        <CultureCard key={m.id} onClick={this.onClick} culture={m}></CultureCard>
+                        <CultureCard key={m.Id} onClick={this.onClick} culture={m}></CultureCard>
                     ))}
                 </div>
             </div>

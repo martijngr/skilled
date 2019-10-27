@@ -10,6 +10,7 @@ class MotivationsSelector extends Component{
         this.onClick = this.onClick.bind(this);
     }
 
+
     onClick(motivation){
         if(this.props.onMotivationClick)
             this.props.onMotivationClick(motivation);
@@ -21,7 +22,7 @@ class MotivationsSelector extends Component{
             <div className="row">
                 <div className="col-md-12 motivatons-container">
                     {this.props.motivations.map(m => (
-                        <MotivationCard key={m.id} onClick={this.onClick} motivation={m}></MotivationCard>
+                        <MotivationCard key={m.Id} onClick={this.onClick} motivation={m}></MotivationCard>
                     ))}
                 </div>
             </div>

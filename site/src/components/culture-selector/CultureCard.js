@@ -33,7 +33,7 @@ class CultureCard extends Component{
                 <img src="https://publicsoperarouen.files.wordpress.com/2015/11/8211388838_84682b08c5_b.jpg" className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <p className="card-text">
-                        {this.props.culture.text}
+                        {this.props.culture.Name}
                     </p>
                 </div>
             </div>

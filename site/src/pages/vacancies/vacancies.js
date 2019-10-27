@@ -9,6 +9,7 @@ import Vacancy from "../vacancy/vacancy";
 import SelectedItem from "../../components/selected-item/selected-item";
 import VacancyResults from "../../components/vacancy-results/VacancyResults";
 import MotivationsSelector from "../../components/motivations-selector/MotivationsSelector";
+import TalentSelector from '../../components/talent-selector/TalentSelector';
 import CultureSelector from "../../components/culture-selector/CultureSelector";
 import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
 
@@ -39,31 +40,41 @@ class Vacancies extends Component {
     selectedVacancyId: '',
     selectedTalents: [],
     area: '',
-    motivations: [
-      {id: 1, text: 'abc'},
-      {id: 2, text: 'def'},
-      {id: 3, text: 'ghi'},
-      {id: 4, text: 'jkl'}
-    ],
-    cultures: [
-      {id: 11, text: 'cul1'},
-      {id: 12, text: 'cul2'},
-      {id: 13, text: 'cul3'},
-      {id: 14, text: 'cul4'}
-    ],
+    motivations: [],
+    cultures: [],
     searchCount: 0,
-    searchCriteria: {}
+    searchCriteria: {},
+    talents: [],
   };
 
   componentDidMount() {
     const that = this;
     const queryParams = queryString.parse(this.props.location.search);
+    
     this.talentService.search(queryParams.talent).then(function(resp) {
       if (resp && resp.result && resp.result.length > 0) {
         that.setState({
           queryStringTalent: resp.result
         });
       }
+    });
+
+    this.talentService.search().then(res => {
+      this.setState({
+        talents: res.result
+      });
+    });
+
+    this.vacancyService.getMotivations().then(function(resp) {
+      that.setState({
+        motivations: resp
+      });
+    });
+
+    this.vacancyService.getCompanyCultures().then(function(resp) {
+      that.setState({
+        cultures: resp
+      });
     });
   }
 
@@ -72,18 +83,25 @@ class Vacancies extends Component {
   }
 
   onTalentSelected(talent){
-    this.setState(prevState => ({
-      selectedTalents: [...prevState.selectedTalents, talent]
-    }), this.setSearchResultsTotal());
+    var index = this.state.talents.findIndex(m => m.Id == talent.Id);
+    var talentsCopy = [...this.state.talents];
+    var talentOnIndex = talentsCopy[index];
+    
+    if(!talentOnIndex.hasOwnProperty('checked'))
+      talentOnIndex.checked= true;
+    else
+      talentOnIndex.checked = talent.checked;
+
+    talentsCopy[index] = talentOnIndex;
+    this.setState({talents: talentsCopy}, this.setSearchResultsTotal());
   }
 
   setSearchResultsTotal(criteria) {
-    console.log('criteria', criteria);
     if(!criteria)
       criteria = this.state.searchCriteria;
 
     var that = this;
-    var talents = that.state.selectedTalents; //.filter(t => t.checked);
+    var talents = that.state.talents.filter(t => t.checked);
     this.setState({
       searchCriteria: criteria
     });
@@ -94,7 +112,9 @@ class Vacancies extends Component {
         criteria.hoursPerWeek,
         criteria.thinkLevel,
         criteria.zipcode,
-        criteria.travelTime
+        criteria.travelTime,
+        this.state.motivations.filter(t => t.checked),
+        this.state.cultures.filter(t => t.checked)
       )
       .then(resp => {
         that.setState({
@@ -106,11 +126,13 @@ class Vacancies extends Component {
   performSearch() {
     this.vacancyService
       .search(
-        this.state.selectedTalents,
+        this.state.talents.filter(t => t.checked),
         this.state.searchCriteria.hoursPerWeek,
         this.state.searchCriteria.thinkLevel,
         this.state.searchCriteria.zipcode,
-        this.state.searchCriteria.travelTime
+        this.state.searchCriteria.travelTime,
+        this.state.motivations.filter(t => t.checked),
+        this.state.cultures.filter(t => t.checked)
       )
       .then(res => {
         this.setState({
@@ -140,12 +162,12 @@ class Vacancies extends Component {
       <MotivationsSelector
         motivations = {this.state.motivations}
         onMotivationClick={(motivation) => {
-          var index = this.state.motivations.findIndex(m => m.id == motivation.id);
+          var index = this.state.motivations.findIndex(m => m.Id == motivation.Id);
 
           var motivations = [...this.state.motivations];
           motivations[index] = motivation;
 
-          this.setState({motivations: motivations});
+          this.setState({motivations: motivations}, this.setSearchResultsTotal());
         }}
       ></MotivationsSelector>
     );
@@ -156,32 +178,24 @@ class Vacancies extends Component {
       <CultureSelector
         cultures = {this.state.cultures}
         onCultureClick={(culture) => {
-          var index = this.state.cultures.findIndex(m => m.id == culture.id);
+          var index = this.state.cultures.findIndex(m => m.Id == culture.Id);
 
           var cultures = [...this.state.cultures];
           cultures[index] = culture;
 
-          this.setState({cultures: cultures});
+          this.setState({cultures: cultures}, this.setSearchResultsTotal());
         }}
       ></CultureSelector>
     );
   }
-
-  renderSelectedTalents(){
+  
+  getTalentSelector(){
     return(
-      this.state.selectedTalents.map(t => (
-        t.checked && 
-        <SelectedItem 
-          key={t.Id} 
-          caption={t.Name} 
-          id={t.Id}
-          data={t}
-          onItemRemoved={(item) => {
-            var talent = item.data;
-            var updatedTalents = this.state.selectedTalents.filter(m => m.Id != talent.Id);
-            this.setState({selectedTalents: updatedTalents}, this.setSearchResultsTotal);
-          }}/>
-      ))
+      <TalentSelector
+        talents = {this.state.talents}
+        onTalentClick={this.onTalentSelected}
+        maxCheckCount={5}
+      ></TalentSelector>
     );
   }
 
@@ -190,19 +204,19 @@ class Vacancies extends Component {
       this.state.motivations.map(t => (
         t.checked && 
         <SelectedItem 
-          key={t.id} 
-          caption={t.text} 
-          id={t.id} 
+          key={t.Id} 
+          caption={t.Name} 
+          id={t.Id} 
           data={t}
           onItemRemoved={(item) => {
             var motivation = item.data;
             motivation.checked = false;
-            var index = this.state.motivations.findIndex(m => m.id == motivation.id);
+            var index = this.state.motivations.findIndex(m => m.Id == motivation.Id);
 
             var motivations = [...this.state.motivations];
             motivations[index] = motivation;
 
-            this.setState({motivations: motivations});
+            this.setState({motivations: motivations}, this.setSearchResultsTotal());
           }}/>
       ))
     );
@@ -213,25 +227,52 @@ class Vacancies extends Component {
       this.state.cultures.map(t => (
         t.checked && 
         <SelectedItem 
-          key={t.id} 
-          caption={t.text} 
-          id={t.id} 
+          key={t.Id} 
+          caption={t.Name} 
+          id={t.Id} 
           data={t}
           onItemRemoved={(item) => {
             var culture = item.data;
             culture.checked = false;
-            var index = this.state.cultures.findIndex(m => m.id == culture.id);
+            var index = this.state.cultures.findIndex(m => m.Id == culture.Id);
 
             var cultures = [...this.state.cultures];
             cultures[index] = culture;
 
-            this.setState({cultures: cultures});
+            this.setState({cultures: cultures}, this.setSearchResultsTotal());
+          }}/>
+      ))
+    );
+  }
+
+  renderSelectedTalents(){
+    return(
+      
+      this.state.talents.map(t => (
+        t.checked && 
+        <SelectedItem 
+          key={t.Id} 
+          caption={t.Name} 
+          id={t.Id} 
+          data={t}
+          onItemRemoved={(item) => {
+            var talent = item.data;
+            talent.checked = false;
+            var index = this.state.talents.findIndex(m => m.Id == talent.Id);
+
+            var talents = [...this.state.talents];
+            talents[index] = talent;
+            this.setState({talents: talents}, this.setSearchResultsTotal());
           }}/>
       ))
     );
   }
 
   render() {
+    if (!this.state.talents || this.state.talents.length == 0){
+      return <div>Loading...</div>
+    }
+
     return (
       <React.Fragment>
         <div className="row results-header">
@@ -250,6 +291,8 @@ class Vacancies extends Component {
               setSearchResultsTotal={this.setSearchResultsTotal}
               searchCount={this.state.searchCount}
               onSearchClick={this.performSearch}
+              onTalentClick={this.setContentAreaTo}
+              talents = {this.state.talents}
             />
           </div>
           <div className="col-md-9 results-content">
@@ -260,7 +303,8 @@ class Vacancies extends Component {
                 {this.renderSelectedCultures()}
                 <VacancySearchButton 
                   searchCount={this.state.searchCount}
-                  onSearchClick={this.performSearch}></VacancySearchButton>
+                  onSearchClick={this.performSearch}
+                  isSticky={true}></VacancySearchButton>
               </div>
             </div>
 
@@ -270,6 +314,7 @@ class Vacancies extends Component {
                     {this.state.area == '' && <VacancyResults results={this.state.results}></VacancyResults>}
                     {this.state.area == 'motivations' && this.getMotivationSelector()}
                     {this.state.area == 'culture' && this.getCultureSelector()}
+                    {this.state.area == 'talent' && this.getTalentSelector()}
                   </div>
                 </div>
             </div>
