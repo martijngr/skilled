@@ -21,6 +21,7 @@ class TalentTypeahead extends Component {
 
   componentDidMount() {
     this.talentService.search().then(res => {
+      console.log('talents loaded. setting state.');
       this.setState({
         talents: res.result
       });

@@ -53,9 +53,14 @@ class Vacancies extends Component {
     
     this.talentService.search(queryParams.talent).then(function(resp) {
       if (resp && resp.result && resp.result.length > 0) {
+        var talent = resp.result;
+        talent.checked = true;
+
         that.setState({
-          queryStringTalent: resp.result
-        });
+          queryStringTalent: talent,
+          talents: [talent]
+        }, that.performSearch());
+
       }
     });
 
@@ -204,7 +209,7 @@ class Vacancies extends Component {
       this.state.motivations.map(t => (
         t.checked && 
         <SelectedItem 
-          key={t.Id} 
+          key={t.Id+"sm"} 
           caption={t.Name} 
           id={t.Id} 
           data={t}
@@ -227,7 +232,7 @@ class Vacancies extends Component {
       this.state.cultures.map(t => (
         t.checked && 
         <SelectedItem 
-          key={t.Id} 
+          key={t.Id+"sc"} 
           caption={t.Name} 
           id={t.Id} 
           data={t}
@@ -251,7 +256,7 @@ class Vacancies extends Component {
       this.state.talents.map(t => (
         t.checked && 
         <SelectedItem 
-          key={t.Id} 
+          key={t.Id+"st"} 
           caption={t.Name} 
           id={t.Id} 
           data={t}
@@ -274,14 +279,14 @@ class Vacancies extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div className="vanancies-container">
         <div className="row results-header">
           <div className="col-md-12 ">
             <img src={headerImage} className="results-header--image img-fluid"/>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-3 results-skillset">
+        <div className="row d-none d-sm-flex">
+          <div className="col results-skillset">
             <Skillset
               initialTalent={this.state.queryStringTalent}
               onTalentSelected= {this.onTalentSelected}
@@ -295,7 +300,7 @@ class Vacancies extends Component {
               talents = {this.state.talents}
             />
           </div>
-          <div className="col-md-9 results-content">
+          <div className="col results-content">
             <div className="row">
               <div className="col-md-12 results-selected-talents--overview">
                 {this.renderSelectedTalents()}
@@ -321,6 +326,52 @@ class Vacancies extends Component {
             </div>
         </div>
 
+        <div className="row d-sm-none">
+          <div className="col">
+
+            <div id="content-area">
+              {this.state.area == '' && <VacancyResults results={this.state.results}></VacancyResults>}
+              {this.state.area == 'motivations' && this.getMotivationSelector()}
+              {this.state.area == 'culture' && this.getCultureSelector()}
+              {this.state.area == 'talent' && this.getTalentSelector()}
+              {this.state.area == 'criteria' && <Skillset
+                initialTalent={this.state.queryStringTalent}
+                onTalentSelected= {this.onTalentSelected}
+                onSearchClick={this.performSearch}
+                onMotivationsClick={this.setContentAreaTo}
+                onCultureClick={this.setContentAreaTo}
+                setSearchResultsTotal={this.setSearchResultsTotal}
+                searchCount={this.state.searchCount}
+                onSearchClick={this.performSearch}
+                onTalentClick={this.setContentAreaTo}
+                talents = {this.state.talents}
+               />}
+            </div>
+
+            <nav className="mobile-menu">
+              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'talent'})}>Talenten</a>
+              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'culture'})}>Cultuur</a>
+              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'motivations'})}>Drijfveren</a>
+              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'criteria'})}>Criteria</a>
+            </nav>
+
+            
+            {this.state.area != '' && 
+              <VacancySearchButton 
+                    searchCount={this.state.searchCount}
+                    onSearchClick={this.performSearch}
+                    isSticky={true}
+                    css="mobile-search-button"
+                    useIcon={true}></VacancySearchButton>
+            }
+          </div>
+        </div>
+        <div className="row d-sm-none search-bar">
+          <div className="col">
+            Kies je filter(s)
+          </div>
+        </div>
+
         <Modal 
           isOpen={this.state.isVacancyModelOpen}
           onRequestClose={this.closeVacancyModal}>
@@ -330,7 +381,7 @@ class Vacancies extends Component {
               key={this.state.selectedVacancyId}>
             </Vacancy>
         </Modal>
-      </React.Fragment>
+      </div>
     );
   }
 }

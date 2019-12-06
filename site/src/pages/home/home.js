@@ -18,10 +18,6 @@ class Home extends Component {
 
   toVacancies = function(talent) {
     this.props.history.push("/vacatures?talent=" + talent.Name);
-    // this.props.history.push({
-    //   pathname: "/vacatures",
-    //   data: talent
-    // });
   };
 
   render() {

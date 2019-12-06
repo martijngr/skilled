@@ -1,12 +1,19 @@
+.vacancies-container{
+  padding-bottom: 100px;
+}
+
 .results-header{
-  // height: 225px;
   align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.results-skillset{
+  flex: 0 0 340px;
 }
 
 .results-selected-talents--overview {
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
   margin: 10px 0 20px 0;
 }
 
@@ -31,4 +38,50 @@
   margin-top:20px;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.mobile-menu{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile-menu--menu-item{
+  height: 75px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background: #F8E0BE;
+  flex-grow: 1;
+  border-right: 1px solid rgb(218, 182, 137);
+  color: black;
+}
+
+.mobile-menu--menu-item:last-child{
+  border: none;
+}
+
+.mobile-menu--menu-item:hover{
+  background: rgb(199, 175, 143);
+  text-decoration: none;
+  color: black;
+}
+
+.search-bar{
+  position: fixed;
+    bottom: 75px;
+    right: 0;
+    left: 0;
+    background: #a77b52;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    color: white;
+}
+
+.mobile-search-button{
+  bottom: 140px;
 }

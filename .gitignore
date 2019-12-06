@@ -6,3 +6,5 @@ bin
 obj
 .env
 .env.development
+*.bak
+*.drawio

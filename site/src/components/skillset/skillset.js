@@ -165,15 +165,15 @@ class Skillset extends Component {
               <h6>Filter ook op</h6>
               <div className="skillset-filters-icons">
                 <div className="skillset-filters-button" onClick={this.motivationsClick}>
-                  <img src={motivationsImg}/>
+                  <img src={motivationsImg} className="img-fluid"/>
                   <div>Drijfveren</div>
                 </div>
                 <div className="skillset-filters-button" onClick={this.cultureClick}>
-                  <img src={cultureImg}/>
+                  <img src={cultureImg} className="img-fluid"/>
                   <div>Cultuur</div>
                 </div>
                 <div>
-                  <img src={conditionsImg}/>
+                  <img src={conditionsImg} className="img-fluid"/>
                   <div>Voorwaarden</div>
                 </div>
               </div>

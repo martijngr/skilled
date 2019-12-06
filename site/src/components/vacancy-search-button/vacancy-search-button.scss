@@ -1,18 +1,33 @@
-.skillset-search--button {
-    cursor: pointer;
-    background-color: #FACC43;
-    color: black;
-    text-align: center;
-    padding: 5px 20px;
-  
-    -webkit-box-shadow: 10px 10px 14px -8px #878787;
-    -moz-box-shadow: 10px 10px 14px -8px #878787;
-    box-shadow: 10px 10px 14px -8px #878787;
-  }
-
 .sticky-to-corner{
   position: fixed;
   bottom: 50px;
   right: 50px; 
   z-index:10;
+}
+
+.search {
+  cursor: pointer;
+  color: black;
+  text-align: center;
+  padding: 5px 20px;
+  -webkit-box-shadow: 10px 10px 14px -8px #878787;
+  -moz-box-shadow: 10px 10px 14px -8px #878787;
+  box-shadow: 10px 10px 14px -8px #878787;
+}
+
+.search--button {
+  background-color: #FACC43;
+}
+
+.search--icon {
+  height: 55px;
+  width: 55px;
+  background-color: #FACC43;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.search--icon-img{
+  width: 50px;
+  margin-left: -19px;
 }

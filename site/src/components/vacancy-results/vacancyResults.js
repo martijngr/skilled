@@ -24,7 +24,7 @@ class VacancyResults extends Component {
     return (
         <React.Fragment>
             {this.props.results.map(v => (
-            <React.Fragment key={v.Id+"v"}>
+            <React.Fragment key={v.Id+"vr"}>
                 <div className="row" key={v.Id+5000}>
                 <div className="result-separator"></div>
                 </div>
