@@ -5,15 +5,23 @@ html,body {
 .home--header-image {
   background-image: url("../../assets/img/homepage_bg.jpg");
   background-repeat: no-repeat;
-  background-position: center 15px;
+  background-position: center 0px;
   background-size: cover;
-  //height: calc(100vh - 111px);
-  //min-height: 500px;
+  position:fixed;
+  top: 71px;
+  left: 0;
+  right:0;
+  bottom: 0;
+  filter: blur(2px);
+}
+
+.home--header{
+  color: #f9f9f9;
 }
 
 .home--header {
   text-align: center;
-  padding-top: 100px;
+  padding-top: 30px;
 }
 
 .home--header-title {

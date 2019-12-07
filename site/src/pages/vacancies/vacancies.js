@@ -279,7 +279,7 @@ class Vacancies extends Component {
     }
 
     return (
-      <div className="vanancies-container">
+      <div className="vacancies-container">
         <div className="row results-header">
           <div className="col-md-12 ">
             <img src={headerImage} className="results-header--image img-fluid"/>
