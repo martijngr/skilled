@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const fs = require('fs'); // to check if the file exists
+const BabelEnginePlugin = require('babel-engine-plugin');
 
 module.exports = (env) => {
   // Get the root path (assuming your webpack config is in the root of your project!)
@@ -34,6 +35,7 @@ module.exports = (env) => {
       filename: "index_bundle.js",
       publicPath: "/"
     },
+    devtool: 'none',
     module: {
       rules: [
         {
@@ -78,14 +80,26 @@ module.exports = (env) => {
       ]
     },
     devServer: {
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: '8080',
     },
+    // devServer: {
+    //   compress: true,
+    //   inline: true,
+    //   port: '8080',
+    //   allowedHosts: [
+    //       '*.*'
+    //   ]
+    // },
     plugins: [
       new HtmlWebpackPlugin({
         template: "./src/index.html",
         favicon: "./src/favicon.ico"
       }),
-      new webpack.DefinePlugin(envKeys)
+      new webpack.DefinePlugin(envKeys),
+      new BabelEnginePlugin({
+        presets: ['env']
+      })
     ]
   }
 };

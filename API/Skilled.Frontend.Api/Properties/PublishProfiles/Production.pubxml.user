@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>04/04/2019 21:48:44</publishTime>
+      <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>09/10/2013 16:29:20</publishTime>
@@ -19,13 +19,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>04/04/2019 21:48:44</publishTime>
+      <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="bin/Autofac.dll">
       <publishTime>05/09/2018 11:57:54</publishTime>
     </File>
+    <File Include="bin/Autofac.Integration.Owin.dll">
+      <publishTime>02/16/2018 18:52:04</publishTime>
+    </File>
     <File Include="bin/Autofac.Integration.WebApi.dll">
       <publishTime>06/21/2018 18:25:22</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.Owin.dll">
+      <publishTime>08/17/2016 16:19:06</publishTime>
     </File>
     <File Include="bin/Autofac.Integration.WebApi.pdb">
       <publishTime>06/21/2018 18:25:22</publishTime>
@@ -37,7 +43,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/FluentValidation.dll">
-      <publishTime>01/25/2019 11:57:34</publishTime>
+      <publishTime>05/10/2019 10:53:18</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -60,11 +66,50 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>10/16/2017 14:14:32</publishTime>
     </File>
+    <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>10/05/2018 19:35:36</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.pdb">
+      <publishTime>10/05/2018 19:26:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.dll">
+      <publishTime>10/05/2018 19:36:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.pdb">
+      <publishTime>10/05/2018 19:26:02</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>10/05/2018 19:45:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.pdb">
+      <publishTime>10/05/2018 19:26:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Cors.dll">
+      <publishTime>01/18/2019 20:50:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>01/18/2019 20:50:30</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>01/18/2019 20:50:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>01/18/2019 20:51:10</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Jwt.dll">
+      <publishTime>01/18/2019 20:50:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>01/18/2019 20:51:00</publishTime>
+    </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>03/24/2018 17:44:14</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 12:19:34</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>09/21/2017 23:42:00</publishTime>
@@ -216,32 +261,62 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Skilled.Api.pdb">
       <publishTime>05/30/2019 12:04:29</publishTime>
     </File>
+    <File Include="bin/Skilled.Bootstrap.Core.dll">
+      <publishTime>11/29/2019 19:11:58</publishTime>
+    </File>
+    <File Include="bin/Skilled.Bootstrap.Core.pdb">
+      <publishTime>11/29/2019 19:11:58</publishTime>
+    </File>
     <File Include="bin/Skilled.Bootstrap.dll">
       <publishTime>05/30/2019 12:04:23</publishTime>
     </File>
     <File Include="bin/Skilled.Bootstrap.pdb">
       <publishTime>05/30/2019 12:04:23</publishTime>
     </File>
+    <File Include="bin/Skilled.Business.Core.dll">
+      <publishTime>11/29/2019 19:11:57</publishTime>
+    </File>
+    <File Include="bin/Skilled.Business.Core.pdb">
+      <publishTime>11/29/2019 19:11:57</publishTime>
+    </File>
+    <File Include="bin/Skilled.CMS.Business.dll">
+      <publishTime>11/29/2019 19:11:57</publishTime>
+    </File>
+    <File Include="bin/Skilled.CMS.Business.pdb">
+      <publishTime>11/29/2019 19:11:57</publishTime>
+    </File>
     <File Include="bin/Skilled.CQRS.dll">
-      <publishTime>05/30/2019 12:04:21</publishTime>
+      <publishTime>11/29/2019 19:11:56</publishTime>
     </File>
     <File Include="bin/Skilled.CQRS.pdb">
-      <publishTime>05/30/2019 12:04:21</publishTime>
+      <publishTime>11/29/2019 19:11:56</publishTime>
     </File>
     <File Include="bin/Skilled.Domain.dll">
-      <publishTime>05/30/2019 12:04:22</publishTime>
+      <publishTime>11/29/2019 19:11:56</publishTime>
     </File>
     <File Include="bin/Skilled.Domain.pdb">
-      <publishTime>05/30/2019 12:04:22</publishTime>
+      <publishTime>11/29/2019 19:11:56</publishTime>
+    </File>
+    <File Include="bin/Skilled.Frontend.Api.dll">
+      <publishTime>11/29/2019 19:12:04</publishTime>
+    </File>
+    <File Include="bin/Skilled.Frontend.Api.pdb">
+      <publishTime>11/29/2019 19:12:04</publishTime>
+    </File>
+    <File Include="bin/Skilled.Frontend.Business.dll">
+      <publishTime>11/29/2019 19:11:57</publishTime>
+    </File>
+    <File Include="bin/Skilled.Frontend.Business.pdb">
+      <publishTime>11/29/2019 19:11:57</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.dll">
-      <publishTime>05/30/2019 12:04:22</publishTime>
+      <publishTime>11/29/2019 19:11:57</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.dll.config">
-      <publishTime>04/04/2019 21:48:44</publishTime>
+      <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.pdb">
-      <publishTime>05/30/2019 12:04:22</publishTime>
+      <publishTime>11/29/2019 19:11:57</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>07/08/2017 01:30:56</publishTime>
@@ -251,6 +326,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.ComponentModel.Primitives.dll">
       <publishTime>11/05/2016 04:55:40</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>10/05/2018 19:34:54</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.pdb">
+      <publishTime>10/05/2018 19:26:08</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>05/10/2018 22:38:56</publishTime>
@@ -269,6 +350,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>05/10/2018 22:39:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>06/27/2014 02:05:20</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
       <publishTime>01/28/2015 04:03:46</publishTime>
@@ -298,13 +382,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>04/04/2019 21:48:44</publishTime>
+      <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>04/04/2019 21:48:44</publishTime>
+      <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/30/2019 12:04:30</publishTime>
+      <publishTime>11/29/2019 19:12:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

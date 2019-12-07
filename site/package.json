@@ -7,6 +7,13 @@
     "start": "webpack-dev-server --mode development --open --hot --env.ENVIRONMENT=development",
     "build": "webpack --mode production --env.ENVIRONMENT=production"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead",
+    "ie11"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/martijngr/skilled.git"
@@ -27,6 +34,7 @@
     "popper.js": "^1.14.4",
     "query-string": "^6.2.0",
     "react": "^16.6.0",
+    "react-app-polyfill": "^1.0.2",
     "react-bootstrap-typeahead": "^3.2.4",
     "react-dom": "^16.6.0",
     "react-modal": "^3.6.1",
@@ -38,6 +46,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-engine-plugin": "^0.3.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",

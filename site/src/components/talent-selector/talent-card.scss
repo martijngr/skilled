@@ -1,0 +1,11 @@
+.card{
+    width: 205px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.card--selected{
+    background-color: green;
+    color: white;
+}

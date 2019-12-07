@@ -1,4 +1,6 @@
-﻿using Skilled.Business.Core.ThinkLevels.Queries;
+﻿using Skilled.Business.Core.CompanyCultures.Queries;
+using Skilled.Business.Core.Motivations.Queries;
+using Skilled.Business.Core.ThinkLevels.Queries;
 using Skilled.Business.Frontend.Vacancies.Queries;
 using Skilled.CQRS;
 using System.IO;
@@ -45,6 +47,22 @@ namespace Skilled.Api.Controllers
         public IHttpActionResult GetThinkLevels()
         {
             var result = _queryProcessor.Handle(new GetThinkLevelsQuery());
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetCompanyCultures()
+        {
+            var result = _queryProcessor.Handle(new GetCompanyCulturesQuery());
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetMotivations()
+        {
+            var result = _queryProcessor.Handle(new GetMotivationsQuery());
 
             return Ok(result);
         }

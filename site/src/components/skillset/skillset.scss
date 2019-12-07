@@ -1,23 +1,18 @@
 .skillset-container {
-  border: 2px solid #c4c4c4;
   -webkit-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
   -moz-box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
   box-shadow: 10px 10px 14px -8px rgba(135, 135, 135, 1);
+
+  background-color: #F8E0BE;
 }
 
 .skillset-content {
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 .skillset-header {
-  letter-spacing: 3px;
-  text-transform: uppercase;
   text-align: center;
-  background-color: #5a695f;
-  font-weight: bold;
-  font-size: 1.3em;
-  padding: 15px;
-  color: white;
+  padding: 30px;
 }
 
 .skillset-form {
@@ -26,17 +21,41 @@
     border: 1px solid #c4c4c4;
     width: 100%;
     padding: 5px;
+    text-align: center;
+
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: #c6c6c6;
+      text-align: center;
+      opacity: 1; /* Firefox */
+      font-style: italic;
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #c6c6c6;
+      text-align: center;
+      font-style: italic;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: #c6c6c6;
+      text-align: center;
+      font-style: italic;
+    }
   }
 }
 
 .skillset-form--search-subtitle {
   margin-top: 10px;
   font-size: 0.8em;
+  cursor: pointer;
 }
 
 .skillset-seperator {
   width: 100%;
-  border-bottom: 1px solid#c4c4c4;
+  border-bottom: 1px solid#DCD0AA;
   height: 1px;
 }
 
@@ -70,6 +89,28 @@
   cursor: pointer;
 }
 
+.skillset-filters{
+  margin: 20px 0px;
+}
+
+.skillset-filters-icons{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.skillset-filters-icons img{
+  height: 40px;
+}
+
+.skillset-filters-icons img + div{
+  padding-top: 15px;
+}
+
+.skillset-filters-button{
+  cursor: pointer;
+}
+
 .skillset-criteria {
   margin: 20px 0;
 }
@@ -85,8 +126,19 @@
   margin-top: 10px;
   font-size: 0.8em;
 
-  input {
-    width: 50px;
+  input{
+    margin: 0 3px;
+    padding: 3px 3px;
+    text-align: center;
+  }
+
+  input.number{
+    width: 30px;
+    
+  }
+
+  input.zipcode{
+    width: 65px;
   }
 
   select {
@@ -94,7 +146,7 @@
   }
 
   & > div {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 }
 
@@ -109,15 +161,42 @@
 
 .skillset-search {
   margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .skillset-search--button {
   cursor: pointer;
-  background-color: #53988c;
-  color: white;
+  background-color: #FACC43;
+  color: black;
   text-align: center;
-  padding: 10px;
-  font-style: italic;
+  padding: 5px 20px;
+
+  -webkit-box-shadow: 10px 10px 14px -8px #878787;
+  -moz-box-shadow: 10px 10px 14px -8px #878787;
+  box-shadow: 10px 10px 14px -8px #878787;
+}
+
+.skillset-footer{
+  background-color: #DEBFA3;
+  font-family: "la_belle_auroreregular";
+  height: 40px;
+  text-align: center;
+
+  -webkit-box-shadow: 4px 0px 4px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 4px 0px 4px -2px rgba(0,0,0,0.75);
+  box-shadow: 4px 0px 4px -2px rgba(0,0,0,0.75);
+}
+
+.skillset-footer-text{
+  text-align: center;
+  padding: 3px 0;
+  line-height: 40px;
+  margin-right: 35px;
+}
+
+.skillset-footer-social img{
+  height: 20px;
 }
 
 .ReactModal__Overlay {

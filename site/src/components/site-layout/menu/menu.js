@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import skilledLogo from '../../../assets/img/skilled_logo.png';
+
 require("./menu.scss");
 
 class Menu extends Component {
@@ -9,6 +11,7 @@ class Menu extends Component {
 
           <nav className="navbar navbar-expand-md navbar-light bg-light">
             <a className="navbar-brand header--top-logo" href="#">
+              <img src={skilledLogo}/>
               SKILLED
             </a>
             {/* <button

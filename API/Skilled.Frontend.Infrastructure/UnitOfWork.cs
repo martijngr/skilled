@@ -1,7 +1,11 @@
 ﻿using Skilled.Business.Core;
+using Skilled.Business.Core.CompanyCultures;
 using Skilled.Business.Core.Mailing;
+using Skilled.Business.Core.Motivations;
+using Skilled.Domain.CompanyCultures;
 using Skilled.Domain.ContactPersons;
 using Skilled.Domain.Employees;
+using Skilled.Domain.Motivations;
 using Skilled.Domain.Permissions;
 using Skilled.Domain.Skills;
 using Skilled.Domain.ThinkLevels;
@@ -18,7 +22,10 @@ namespace Skilled.Infrastructure
         public UnitOfWork(SkilledContext context)
         {
             _context = context;
-            context.Database.Log = (s) => Debug.Write(s);
+            context.Database.Log = (s) =>
+            {
+                Debug.Write(s);
+            };
 
             Vacancies = new BaseRepository<Vacancy>(context);
             Skills = new BaseRepository<Skill>(context);
@@ -30,6 +37,8 @@ namespace Skilled.Infrastructure
             Employees = new BaseRepository<Employee>(context);
             EmployeeGroups = new BaseRepository<EmployeeGroup>(context);
             Permissions = new BaseRepository<Permission>(context);
+            CompanyCultures = new BaseRepository<CompanyCulture>(context);
+            Motivations = new BaseRepository<Motivation>(context);
         }
 
         public IRepository<Vacancy> Vacancies { get; }
@@ -51,6 +60,10 @@ namespace Skilled.Infrastructure
         public IRepository<EmployeeGroup> EmployeeGroups { get; }
 
         public IRepository<Permission> Permissions { get; }
+
+        public IRepository<CompanyCulture> CompanyCultures { get; }
+
+        public IRepository<Motivation> Motivations { get; }
 
         public int SaveChanges()
         {

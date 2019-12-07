@@ -6,7 +6,13 @@ import skillsetIcon from "../../assets/icons/Icon_skillset.png";
 import thinkIcon from "../../assets/icons/Icon_skills.png";
 import TalentService from "./../../services/api/TalentService";
 import TalentTypeahead from "../../components/talent-typeahead/talent-typehead";
-import TalentStore from "../talent-store/TalentStore";
+import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
+
+import conditionsImg from '../../assets/img/voorwaarden.png';
+import motivationsImg from '../../assets/img/drijfveren.png';
+import cultureImg from '../../assets/img/cultuur.png';
+import linkedinImg from '../../assets/icons/linkedin_icon_black.png';
+import instagramImg from '../../assets/icons/instagram_icon_black.png';
 
 class Skillset extends Component {
   constructor(props) {
@@ -24,11 +30,10 @@ class Skillset extends Component {
       this
     );
 
-    // Modal function handlers
-    this.openTalentModal = this.openTalentModal.bind(this);
-    this.onTalentModalCheckboxChange = this.onTalentModalCheckboxChange.bind(
-      this
-    );
+    // filter button click handlers
+    this.motivationsClick = this.motivationsClick.bind(this);
+    this.cultureClick = this.cultureClick.bind(this);
+    this.talentClick = this.talentClick.bind(this);
 
     this.state = {
       thinkLevels: [],
@@ -41,8 +46,19 @@ class Skillset extends Component {
     };
   }
 
-  openTalentModal() {
-    this.refs.talentStoreModal.openTalentModal();
+  motivationsClick(){
+    if(this.props.onMotivationsClick)
+      this.props.onMotivationsClick('motivations');
+  }
+
+  cultureClick(){
+    if(this.props.onCultureClick)
+      this.props.onCultureClick('culture');
+  }
+
+  talentClick(){
+    if(this.props.onTalentClick)
+      this.props.onTalentClick('talent');
   }
 
   updateTalents(talents) {
@@ -50,8 +66,6 @@ class Skillset extends Component {
       talents: talents
     });
   }
-
-  afterOpenTalentModal() {}
 
   componentDidMount() {
     const that = this;
@@ -80,14 +94,18 @@ class Skillset extends Component {
   }
 
   onTalentSelected(talent) {
-    if (this.maximumSelectedTalentsReached()) return;
+    if (this.maximumSelectedTalentsReached()) 
+      return;
 
     talent.checked = true;
-    const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
-    let talents = [...this.state.talents];
-    talents[talentIndex] = talent;
+    // const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
+    // let talents = [...this.state.talents];
+    // talents[talentIndex] = talent;
 
-    this.setState({ talents }, this.setSearchResultsTotal);
+    if(this.props.onTalentSelected)
+        this.props.onTalentSelected(talent);
+
+    // this.setState({ talents }, this.setSearchResultsTotal);
   }
 
   onSearchClick() {
@@ -103,68 +121,25 @@ class Skillset extends Component {
   }
 
   maximumSelectedTalentsReached() {
-    return this.state.talents.filter(t => t.checked).length >= 5;
-  }
-
-  setModalCheckboxes() {
-    return this.state.talents.map(this.createTalentChecbox);
-  }
-
-  createTalentChecbox(talent) {
-    let attributes = {
-      type: "checkbox",
-      key: talent.Id,
-      value: talent.Id,
-      checked: talent.checked,
-      onChange: this.onTalentModalCheckboxChange,
-      "data-talent": JSON.stringify(talent)
-    };
-
-    return (
-      <div key={talent.Id}>
-        <label>
-          <input {...attributes} /> {talent.Name}
-        </label>
-      </div>
-    );
-  }
-
-  onTalentModalCheckboxChange(e) {
-    var talent = JSON.parse(e.target.dataset.talent);
-    talent.checked = !talent.checked;
-
-    if (this.maximumSelectedTalentsReached() && talent.checked) return;
-
-    const talentIndex = this.state.talents.findIndex(t => t.Id == talent.Id);
-    let updatedTalents = [...this.state.talents];
-    updatedTalents[talentIndex] = talent;
-
-    this.setState({ talents: updatedTalents }, this.setSearchResultsTotal);
+    return this.props.talents.filter(t => t.checked).length >= 5;
   }
 
   setSearchResultsTotal() {
-    var that = this;
-    var talents = that.state.talents.filter(t => t.checked);
-
-    this.vacancyService
-      .searchCount(
-        talents,
-        this.refs.hoursPerWeek.value,
-        this.refs.thinkLevel.value,
-        this.refs.zipcode.value,
-        this.refs.travelTime.value
-      )
-      .then(resp => {
-        that.setState({
-          searchCount: resp.count
-        });
+    if(this.props.setSearchResultsTotal)
+      this.props.setSearchResultsTotal({
+        hoursPerWeek: this.refs.hoursPerWeek.value,
+        thinkLevel: this.refs.thinkLevel.value,
+        zipcode: this.refs.zipcode.value,
+        travelTime: this.refs.travelTime.value
       });
   }
 
   render() {
     return (
       <div className="skillset-container">
-        <div className="skillset-header">skillset</div>
+        <div className="skillset-header">
+          <h4>Zoekfilters</h4>
+        </div>
         <div className="skillset-content">
           {this.maximumSelectedTalentsReached() && (
             <div>
@@ -172,41 +147,41 @@ class Skillset extends Component {
               talent te kunnen kiezen
             </div>
           )}
-          {this.state.talents.filter(t => t.checked).length < 5 && (
+          {!this.maximumSelectedTalentsReached() && (
             <div className="skillset-form">
-              <TalentTypeahead onTalentSelected={this.onTalentSelected} />
+              <TalentTypeahead 
+                placeholderText="Voeg een talent toe" 
+                onTalentSelected={this.onTalentSelected} 
+                talents={this.props.talents}/>
               <div className="skillset-form--search-subtitle">
-                <span onClick={this.openTalentModal}>
-                  Of selecteer direct uit de talent store >
+                <span onClick={this.talentClick}>
+                  > Bekijk alle talenten
                 </span>
               </div>
             </div>
           )}
           <div className="skillset-seperator" />
-          <div className="skillset-selected-talents">
-            <div className="skillset-selected-talents--header">
-              Jouw talenten:
-            </div>
-            <div className="skillset-selected-talents--overview">
-              {this.state.talents
-                .filter(t => t.checked)
-                .map(t => (
-                  <div key={t.Id} className="skillset-selected-talents--talent">
-                    <span
-                      onClick={this.onTalentModalCheckboxChange}
-                      data-talent={JSON.stringify(t)}
-                      className="skillset-selected-talents--talent--remove"
-                    >
-                      X&nbsp;
-                    </span>
-                    {t.Name}
-                  </div>
-                ))}
-            </div>
+          <div className="skillset-filters">
+              <h6>Filter ook op</h6>
+              <div className="skillset-filters-icons">
+                <div className="skillset-filters-button" onClick={this.motivationsClick}>
+                  <img src={motivationsImg} className="img-fluid"/>
+                  <div>Drijfveren</div>
+                </div>
+                <div className="skillset-filters-button" onClick={this.cultureClick}>
+                  <img src={cultureImg} className="img-fluid"/>
+                  <div>Cultuur</div>
+                </div>
+                <div>
+                  <img src={conditionsImg} className="img-fluid"/>
+                  <div>Voorwaarden</div>
+                </div>
+              </div>
           </div>
+          
           <div className="skillset-seperator" />
           <div className="skillset-criteria">
-            <div className="skillset-criteria--header">Jouw voorkeuren:</div>
+            <h6>Aanvullende criteria</h6>
             <div className="skillset-criteria--overview">
               <div>
                 <div className="skillset-criteria--overview-icon">
@@ -217,6 +192,7 @@ class Skillset extends Component {
                   ref="hoursPerWeek"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="32"
+                  className="number"
                 />{" "}
                 werkuren per week
               </div>
@@ -230,6 +206,7 @@ class Skillset extends Component {
                   ref="travelTime"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="30"
+                  className="number"
                 />{" "}
                 minuten reistijd
               </div>
@@ -241,6 +218,7 @@ class Skillset extends Component {
                   ref="zipcode"
                   onBlur={this.setSearchResultsTotal}
                   placeholder="1234AB"
+                  className="zipcode"
                 />
               </div>
               <div>
@@ -260,21 +238,19 @@ class Skillset extends Component {
           </div>
           <div className="skillset-seperator" />
           <div className="skillset-search">
-            <div
-              className="skillset-search--button"
-              onClick={this.onSearchClick}
-            >
-              Zoek ({this.state.searchCount})
-            </div>
+          <VacancySearchButton 
+                  searchCount={this.props.searchCount}
+                  onSearchClick={this.props.onSearchClick}></VacancySearchButton>
           </div>
         </div>
-
-        <TalentStore
-          ref="talentStoreModal"
-          talents={this.state.talents}
-          isModelOpen={this.state.showTalentStore}
-          updateTalents={this.updateTalents}
-        />
+        <div className="skillset-footer">
+          <span className="skillset-footer-text">
+            Need some courage first?
+          </span>
+          <span className="skillset-footer-social">
+            <img src={linkedinImg}/> <img src={instagramImg}/>
+          </span>
+        </div>
       </div>
     );
   }

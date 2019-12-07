@@ -18,17 +18,15 @@ class Home extends Component {
 
   toVacancies = function(talent) {
     this.props.history.push("/vacatures?talent=" + talent.Name);
-    // this.props.history.push({
-    //   pathname: "/vacatures",
-    //   data: talent
-    // });
   };
 
   render() {
     return (
       <React.Fragment>
-        <div className="row home--header-image h-100">
-          <div className="col-md-3 d-none d-sm-block"/>
+        <div className="row home--header-image">
+        </div>
+        <div className="row home--header h-100">
+          <div className="col-md-3"/>
           <div className="col-md-6 ">
             <div className="home--header">
               <div className="home--header-title">de vacaturesite</div>
@@ -37,7 +35,7 @@ class Home extends Component {
               </div>
               <div className="home--header-search-box">
                 <div className="home--header-search-box--input">
-                  <TalentTypeahead onTalentSelected={this.toVacancies} />
+                  <TalentTypeahead onTalentSelected={this.toVacancies} placeholderText="Vertel ons jouw talent, probeers eens 'creatief'"/>
                 </div>
                 <div className="home--header-search-box--icon">
                   <img src={searchIcon} onClick={this.doSearch} />

@@ -62,11 +62,11 @@ class TalentStore extends Component {
       };
 
       return (
-        <div key={talent.Id}>
+        <li key={talent.Id}>
           <label>
             <input {...attributes} /> {talent.Name}
           </label>
-        </div>
+        </li>
       );
     });
   }
@@ -105,7 +105,9 @@ class TalentStore extends Component {
             te kunnen kiezen
           </div>
         )}
-        <div>{this.setModalCheckboxes()}</div>
+        <ul>
+          {this.setModalCheckboxes()}
+        </ul>
       </Modal>
     );
   }

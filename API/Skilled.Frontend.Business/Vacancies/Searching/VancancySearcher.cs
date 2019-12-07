@@ -35,8 +35,10 @@ namespace Skilled.Business.Frontend.Vacancies.Searching
             vacancies = FilterByWorkHoursPerWeek(vacancies, criteria);
             vacancies = FilterByThinkLevel(vacancies, criteria);
             vacancies = FilterByZipcodeDistance(vacancies, criteria);
+            vacancies = FilterByMotivations(vacancies, criteria);
+            vacancies = FilterByCultures(vacancies, criteria);
 
-            return new SearchVacancyResult(vacancies,splittedTalents, _distances);
+            return new SearchVacancyResult(vacancies.Distinct(), splittedTalents, _distances);
         }
 
         private IQueryable<Vacancy> FilterByZipcodeDistance(IQueryable<Vacancy> vacancies, SearchCriteria criteria)
@@ -82,6 +84,32 @@ namespace Skilled.Business.Frontend.Vacancies.Searching
             }
 
             return vacancies;
+        }
+
+        private IQueryable<Vacancy> FilterByMotivations(IQueryable<Vacancy> vacancies, SearchCriteria criteria)
+        {
+            var motivationIds = criteria.MotivationIds.Where(m => m > 0);
+            if (!motivationIds.Any())
+                return vacancies;
+
+            return vacancies.SelectMany(v =>
+                v.Motivations
+                    .Select(m => new { MotivationId = m.Id, Vacancy = v })
+                    .Where(m => motivationIds.Contains(m.MotivationId))
+                    .Select(m => m.Vacancy));
+        }
+
+        private IQueryable<Vacancy> FilterByCultures(IQueryable<Vacancy> vacancies, SearchCriteria criteria)
+        {
+            var cultureIds = criteria.CultureIds.Where(m => m > 0);
+            if (!cultureIds.Any())
+                return vacancies;
+
+            return vacancies.SelectMany(v =>
+                v.Employer.CompanyCultures
+                    .Select(c => new { CompanyCultureId = c.Id, Vacancy = v })
+                    .Where(m => cultureIds.Contains(m.CompanyCultureId))
+                    .Select(m => m.Vacancy));
         }
     }
 }
