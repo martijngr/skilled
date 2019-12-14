@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Skilled.Business.Frontend.Vacancies.Views
 {
@@ -41,9 +39,7 @@ namespace Skilled.Business.Frontend.Vacancies.Views
 
         public ContactPersonView ContactPerson { get; set; }
 
-        //public virtual Employer Employer { get; set; }
-
-        //public virtual ContactPerson ContactPerson { get; set; }
+        public string CompanyLogoUrl { get; set; }
 
         public class EmployerView
         {

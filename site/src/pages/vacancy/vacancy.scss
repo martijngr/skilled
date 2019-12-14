@@ -1,60 +1,50 @@
-.block-title{
-    font-size: 1em;
-    text-transform: uppercase;
-    letter-spacing: 1px;  
-    margin-bottom: 5px;
+.react-tabs__tab:focus {
+    box-shadow: none;
+    border-color:#d4bb98;
+    outline: none
 }
 
-.highlight__item{
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+.react-tabs__tab:focus:after{
+    display: none;
 }
 
-.highlight__item-icon{
-    margin-right: 20px;
-}
-
-.highlight__item-icon img{
-    width: 35px;
-}
-
-.highlight__item-description{
-    text-transform: uppercase;
-    letter-spacing: 1px;  
+.react-tabs__tab-list{
+    font-weight: bold;
+    font-family: 'inconsolataregular';
+    font-size: 20px;
+    background-color: #F8E0BE;
 }
 
 .react-tabs__tab-list {
     display: flex;
+    -webkit-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
 }
 
-.divider{
-    height: 2px;
-    border: 1px solid grey;
-    margin: 30px 0;
-}
 .react-tabs__tab-panel{
     margin-top: 20px;
 }
 
 .react-tabs__tab {
-    border: 1px solid #212529;
+    border: 1px solid #d4bb98;
     border-right: none;
     flex-grow: 1;
     flex-basis: 0;
     font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 15px 12px;
+    text-align: center;
+    margin-top: -1px;
 }
 .react-tabs__tab:last-child{
-    border-right: 1px solid #212529;
+    border-right: 1px solid #d4bb98;
 }
 
 .react-tabs__tab--selected {
-    background: #53988c;
+    background: #d4bb98;
     border-radius: 0;
-    color: white;
+    color: black;
 }
 
 .tab__content-title{
@@ -63,45 +53,51 @@
     font-weight: bold;
 }
 
-.talents{
-    margin-bottom: 20px;
-}
-
 .talents-overview li:before{
     content:"\2713\0020";
     font-size:1.1em;
 }
 
-.talent-overview{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.feature-block{
+    background: #F8E0BE;
+    text-align: center;
+    max-width: 230px;
+    margin-top: -35px;
+    margin-left: -30px;
+    padding-bottom: 30px;
+    -webkit-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
 }
 
-.talent-overview__item {
-    padding: 5px;
-    background-color: black;
-    color: white;
-    margin-top: 20px;
-    font-size: 0.8em;
-    text-transform: uppercase;
+.feature-logo img{
+    margin-top: 15px;
+    height: 150px;
 }
 
-.talent-overview__item-selected{
-    background: #1d9e1d;
+.feature-job-title{
+    margin-top:15px;
+    font-weight: bold;
 }
 
-.contactperson-image{
-    border-radius:50% 50% 50% 50%;  
-   width:100px;
-   height:100px;
+.feature-job-subline{
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-.contactperson__details{
-    display: flex;
-    align-items: center;
+.feature-cta{
+    margin-top: 50px;
 }
 
-.contactperson__contact-data{
-    padding-left: 30px
+.btn{
+    cursor: pointer;
+    color: black;
+    text-align: center;
+    padding: 5px 20px;
+    -webkit-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
+    background-color: #FACC43;
+    border-radius: 0px;
+    font-family: 'inconsolataregular';
 }

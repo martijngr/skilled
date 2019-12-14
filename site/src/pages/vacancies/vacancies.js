@@ -3,7 +3,7 @@ import TalentService from "./../../services/api/TalentService";
 import VacancyService from "./../../services/api/VacancyService";
 import Skillset from "../../components/skillset/skillset";
 import queryString from "query-string";
-import VacancyBlock from "../../components/vacancy-block/VacancyBlock";
+import HeaderImage from "../../components/header-image/HeaderImage";
 import Modal from "react-modal";
 import Vacancy from "../vacancy/vacancy";
 import SelectedItem from "../../components/selected-item/selected-item";
@@ -13,7 +13,7 @@ import TalentSelector from '../../components/talent-selector/TalentSelector';
 import CultureSelector from "../../components/culture-selector/CultureSelector";
 import VacancySearchButton from "../../components/vacancy-search-button/VacancySearchButton";
 
-import headerImage from "../../assets/img/results_header.png";
+import headerImg from "../../assets/img/results_header.png";
 
 require("./vacancies.scss");
 
@@ -147,13 +147,8 @@ class Vacancies extends Component {
       });
   }
 
-  onVacancyClick(vacancyId){
-    if(!vacancyId) return;
-
-    this.setState({
-      selectedVacancyId: vacancyId,
-      isVacancyModelOpen: true
-    });
+  onVacancyClick(vacancy){
+    this.props.history.push("/vacature?id=" + vacancy.Id);
   }
 
   closeVacancyModal(){
@@ -280,11 +275,9 @@ class Vacancies extends Component {
 
     return (
       <div className="vacancies-container">
-        <div className="row results-header">
-          <div className="col-md-12 ">
-            <img src={headerImage} className="results-header--image img-fluid"/>
-          </div>
-        </div>
+        <React.Fragment>
+          <HeaderImage image={headerImg} />
+        </React.Fragment>
         <div className="row d-none d-sm-flex">
           <div className="col results-skillset">
             <Skillset
@@ -316,7 +309,11 @@ class Vacancies extends Component {
             <div className="row">
                 <div className="col-md-12">
                   <div id="content-area">
-                    {this.state.area == '' && <VacancyResults results={this.state.results}></VacancyResults>}
+                    {this.state.area == '' && 
+                      <VacancyResults 
+                        results={this.state.results}
+                        onVacancyClick={this.onVacancyClick}>
+                      </VacancyResults>}
                     {this.state.area == 'motivations' && this.getMotivationSelector()}
                     {this.state.area == 'culture' && this.getCultureSelector()}
                     {this.state.area == 'talent' && this.getTalentSelector()}

@@ -6,31 +6,34 @@ require("./vacancyResults.scss");
 class VacancyResults extends Component {
   constructor(props) {
     super(props);
+
+    this.onVacancyClick = this.onVacancyClick.bind(this);
   }
 
   state = {
   };
 
-  onVacancyClick(vacancyId){
-    if(!vacancyId) return;
+  onVacancyClick(vacancy){
+    if(!vacancy) 
+      return;
 
-    this.setState({
-      selectedVacancyId: vacancyId,
-      isVacancyModelOpen: true
-    });
+    if(this.props.onVacancyClick){
+      this.props.onVacancyClick(vacancy);
+    }
+
   }
 
   render() {
     return (
         <React.Fragment>
             {this.props.results.map(v => (
-            <React.Fragment key={v.Id+"vr"}>
-                <div className="row" key={v.Id+5000}>
-                <div className="result-separator"></div>
-                </div>
+              <React.Fragment key={v.Id+"vr"}>
+                  <div className="row" key={v.Id+5000}>
+                  <div className="result-separator"></div>
+                  </div>
 
-                <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
-            </React.Fragment>
+                  <VacancyBlock key={v.Id} vacancy={v} onVacancyClick={this.onVacancyClick}/>
+              </React.Fragment>
             ))}
         </React.Fragment>
     );

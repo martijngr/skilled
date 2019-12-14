@@ -1,6 +1,9 @@
 ﻿using Skilled.Business.Core;
 using Skilled.Business.Frontend.Vacancies.Views;
 using Skilled.CQRS;
+using Skilled.Domain.PathHandling;
+using Skilled.Domain.Settings;
+using System.IO;
 using System.Linq;
 
 namespace Skilled.Business.Frontend.Vacancies.Queries
@@ -18,10 +21,12 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
     public class GetVacancyByIdQueryHandler : IQueryHandler<GetVacancyByIdQuery, VacancyView>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAppSettings _appSettings;
 
-        public GetVacancyByIdQueryHandler(IUnitOfWork unitOfWork)
+        public GetVacancyByIdQueryHandler(IUnitOfWork unitOfWork, IAppSettings appSettings)
         {
             _unitOfWork = unitOfWork;
+            _appSettings = appSettings;
         }
 
         public VacancyView Handle(GetVacancyByIdQuery query)
@@ -30,6 +35,7 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
                 .Vacancies
                 .All
                 .Where(v => v.Id == query.VacancyId)
+                .ToList()
                 .Select(v => new VacancyView
                 {
                     City = v.City,
@@ -55,7 +61,8 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
                     {
                         Description = v.Employer.Description,
                         Name= v.Employer.Name
-                    }
+                    },
+                    CompanyLogoUrl = _appSettings.MediaUrl.CombineUrl("Employers", v.Employer.Id.ToString(), v.LogoFileName)
                 })
                 .FirstOrDefault();
         }

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "../pages/home/home";
 import Vacancies from "./../pages/vacancies/vacancies";
+import Vacancy from "./../pages/vacancy/vacancy";
+
 import Menu from "../components/site-layout/menu/menu";
 require("./app.scss");
 
@@ -12,6 +14,7 @@ class App extends Component {
         <Menu />
         <Switch>
           <Route path="/vacatures" component={Vacancies} />
+          <Route path="/vacature" component={Vacancy} />
           <Route path="/" component={Home} />
         </Switch>
         <div>

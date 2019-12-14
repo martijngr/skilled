@@ -5,5 +5,7 @@ namespace Skilled.Domain.Settings
     public interface IAppSettings
     {
         string BaseFileLocation { get; }
+
+        string MediaUrl { get; }
     }
 }
