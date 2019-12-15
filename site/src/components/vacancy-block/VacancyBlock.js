@@ -12,8 +12,9 @@ class VacancyBlock extends Component {
   }
 
   onVacancyClick(){
-    if(this.props.onVacancyClick)
+    if(this.props.onVacancyClick){
       this.props.onVacancyClick(this.props.vacancy);
+    }
   }
 
   render() {
@@ -44,13 +45,13 @@ class VacancyBlock extends Component {
           <div className="result-block--footer">
             <div className="result-block--footer-icons">
               <span>
-                 <img src={shareIcon} />
-               </span>
-             </div>
-             <div className="result-block--footer-post-date">
-               {this.props.vacancy.AgeInDays} dagen geleden
-             </div>
-           </div>
+                <img src={shareIcon} />
+              </span>
+            </div>
+            <div className="result-block--footer-post-date">
+              {this.props.vacancy.AgeInDays} dagen geleden
+            </div>
+          </div>
         </div>
       </div>
     );

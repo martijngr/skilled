@@ -29,6 +29,7 @@ class Vacancies extends Component {
     this.onVacancyClick = this.onVacancyClick.bind(this);
     this.closeVacancyModal = this.closeVacancyModal.bind(this);
     this.setSearchResultsTotal = this.setSearchResultsTotal.bind(this);
+    this.renderVacancyResults = this.renderVacancyResults.bind(this);
 
     this.setContentAreaTo = this.setContentAreaTo.bind(this);
   }
@@ -47,40 +48,37 @@ class Vacancies extends Component {
     talents: [],
   };
 
-  componentDidMount() {
-    const that = this;
+  init(){
     const queryParams = queryString.parse(this.props.location.search);
-    
-    this.talentService.search(queryParams.talent).then(function(resp) {
-      if (resp && resp.result && resp.result.length > 0) {
-        var talent = resp.result;
-        talent.checked = true;
-
-        that.setState({
-          queryStringTalent: talent,
-          talents: [talent]
-        }, that.performSearch());
-
-      }
-    });
 
     this.talentService.search().then(res => {
+      const talents = res.result;
+      const queryStringTalent = queryParams.talent;
+
+      var index = talents.findIndex(m => m.Name == queryStringTalent);
+      var talentOnIndex = talents[index];
+      talentOnIndex.checked= true;
+
       this.setState({
-        talents: res.result
-      });
+        talents: talents
+      }, this.performSearch());
     });
 
-    this.vacancyService.getMotivations().then(function(resp) {
-      that.setState({
+    this.vacancyService.getMotivations().then(resp => {
+      this.setState({
         motivations: resp
       });
     });
 
-    this.vacancyService.getCompanyCultures().then(function(resp) {
-      that.setState({
+    this.vacancyService.getCompanyCultures().then(resp => {
+      this.setState({
         cultures: resp
       });
     });
+  }
+
+  componentDidMount() {
+    this.init();
   }
 
   setContentAreaTo(name){
@@ -88,6 +86,8 @@ class Vacancies extends Component {
   }
 
   onTalentSelected(talent){
+    console.log('[onTalentSelected] with talent', talent);
+    console.log('[onTalentSelected] this.state.talents', this.state.talents)
     var index = this.state.talents.findIndex(m => m.Id == talent.Id);
     var talentsCopy = [...this.state.talents];
     var talentOnIndex = talentsCopy[index];
@@ -268,6 +268,15 @@ class Vacancies extends Component {
     );
   }
 
+  renderVacancyResults(){
+    return (
+      <VacancyResults 
+        results={this.state.results} 
+        onVacancyClick={this.onVacancyClick}>
+      </VacancyResults>
+    );
+  }
+
   render() {
     if (!this.state.talents || this.state.talents.length == 0){
       return <div>Loading...</div>
@@ -309,11 +318,7 @@ class Vacancies extends Component {
             <div className="row">
                 <div className="col-md-12">
                   <div id="content-area">
-                    {this.state.area == '' && 
-                      <VacancyResults 
-                        results={this.state.results}
-                        onVacancyClick={this.onVacancyClick}>
-                      </VacancyResults>}
+                    {this.state.area == '' && this.renderVacancyResults()}
                     {this.state.area == 'motivations' && this.getMotivationSelector()}
                     {this.state.area == 'culture' && this.getCultureSelector()}
                     {this.state.area == 'talent' && this.getTalentSelector()}
@@ -327,7 +332,7 @@ class Vacancies extends Component {
           <div className="col">
 
             <div id="content-area">
-              {this.state.area == '' && <VacancyResults results={this.state.results}></VacancyResults>}
+              {this.state.area == '' && this.renderVacancyResults() }
               {this.state.area == 'motivations' && this.getMotivationSelector()}
               {this.state.area == 'culture' && this.getCultureSelector()}
               {this.state.area == 'talent' && this.getTalentSelector()}
