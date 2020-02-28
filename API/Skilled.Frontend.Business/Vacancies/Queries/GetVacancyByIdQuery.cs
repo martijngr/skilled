@@ -10,12 +10,7 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
 {
     public class GetVacancyByIdQuery : IQuery<VacancyView>
     {
-        public GetVacancyByIdQuery(int vacancyId)
-        {
-            VacancyId = vacancyId;
-        }
-
-        public int VacancyId { get; }
+        public int VacancyId { get; set; }
     }
 
     public class GetVacancyByIdQueryHandler : IQueryHandler<GetVacancyByIdQuery, VacancyView>

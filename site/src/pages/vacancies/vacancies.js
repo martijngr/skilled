@@ -86,8 +86,6 @@ class Vacancies extends Component {
   }
 
   onTalentSelected(talent){
-    console.log('[onTalentSelected] with talent', talent);
-    console.log('[onTalentSelected] this.state.talents', this.state.talents)
     var index = this.state.talents.findIndex(m => m.Id == talent.Id);
     var talentsCopy = [...this.state.talents];
     var talentOnIndex = talentsCopy[index];
@@ -148,6 +146,9 @@ class Vacancies extends Component {
   }
 
   onVacancyClick(vacancy){
+    var candidateTalenIds = this.state.talents.find(t => t.checked);
+    console.log(candidateTalenIds);
+    
     this.props.history.push("/vacature?id=" + vacancy.Id);
   }
 

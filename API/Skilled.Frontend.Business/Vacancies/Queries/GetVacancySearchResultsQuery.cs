@@ -2,6 +2,7 @@
 using Skilled.Business.Frontend.Vacancies.Views;
 using Skilled.CQRS;
 using Skilled.Domain.Settings;
+using Skilled.Frontend.Business.Vacancies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,16 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
     {
         private readonly VancancySearcher _vacancySearcher;
         private readonly IAppSettings _settings;
+        private readonly VacancyMatchCalculator _vacancyMatchCalculator;
 
-        public GetVacancySearchResultsQueryHandler(VancancySearcher vacancySearcher, IAppSettings settings)
+        public GetVacancySearchResultsQueryHandler(
+            VancancySearcher vacancySearcher, 
+            IAppSettings settings,
+            VacancyMatchCalculator vacancyMatchCalculator)
         {
             _vacancySearcher = vacancySearcher;
             _settings = settings;
+            _vacancyMatchCalculator = vacancyMatchCalculator;
         }
 
         public IEnumerable<VacancySearchResult> Handle(GetVacancySearchResultsQuery query)
@@ -47,22 +53,12 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
         private void CalculateMatchPercentages(IEnumerable<string> splittedTalents, List<VacancySearchResult> searchResults)
         {
             var candidateTalentCount = splittedTalents?.Count() ?? 0;
+            var candidateTalents = splittedTalents.Select(t => t.ToLower());
 
             foreach (var searchResult in searchResults)
             {
-                var candidateTalents = splittedTalents.Select(t => t.ToLower());
                 var vacancyTalents = searchResult.VacancySkills.Select(t => t.ToLower());
-
-                var vacancyTalentCount = searchResult.VacancySkills.Count();
-                var matchCount = candidateTalents.Intersect(vacancyTalents).Count();
-
-                if (matchCount == vacancyTalentCount)
-                {
-                    searchResult.MatchPercentage = 100;
-                    continue;
-                }
-
-                searchResult.MatchPercentage = 100 / vacancyTalentCount * matchCount;
+                searchResult.MatchPercentage = _vacancyMatchCalculator.CalculateMatch(candidateTalents, vacancyTalents);
             }
         }
     }

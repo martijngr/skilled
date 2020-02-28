@@ -36,9 +36,9 @@ namespace Skilled.Api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetVacancy(int vacancyId)
+        public IHttpActionResult GetVacancy([FromUri] GetVacancyByIdQuery query)
         {
-            var vacancy = _queryProcessor.Handle(new GetVacancyByIdQuery(vacancyId));
+            var vacancy = _queryProcessor.Handle(query);
 
             return Ok(new { vacancy });
         }
