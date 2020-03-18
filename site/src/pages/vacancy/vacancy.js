@@ -27,19 +27,18 @@ class Vacancy extends Component{
         this.state = { 
             tabIndex: 0,
             loading: true,
-            vacancy: null
+            vacancy: null,
+            candidateTalents: []
          };
     }
 
     componentDidMount() {
-        const that = this;
-        const queryParams = queryString.parse(this.props.location.search);
-
-        this.vacancyService.getById(queryParams.id).then(res => {
-            if(res && res.vacancy){
-                console.log(res.vacancy);
+        this.vacancyService.getById(window.location.search).then(res => {
+            if(res){
                 this.setState({
-                    vacancy: res.vacancy,
+                    vacancy: res.Vacancy,
+                    matchPercentage: res.MatchPercentage,
+                    candidateTalents: res.CandidateTalents,
                     loading: false
                 });
             }
@@ -72,34 +71,49 @@ class Vacancy extends Component{
                             <TabList>
                                 <Tab>Werkzaamheden</Tab>
                                 <Tab>Skillset</Tab>
-                                <Tab>Team &amp; Bedrijf</Tab>
-                                <Tab>Voorwaarden</Tab>
-                                <Tab>De Match</Tab>
+                                <Tab>Team</Tab>
+                                {/* <Tab>Voorwaarden</Tab> */}
+                                {/* <Tab>De Match</Tab> */}
                             </TabList>
                             <TabPanel>
                                 <div className="tab__content-title">Wat ga je doen?</div>
                                 {this.state.vacancy.Description}</TabPanel>
                             <TabPanel>
                                 <div className="tab__content-title">Talenten</div>
-                                <ul className="talents-overview">{this.state.vacancy.Skills.map(s => (
-                                    <li key={s}>{s}</li>
-                                ))}</ul>
+                                <div className="row">
+                                    <div className="matchperc col-sm-2">
+                                        <div>{this.state.matchPercentage}%</div> 
+                                        <div>match</div>
+                                    </div>
+                                    <div className="col-sm-10">
+                                        <ul className="talents-overview">
+                                            {this.state.vacancy.Skills.map(s => {
+                                                
+                                                const isMatch = this.state.candidateTalents.some(c => c.toLowerCase() == s.toLowerCase());
+                                                let className = isMatch ? "match" : "no-match";
+
+                                                return(<li className={className} key={s}>{s}</li>)
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                                
                             </TabPanel>
                             <TabPanel>
                                 <div className="tab__content-title">Met wie?</div>
                                 {this.state.vacancy.Employer.Description}
                             </TabPanel>
-                            <TabPanel>
+                            {/* <TabPanel>
                                 <div className="tab__content-title">What's in it for me?</div>
                                 {this.state.vacancy.SalaryFrom}
                             </TabPanel>
                             <TabPanel>
                                 <div className="tab__content-title">De match</div>
                                 {this.state.vacancy.SalaryFrom}
-                            </TabPanel>
+                            </TabPanel> */}
                         </Tabs>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 d-none d-md-flex">
                         <div className="feature-block">
                             <div className="feature-logo">
                                 <img src={this.state.vacancy.CompanyLogoUrl} />
@@ -111,7 +125,7 @@ class Vacancy extends Component{
                             {this.state.vacancy.Employer.Name} | {this.state.vacancy.City} | {this.state.vacancy.ThinkLevel}
                             </div>
                             <div className="feature-cta">
-                                <button className="btn" value="">Solliciteer nu ></button>
+                                <a className="btn" target="_blank" href={this.state.vacancy.JobApplicationLink}>Solliciteer nu ></a>
                             </div>
                         </div>
                     </div>

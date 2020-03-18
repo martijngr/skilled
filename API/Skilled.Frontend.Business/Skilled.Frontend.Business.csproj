@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactForms\Commands\SendContactFormCommand.cs" />
     <Compile Include="ContactPersons\Queries\GetProfilePicturePathByContactPersonId.cs" />
     <Compile Include="Mailing\ComingSoon\AddMailRecipientCommand.cs" />
     <Compile Include="Mailing\TellAFriend\SendTellAFriendMailCommand.cs" />

@@ -3,6 +3,8 @@ using Skilled.Business.Core.Motivations.Queries;
 using Skilled.Business.Core.ThinkLevels.Queries;
 using Skilled.Business.Frontend.Vacancies.Queries;
 using Skilled.CQRS;
+using Skilled.Frontend.Api.Models.Vacancies;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,10 +15,12 @@ namespace Skilled.Api.Controllers
     public class VacanciesController : ApiController
     {
         private readonly QueryProcessor _queryProcessor;
+        private readonly VacancyDetailViewModelBuilder _vacancyDetailViewModelBuilder;
 
-        public VacanciesController(QueryProcessor queryProcessor)
+        public VacanciesController(QueryProcessor queryProcessor, VacancyDetailViewModelBuilder vacancyDetailViewModelBuilder)
         {
             _queryProcessor = queryProcessor;
+            _vacancyDetailViewModelBuilder = vacancyDetailViewModelBuilder;
         }
 
         [HttpGet]
@@ -36,11 +40,12 @@ namespace Skilled.Api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetVacancy([FromUri] GetVacancyByIdQuery query)
+        public IHttpActionResult GetVacancy(int id, string talentNames = "")
         {
-            var vacancy = _queryProcessor.Handle(query);
+            var talentNameList = talentNames?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var model = _vacancyDetailViewModelBuilder.Build(id, talentNameList);
 
-            return Ok(new { vacancy });
+            return Ok(model);
         }
 
         [HttpGet]

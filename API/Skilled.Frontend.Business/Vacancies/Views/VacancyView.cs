@@ -33,6 +33,8 @@ namespace Skilled.Business.Frontend.Vacancies.Views
 
         public string ThinkLevel { get; set; }
 
+        public string JobApplicationLink { get; set; }
+
         public IEnumerable<string> Skills { get; set; }
 
         public EmployerView Employer { get; set; }

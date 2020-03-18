@@ -262,10 +262,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 12:04:29</publishTime>
     </File>
     <File Include="bin/Skilled.Bootstrap.Core.dll">
-      <publishTime>12/14/2019 14:37:44</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Bootstrap.Core.pdb">
-      <publishTime>12/14/2019 14:37:44</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Bootstrap.dll">
       <publishTime>05/30/2019 12:04:23</publishTime>
@@ -274,49 +274,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/30/2019 12:04:23</publishTime>
     </File>
     <File Include="bin/Skilled.Business.Core.dll">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Business.Core.pdb">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.CMS.Business.dll">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.CMS.Business.pdb">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.CQRS.dll">
-      <publishTime>11/29/2019 19:11:56</publishTime>
+      <publishTime>03/17/2020 14:15:59</publishTime>
     </File>
     <File Include="bin/Skilled.CQRS.pdb">
-      <publishTime>11/29/2019 19:11:56</publishTime>
+      <publishTime>03/17/2020 14:15:59</publishTime>
     </File>
     <File Include="bin/Skilled.Domain.dll">
-      <publishTime>12/14/2019 14:37:42</publishTime>
+      <publishTime>03/18/2020 19:50:46</publishTime>
     </File>
     <File Include="bin/Skilled.Domain.pdb">
-      <publishTime>12/14/2019 14:37:42</publishTime>
+      <publishTime>03/18/2020 19:50:46</publishTime>
     </File>
     <File Include="bin/Skilled.Frontend.Api.dll">
-      <publishTime>12/14/2019 14:37:52</publishTime>
+      <publishTime>03/18/2020 19:50:53</publishTime>
     </File>
     <File Include="bin/Skilled.Frontend.Api.pdb">
-      <publishTime>12/14/2019 14:37:52</publishTime>
+      <publishTime>03/18/2020 19:50:53</publishTime>
     </File>
     <File Include="bin/Skilled.Frontend.Business.dll">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Frontend.Business.pdb">
-      <publishTime>12/14/2019 14:37:43</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.dll">
-      <publishTime>12/14/2019 14:37:44</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.dll.config">
       <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="bin/Skilled.Infrastructure.pdb">
-      <publishTime>12/14/2019 14:37:44</publishTime>
+      <publishTime>03/18/2020 19:50:47</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>07/08/2017 01:30:56</publishTime>
@@ -388,7 +388,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2019 20:26:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/14/2019 14:37:53</publishTime>
+      <publishTime>03/18/2020 19:50:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

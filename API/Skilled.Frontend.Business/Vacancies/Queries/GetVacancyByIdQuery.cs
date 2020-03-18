@@ -1,9 +1,7 @@
 ﻿using Skilled.Business.Core;
 using Skilled.Business.Frontend.Vacancies.Views;
 using Skilled.CQRS;
-using Skilled.Domain.PathHandling;
 using Skilled.Domain.Settings;
-using System.IO;
 using System.Linq;
 
 namespace Skilled.Business.Frontend.Vacancies.Queries
@@ -11,6 +9,8 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
     public class GetVacancyByIdQuery : IQuery<VacancyView>
     {
         public int VacancyId { get; set; }
+
+        public string[] TalentNames { get; set; }
     }
 
     public class GetVacancyByIdQueryHandler : IQueryHandler<GetVacancyByIdQuery, VacancyView>
@@ -43,6 +43,7 @@ namespace Skilled.Business.Frontend.Vacancies.Queries
                     SalaryTill = v.SalaryTill,
                     Title = v.Title,
                     Zipcode = v.Zipcode.Value,
+                    JobApplicationLink = v.JobApplicationLink,
                     ContactPerson = new VacancyView.ContactPersonView
                     {
                         Id = v.ContactPerson.Id,

@@ -36,3 +36,15 @@ h1, h2, h3, h4, h5, h6{
      // max-width: 100%;
      // height: 100%;
 }
+
+.btn:focus, .form-control:focus {
+     box-shadow: none;
+ }
+
+ .validation {
+     margin-top: 5px;
+   }
+   .validation-error {
+     color: #ff4343;
+     font-size: 0.8em;
+   }

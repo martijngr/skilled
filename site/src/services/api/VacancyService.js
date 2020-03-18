@@ -11,8 +11,7 @@ class VacancyService {
     travelTime, 
     motivationIds, 
     cultureIds ) {
-    var talentNames = talents.map(t => t.Name);
-
+    let talentNames = talents.map(t => t.Name);
     let cultureIdList = cultureIds.map(c =>  c.Id + '&CultureIds=').join("");
     let motivationIdList = motivationIds.map(c =>  c.Id + '&MotivationIds=').join("");
 
@@ -97,9 +96,9 @@ class VacancyService {
       });
   };
 
-  getById(vacancyId){
+  getById(queryString){
     return axios
-      .get(this.baseUrl + "/GetVacancy?vacancyId=" + vacancyId)
+      .get(this.baseUrl + "/GetVacancy" + queryString)
       .then(res => {
         return res.data;
       });

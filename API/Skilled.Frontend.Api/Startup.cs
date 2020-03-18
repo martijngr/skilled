@@ -1,11 +1,14 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
+using Newtonsoft.Json.Serialization;
 using Owin;
 using Skilled.Api.Settings;
 using Skilled.Bootstrap;
 using Skilled.Domain.Settings;
+using Skilled.Frontend.Api.Models.Vacancies;
 using System;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
 
@@ -34,10 +37,15 @@ namespace Skilled.Api
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            // config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            // config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/octet-stream"));
+
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             // builder.RegisterWebApiFilterProvider(config); // using this prevents authorize filter from executing
             builder.RegisterType<AppSettings>().As<IAppSettings>();
+            builder.RegisterType<VacancyDetailViewModelBuilder>();
 
             // Set the dependency resolver to be Autofac.
             FrontendBootstrapper.Bootstrap(builder, assemblies);

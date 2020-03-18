@@ -160,7 +160,7 @@ class Skillset extends Component {
               </div>
             </div>
           )}
-          <div className="skillset-seperator" />
+          {/* <div className="skillset-seperator" />
           <div className="skillset-filters">
               <h6>Filter ook op</h6>
               <div className="skillset-filters-icons">
@@ -177,7 +177,7 @@ class Skillset extends Component {
                   <div>Voorwaarden</div>
                 </div>
               </div>
-          </div>
+          </div> */}
           
           <div className="skillset-seperator" />
           <div className="skillset-criteria">

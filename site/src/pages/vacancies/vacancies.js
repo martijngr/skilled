@@ -30,6 +30,7 @@ class Vacancies extends Component {
     this.closeVacancyModal = this.closeVacancyModal.bind(this);
     this.setSearchResultsTotal = this.setSearchResultsTotal.bind(this);
     this.renderVacancyResults = this.renderVacancyResults.bind(this);
+    this.afterInit = this.afterInit.bind(this);
 
     this.setContentAreaTo = this.setContentAreaTo.bind(this);
   }
@@ -53,15 +54,12 @@ class Vacancies extends Component {
 
     this.talentService.search().then(res => {
       const talents = res.result;
-      const queryStringTalent = queryParams.talent;
-
-      var index = talents.findIndex(m => m.Name == queryStringTalent);
-      var talentOnIndex = talents[index];
-      talentOnIndex.checked= true;
+      const queryStringTalents = queryParams.talent.split(",");
+      queryStringTalents.forEach(t => this.markTalentAsChecked(talents, t));
 
       this.setState({
         talents: talents
-      }, this.performSearch());
+      }, this.afterInit);
     });
 
     this.vacancyService.getMotivations().then(resp => {
@@ -75,6 +73,18 @@ class Vacancies extends Component {
         cultures: resp
       });
     });
+  }
+
+  markTalentAsChecked(talents, talent){
+    var index = talents.findIndex(m => m.Name == talent);
+    var talentOnIndex = talents[index];
+
+    talentOnIndex.checked= true;
+  }
+
+  afterInit(){
+    this.setSearchResultsTotal();
+    this.performSearch();
   }
 
   componentDidMount() {
@@ -96,7 +106,10 @@ class Vacancies extends Component {
       talentOnIndex.checked = talent.checked;
 
     talentsCopy[index] = talentOnIndex;
-    this.setState({talents: talentsCopy}, this.setSearchResultsTotal());
+    this.setState({talents: talentsCopy}, this.setSearchResultsTotal);
+    let checkedTalents = talentsCopy.filter(t => t.checked).map(c =>  c.Name + ',').join("").slice(0, -1);
+    
+    this.props.history.push("/vacatures?talent=" + checkedTalents);
   }
 
   setSearchResultsTotal(criteria) {
@@ -127,6 +140,7 @@ class Vacancies extends Component {
   }
 
   performSearch() {
+
     this.vacancyService
       .search(
         this.state.talents.filter(t => t.checked),
@@ -146,10 +160,10 @@ class Vacancies extends Component {
   }
 
   onVacancyClick(vacancy){
-    var candidateTalenIds = this.state.talents.find(t => t.checked);
-    console.log(candidateTalenIds);
-    
-    this.props.history.push("/vacature?id=" + vacancy.Id);
+    let candidateTalents = this.state.talents.filter(t => t.checked);
+    let talentNameList = candidateTalents.map(c =>  c.Name + ',').join("").slice(0, -1);
+
+    this.props.history.push("/vacature?id=" + vacancy.Id + "&talentNames=" + talentNameList);
   }
 
   closeVacancyModal(){
@@ -270,6 +284,16 @@ class Vacancies extends Component {
   }
 
   renderVacancyResults(){
+    if(!this.state.results || this.state.results.length == 0){
+      return(
+        <div>
+          <p>Voor de opgegeven talenten zijn momenteel geen vacatures beschikbaar.</p>
+          <p> Probeer eens te zoeken op een ander talent!</p>
+        </div>
+      );
+    }
+
+
     return (
       <VacancyResults 
         results={this.state.results} 
@@ -353,9 +377,9 @@ class Vacancies extends Component {
 
             <nav className="mobile-menu">
               <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'talent'})}>Talenten</a>
-              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'culture'})}>Cultuur</a>
+              {/* <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'culture'})}>Cultuur</a>
               <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'motivations'})}>Drijfveren</a>
-              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'criteria'})}>Criteria</a>
+              <a href="#" className="mobile-menu--menu-item" onClick={() => this.setState({area:'criteria'})}>Criteria</a> */}
             </nav>
 
             

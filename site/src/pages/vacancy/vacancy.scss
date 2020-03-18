@@ -53,18 +53,24 @@
     font-weight: bold;
 }
 
-.talents-overview li:before{
+.talents-overview{
+    list-style-type: none;
+}
+
+.talents-overview li.match:before{
     content:"\2713\0020";
     font-size:1.1em;
+}
+.talents-overview li.no-match{
+    padding-left: 17px;
 }
 
 .feature-block{
     background: #F8E0BE;
     text-align: center;
-    max-width: 230px;
     margin-top: -35px;
-    margin-left: -30px;
-    padding-bottom: 30px;
+    margin-left: -31px;
+    padding: 30px;
     -webkit-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 3px 5px -2px rgba(0, 0, 0, 0.75);
@@ -101,3 +107,49 @@
     border-radius: 0px;
     font-family: 'inconsolataregular';
 }
+
+.mobile-menu{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .mobile-menu--menu-item{
+    height: 75px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: #F8E0BE;
+    flex-grow: 1;
+    border-right: 1px solid rgb(218, 182, 137);
+    color: black;
+  }
+  
+  .mobile-menu--menu-item:last-child{
+    border: none;
+  }
+  
+  .mobile-menu--menu-item:hover{
+    background: rgb(199, 175, 143);
+    text-decoration: none;
+    color: black;
+  }
+
+  .matchperc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .matchperc div:first-of-type{
+    font-size:1.5em;
+  }
+  
+  .matchperc div:nth-child(2){
+    font-family: 'la_belle_auroreregular';
+    font-size: 2em;
+  }

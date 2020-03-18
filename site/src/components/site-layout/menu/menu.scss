@@ -98,3 +98,20 @@
     margin-bottom: 10px;
   }
 }
+
+.contactFormModal{
+  position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: papayawhip;
+}
+
+@media (max-width: 768px) { 
+  #navbarTogglerDemo01{
+    z-index: 1;
+    background-color: white;
+    padding: 20px;
+  }
+}

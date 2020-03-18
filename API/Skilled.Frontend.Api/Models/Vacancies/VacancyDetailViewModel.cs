@@ -7,5 +7,7 @@ namespace Skilled.Frontend.Api.Models.Vacancies
         public VacancyView Vacancy { get; set; }
 
         public int MatchPercentage { get; set; }
+
+        public string[] CandidateTalents { get; set; }
     }
 }

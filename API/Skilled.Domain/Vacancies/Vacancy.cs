@@ -28,6 +28,8 @@ namespace Skilled.Domain.Vacancies
 
         public decimal SalaryTill { get; set; }
 
+        public string JobApplicationLink { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public virtual Zipcode Zipcode { get; set; }
